@@ -1,0 +1,51 @@
+.footcontainer {
+    background: tomato;
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 16px;
+    margin: 0;
+    list-style: none;
+}
+
+.footitem {
+    padding: 5px;
+    height: 150px;
+    margin-top: 10px;
+    color: white;
+    text-align: start;
+    font-size: 18px;
+    font-weight: 200;
+    line-height: 1.5;
+}
+
+@media all and (min-width: 1920px) {}
+
+@media all and (min-width: 960px) and (max-width: 1280px) {}
+
+@media all and (min-width: 600px) and (max-width: 959.98px) {}
+
+@media all and (max-width: 599.98px) {
+    .footcontainer {
+        background: tomato;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        justify-content: space-around;
+        padding: 16px;
+        margin: 0;
+        list-style: none;
+    }
+
+    .footitem {
+        padding: 5px;
+        height: 150px;
+        margin-top: 10px;
+        color: white;
+        text-align: center;
+        font-size: 18px;
+        font-weight: 200;
+        line-height: 1.5;
+    }
+}

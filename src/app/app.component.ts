@@ -10,12 +10,12 @@ export interface myRoute {
 }
 const style1 = style({
   marginTop: '3px',
-  fontSize: '24px'
+  fontSize: '16px'
 })
 
 const style2 = style({
-  marginTop: '64px',
-  fontSize: '36px'
+  marginTop: '3px',
+  fontSize: '24px'
 })
 @Component({
   selector: 'app-root',
