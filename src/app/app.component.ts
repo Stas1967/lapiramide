@@ -10,7 +10,7 @@ export interface myRoute {
 }
 const style1 = style({
   marginTop: '3px',
-  fontSize: '16px'
+  fontSize: '24px'
 })
 
 const style2 = style({
@@ -45,7 +45,7 @@ export class AppComponent {
     // { icon: 'shop', name: 'Shop', url: '/shop' },
     // { icon: 'newspaper', name: 'Blog', url: '/blog' },
     // { icon: 'euro_symbol', name: 'Trading in a nut', url: '/trading' },
-    { icon: 'face', name: 'About Me', url: '/about' },
+    { icon: 'celebration', name: 'Eventos', url: '/events' },
     // { icon: 'login', name: 'Login', url: '/login' },
   ]
 

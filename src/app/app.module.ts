@@ -19,16 +19,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 // Material Form
-import { ReactiveFormsModule } from '@angular/forms';
-import { FormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 //import { HomeComponent } from './home/home.component';
 //import { AboutComponent } from './about/about.component';
 import { FootComponent } from './foot/foot.component';
 //import { LoginComponent, LogDialog } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MAT_DATE_LOCALE, MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 
 
 const firebaseConfig = {
@@ -64,10 +61,6 @@ export const fireStorage = getStorage(app);
     MatIconModule,
     MatButtonModule,
     MatCardModule,
-    ReactiveFormsModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
     MatDialogModule,
     MatMenuModule,
     MatProgressSpinnerModule,

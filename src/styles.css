@@ -16,6 +16,10 @@ hr {
     background-image: linear-gradient(to right, rgba(19, 1, 36, 0.1), rgb(19, 1, 36), rgba(19, 1, 36, 0.1));
 }
 
+h1 {
+    font-weight: 200 !important;
+}
+
 .container {
     width: 960px;
     margin: 36px auto;
