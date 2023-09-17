@@ -12,6 +12,7 @@ import { BookinghomeComponent } from '../bookinghome/bookinghome.component';
 })
 export class HomeComponent {
   isSmall: boolean;
+
   constructor(public bhvsrv: BehavService,) {
     this.isSmall = bhvsrv.isMobilFu();
   }
@@ -22,6 +23,6 @@ export class HomeComponent {
 
   }
   ngOnInit() {
-  }
 
+  }
 }

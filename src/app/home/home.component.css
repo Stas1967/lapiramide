@@ -55,55 +55,63 @@ a:hover {
     cursor: pointer;
 }
 
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+}
 
-@media all and (min-width: 1920px) {
-    .phone {
-        width: 800px;
-        bottom: 90px;
-        left: 70px;
+.slide {
+    display: none;
+    width: 100%;
+    height: auto;
+}
+
+.fade {
+    animation: fade 5s infinite;
+}
+
+.smallname {
+    color: rgb(255, 232, 213);
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-size: 24px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 12px;
+}
+
+@keyframes fade {
+    0%, 100% {
+        opacity: 0
+    }
+
+    20%, 80% {
+        opacity: 1
     }
 }
 
-@media all and (min-width: 1280px) and (max-width: 1919.98px) {
-    .phone {
-        width: 480px;
-        bottom: 120px;
-        left: 70px;
-    }
-}
+@media all and (min-width: 1920px) {}
+
+@media all and (min-width: 1280px) and (max-width: 1919.98px) {}
 
 @media all and (min-width: 960px) and (max-width: 1279.98px) {
-    .phone {
-        width: 420px;
-        bottom: 40px;
-        left: 36px;
-    }
-
     .slogan {
         padding: 16px 12px;
-        bottom: 40px;
-        right: 30px;
-        width: 45%;
+        bottom: 6px;
+        width: 30%;
         gap: 12px;
     }
 
     .slogantxt {
-        font-size: 32px;
+        font-size: 28px;
         line-height: 1.2;
-    }
-
-    .find {
-        font-size: 36px;
-        padding: 16px;
     }
 }
 
 @media all and (min-width: 600px) and (max-width: 959.98px) {
     .slogan {
         padding: 8px 16px;
-        bottom: 60px;
-        right: 30px;
-        width: 65%;
         gap: 12px;
     }
 
@@ -112,32 +120,8 @@ a:hover {
         line-height: 1.2;
     }
 
-    .find {
-        font-size: 28px;
-        text-align: center;
-        padding: 16px;
-    }
 }
 
-@media all and (min-width: 320px) and (max-width: 599.98px) {
-    .slogan {
-        padding: 8px 16px;
-        bottom: 20px;
-        right: 20px;
-        width: 65%;
-        gap: 12px;
-    }
-
-    .slogantxt {
-        font-size: 18px;
-        line-height: 1;
-    }
-
-    .find {
-        font-size: 18px;
-        text-align: center;
-        padding: 6px;
-    }
-}
+@media all and (min-width: 320px) and (max-width: 599.98px) {}
 
 @media all and (max-width: 319.98px) {}

@@ -50,6 +50,7 @@ export const fireStorage = getStorage(app);
 @NgModule({
   declarations: [
     AppComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -65,7 +66,7 @@ export const fireStorage = getStorage(app);
     MatMenuModule,
     MatProgressSpinnerModule,
     HttpClientModule,
-    FootComponent
+    FootComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

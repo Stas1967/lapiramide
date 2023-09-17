@@ -41,7 +41,7 @@ export class AppComponent {
   @ViewChild('sidecont', { static: false }) public sidecont: MatSidenavContent | undefined;
 
   links: myRoute[] = [
-    { icon: 'home', name: 'Home', url: '/home' },
+    { icon: 'home', name: 'Inicio', url: '/' },
     // { icon: 'shop', name: 'Shop', url: '/shop' },
     // { icon: 'newspaper', name: 'Blog', url: '/blog' },
     // { icon: 'euro_symbol', name: 'Trading in a nut', url: '/trading' },

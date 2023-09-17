@@ -1,19 +1,23 @@
 <div class="jumbo">
-    <img src="../../assets/images/c82c0b9d.webp" alt="Apartamentos La Piramide" width="100%">
-    <div class="slogan">
+    <img src="../../assets/images/piscina.jpg" alt="Apartamentos La Piramide" width="100%">
+    <div *ngIf="!isSmall" class="slogan">
         <div class="cardcontainer">
             <h1>La Pirámide</h1>
-            <p>En Fuerteventura hay un lugar donde puedes alojarte y descansar se llama La Pirámide y es genial tiene
-                todo
-                lo que puedes desear</p>
+            <p>Selecione las fechas y descubre lo que hemos preparado par Ti</p>
         </div>
         <app-bookinghome></app-bookinghome>
     </div>
+    <div *ngIf="isSmall" class="smallname">
+        Apartamentos La Pirámide
+    </div>
+</div>
+<div *ngIf="isSmall">
+    <app-bookinghome></app-bookinghome>
 </div>
 <div class="container">
     <div class="cardcontainer">
-        <h1>La Pirámide</h1>
-
+        <h1>Aparthotel La Pirámide</h1>
+        <hr>
         <p>En Fuerteventura hay un lugar donde puedes alojarte y descansar se llama La Pirámide y es genial tiene todo
             lo que puedes desear</p>
         <p>Unos apartamentos muy bonitos con vistas al mar y a la montaña con wifi, aire y televisión y una cocina donde

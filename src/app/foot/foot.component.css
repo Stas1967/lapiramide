@@ -20,11 +20,36 @@
     line-height: 1.5;
 }
 
+.orderA {
+    order: 1;
+}
+
+.orderB {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    order: 2;
+    justify-content: center;
+    align-items: center;
+}
+
+.orderB img {
+    width: 180px;
+}
+
+.orderC {
+    order: 3;
+}
+
 @media all and (min-width: 1920px) {}
 
 @media all and (min-width: 960px) and (max-width: 1280px) {}
 
-@media all and (min-width: 600px) and (max-width: 959.98px) {}
+@media all and (min-width: 600px) and (max-width: 959.98px) {
+    .orderB img {
+        width: 80px;
+    }
+}
 
 @media all and (max-width: 599.98px) {
     .footcontainer {
@@ -47,5 +72,23 @@
         font-size: 18px;
         font-weight: 200;
         line-height: 1.5;
+    }
+
+    .orderA {
+        order: 1;
+    }
+
+    .orderB {
+
+        order: 3;
+        align-self: center;
+    }
+
+    .orderB img {
+        width: 120px;
+    }
+
+    .orderC {
+        order: 2;
     }
 }

@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { BehavService } from '../services/behav.service';
 
 
 @Component({
@@ -28,7 +29,7 @@ export class BookinghomeComponent {
     end: new FormControl<Date | null>(null),
   });
 
-  constructor(private _adapter: DateAdapter<any>, @Inject(MAT_DATE_LOCALE) private _locale: string,) {
+  constructor(private _adapter: DateAdapter<any>, @Inject(MAT_DATE_LOCALE) private _locale: string, public bhvsrv: BehavService,) {
     const lang = 'es-ES'; // window.navigator.language;
     _adapter.setLocale(lang)
   }
