@@ -42,11 +42,17 @@ export class AppComponent {
 
   links: myRoute[] = [
     { icon: 'home', name: 'Inicio', url: '/' },
-    // { icon: 'shop', name: 'Shop', url: '/shop' },
+    { icon: 'celebration', name: 'Eventos', url: '/events' },
+    { icon: 'login', name: 'Login', url: '/login' },
+  ]
+
+  linkssm: myRoute[] = [
+    { icon: 'home', name: 'Inicio', url: '/' },
+    { icon: 'shop', name: 'Ofertas', url: '/offer' },
     // { icon: 'newspaper', name: 'Blog', url: '/blog' },
     // { icon: 'euro_symbol', name: 'Trading in a nut', url: '/trading' },
     { icon: 'celebration', name: 'Eventos', url: '/events' },
-    // { icon: 'login', name: 'Login', url: '/login' },
+    { icon: 'login', name: 'Login', url: '/login' },
   ]
 
   constructor(public bhvsrv: BehavService, public router: Router) {
@@ -55,6 +61,7 @@ export class AppComponent {
     router.events.subscribe((navi) => {
       if (navi instanceof NavigationStart) {
         this.spinner = true;
+        this.sidenav?.close();
         const yui = this.sidecont?.getElementRef().nativeElement.scroll({ top: 0, behavior: 'smooth' })
       } else if (navi instanceof NavigationEnd) {
         this.spinner = false;

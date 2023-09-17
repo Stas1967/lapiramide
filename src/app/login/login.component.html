@@ -1,0 +1,45 @@
+<div class="container">
+    <div [ngClass]="isSmall ? 'ofsm' : 'ofxl'">
+        <div class="titlebox">
+            <!-- <img [src]="" alt="Trading" class="imgTitle"> -->
+            <div>
+                <div class="title">
+                    Log In
+                </div>
+                <div style="font-size: 36px; margin-top: 36px; line-height: 1.5;">The form is being developed</div>
+            </div>
+        </div>
+        <hr style="margin: 36px;">
+        <div class="logbox">
+            <form [formGroup]="logform" style="width: 100%;">
+                <div class="formbox">
+                    <mat-form-field>
+                        <mat-label>Email</mat-label>
+                        <input matInput value="" formControlName="logemail">
+                        <mat-error *ngIf="logform.invalid">{{getEmailErrorMsg()}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Password</mat-label>
+                        <input matInput value="" formControlName="logpassw" [type]="hidefpass ? 'password' : 'text'"
+                            autocomplete="on">
+                        <button mat-icon-button matSuffix (click)="hidefpass = !hidefpass"
+                            [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidefpass">
+                            <mat-icon>{{hidefpass ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                        <mat-error *ngIf="logform.invalid">{{getPassErrorMsg()}}</mat-error>
+                    </mat-form-field>
+                    <div>
+                        <a href="#">Forgot Password</a>
+                    </div>
+
+                    <button class="loginbtn" mat-stroked-button (click)="LogUser()"
+                        [disabled]="!logform.valid"><mat-icon>login</mat-icon>Login</button>
+
+                </div>
+            </form>
+            <div style="margin-bottom: 36px;">
+                <p>You don&#8217;t have account&nbsp;click&nbsp;<a routerLink="/register">here</a></p>
+            </div>
+        </div>
+    </div>
+</div>

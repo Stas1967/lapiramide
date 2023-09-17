@@ -26,6 +26,7 @@ import { FootComponent } from './foot/foot.component';
 //import { LoginComponent, LogDialog } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MAT_DATE_LOCALE, MatNativeDateModule, MatRippleModule } from '@angular/material/core';
+import { LogDialog } from './login/login.component';
 
 
 const firebaseConfig = {
@@ -50,7 +51,7 @@ export const fireStorage = getStorage(app);
 @NgModule({
   declarations: [
     AppComponent,
-
+    LogDialog
   ],
   imports: [
     BrowserModule,

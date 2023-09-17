@@ -70,6 +70,15 @@ mat-progress-spinner circle {
     stroke: white;
 }
 
+/* extra margin */
+.ofxl {
+    margin-top: 120px;
+}
+
+.ofsm {
+    margin-top: 16px;
+}
+
 @media all and (min-width: 1920px) {}
 
 @media all and (min-width: 1280px) and (max-width: 1919.98px) {}

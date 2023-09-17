@@ -30,7 +30,7 @@
       <span>Menu</span>
     </mat-toolbar>
     <mat-nav-list>
-      <mat-list-item *ngFor="let link of links" (isActiveChange)="isActivChang()" [routerLink]="link.url"
+      <mat-list-item *ngFor="let link of linkssm" (isActiveChange)="isActivChang()" [routerLink]="link.url"
         routerLinkActive="active-item">
         <div class="link">
           <mat-icon class="iconbtn" style="color: rgb(24, 24, 24);">{{link.icon}}</mat-icon>

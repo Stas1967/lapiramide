@@ -1,0 +1,51 @@
+.titlebox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.logbox {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 24px auto;
+    max-width: 480px;
+    background-color: rgb(255, 255, 255);
+    padding: 24px;
+}
+
+.formbox {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+}
+
+
+.loginbtn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 56px;
+    gap: 32px;
+    font-size: 24px;
+}
+
+.imgTitle {
+    width: 120px;
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.336);
+}
+
+.title {
+    font-size: 48px;
+    color: rgb(40, 0, 70);
+}
+
+a {
+    text-decoration: none;
+    color: rgb(16, 75, 185);
+    font-weight: 500;
+}
