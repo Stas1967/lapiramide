@@ -5,17 +5,35 @@
 
 }
 
-button {
+.button {
     border-radius: 0px;
     height: 72px !important;
     font-size: 26px;
     font-weight: 200;
-    color: rgb(224, 101, 0) !important;
+    color: rgb(109, 49, 3) !important;
 }
 
-button mat-icon {
+.button mat-icon {
     scale: 2;
     margin-right: 36px;
+}
+
+button.sunday-date-class {
+    background: rgba(60, 255, 0, 0.3);
+}
+
+button.sat-date-class {
+    background: rgba(0, 119, 255, 0.3);
+}
+
+button {
+    font-size: 24px;
+}
+
+.dayscount {
+    font-size: 18px;
+    color: rgb(48, 21, 0);
+    font-family: 'Lugrasimo', cursive;
 }
 
 @media all and (min-width: 1920px) {}
@@ -35,13 +53,17 @@ button mat-icon {
         padding: 24px;
     }
 
-    button {
+    .button {
         font-size: 26px;
         font-weight: 200;
     }
 
-    button mat-icon {
+    .button mat-icon {
         scale: 2;
         margin-right: 36px;
+    }
+
+    button {
+        font-size: 18px;
     }
 }
