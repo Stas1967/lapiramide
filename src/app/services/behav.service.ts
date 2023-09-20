@@ -74,4 +74,21 @@ export class BehavService {
       return doc
     }
   }
+
+  getDate() {
+    const dateA = parseInt(localStorage.getItem('startdate') || '')
+    const dateB = parseInt(localStorage.getItem('enddate') || '')
+    let start = new Date(dateA);
+    let end = new Date(dateB);
+    if (end < new Date()) {
+      start = new Date();
+      end = new Date(new Date().setDate(new Date().getDate() + 1));
+    }
+    if (Number.isNaN(dateA) && Number.isNaN(dateB)) {
+      start = new Date();
+      end = new Date(new Date().setDate(new Date().getDate() + 1));
+    }
+
+    return { start, end };
+  }
 }

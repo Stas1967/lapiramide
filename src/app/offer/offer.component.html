@@ -5,4 +5,13 @@
             <p>Un abanico de las opciones para disfrutar de tus vacaciones</p>
         </div>
     </div>
+    <hr>
+    <div class="cardcontainer">
+        <div class="carditem">
+            <div style="display: flex; flex-direction: row; flex-wrap: wrap; gap: 24px;">
+                <app-bookinghome #book [btnVisible]="false" [startDate]="datestart"
+                    [endDate]="dateend"></app-bookinghome>
+            </div>
+        </div>
+    </div>
 </div>

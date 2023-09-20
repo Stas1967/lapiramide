@@ -2,23 +2,23 @@ import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavigationEnd, NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { BehavService } from '../services/behav.service';
+import { BookinghomeComponent } from '../bookinghome/bookinghome.component';
 
 @Component({
   selector: 'app-offer',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, BookinghomeComponent],
   templateUrl: './offer.component.html',
   styleUrls: ['./offer.component.css']
 })
 export class OfferComponent {
   isSmall: boolean;
-  isTabl: boolean;
+  datestart: Date;
+  dateend: Date;
   constructor(public router: Router, public bhvsrv: BehavService,) {
     this.isSmall = bhvsrv.isMobilFu();
-    this.isTabl = bhvsrv.isTabletFu();
-    const dateA = parseInt(localStorage.getItem('startdate') || '')
-    const date = new Date(dateA)
-    console.log(date.getDate());
+    this.datestart = bhvsrv.getDate().start
+    this.dateend = bhvsrv.getDate().end;
   }
 
   @HostListener('window:resize', ['$event'])

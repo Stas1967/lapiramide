@@ -27,6 +27,7 @@ import { FootComponent } from './foot/foot.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MAT_DATE_LOCALE, MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { LogDialog } from './login/login.component';
+import { WrongDialog } from './bookinghome/bookinghome.component';
 
 
 const firebaseConfig = {
@@ -51,7 +52,8 @@ export const fireStorage = getStorage(app);
 @NgModule({
   declarations: [
     AppComponent,
-    LogDialog
+    LogDialog,
+    WrongDialog,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +70,7 @@ export const fireStorage = getStorage(app);
     MatProgressSpinnerModule,
     HttpClientModule,
     FootComponent,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

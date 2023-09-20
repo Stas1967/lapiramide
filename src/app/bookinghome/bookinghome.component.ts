@@ -1,4 +1,4 @@
-import { Component, Inject, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, Input, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DateAdapter, MAT_DATE_LOCALE, MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { MatCalendarCellClassFunction, MatDatepickerModule } from '@angular/material/datepicker';
@@ -11,6 +11,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { BehavService } from '../services/behav.service';
 import { Router } from '@angular/router';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
 
 
 @Component({
@@ -21,7 +23,8 @@ import { Router } from '@angular/router';
     ReactiveFormsModule, FormsModule,
     MatFormFieldModule, MatInputModule,
     MatNativeDateModule, MatRippleModule,
-    MatButtonModule, MatIconModule],
+    MatButtonModule, MatIconModule, MatCardModule,
+    MatButtonModule],
   templateUrl: './bookinghome.component.html',
   styleUrls: ['./bookinghome.component.css'],
 })
@@ -31,6 +34,10 @@ export class BookinghomeComponent {
     start: new FormControl<Date | null>(null),
     end: new FormControl<Date | null>(null),
   });
+  @Input() btnVisible = true;
+  @Input() startDate: Date | undefined;
+  @Input() endDate: Date | undefined;
+
 
   // dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
   //   if (view === 'month') {
@@ -52,7 +59,6 @@ export class BookinghomeComponent {
   dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
     if (view === 'month') {
       const day = cellDate.getDay();
-      // Marcar los domingos con 'sunday-date-class' y los sábados con 'saturday-date-class'.
       if (day === 0) {
         return 'sunday-date-class';
       } else if (day === 6) {
@@ -69,21 +75,84 @@ export class BookinghomeComponent {
 
   getSelectedDays = (): number => {
     let endDate = this.range.controls.end.value?.getTime() || new Date().getTime();
-    let startDate = this.range.controls.start.value?.getTime() || new Date().getTime();
+    let startDate = this.range.controls.start.value?.getTime() || new Date(new Date().setDate(new Date().getDate() + 1)).getTime();
     if (endDate > startDate) {
       let diffInMs = Math.abs(endDate - startDate);
       let diffInDays = diffInMs / (1000 * 60 * 60 * 24);
-      localStorage.setItem('startdate', this.range.controls.start.value?.getTime().toString() || '')
-      localStorage.setItem('enddate', this.range.controls.end.value?.getTime().toString() || '')
+      localStorage.setItem('startdate', startDate.toString() || '')
+      localStorage.setItem('enddate', endDate.toString() || '')
       return Math.round(diffInDays);
+    } else if (endDate === startDate) {
+      return 0;
     }
-    return 0;
+    return -1;
   }
   goToOffer() {
-    this.route.navigateByUrl('/offer')
+    if (this.getSelectedDays() === 0) {
+      const wrd = this.dialog.open(WrongDialog)
+      wrd.afterClosed().subscribe((d) => {
+        if (d === 'true') {
+          console.log('ewrewrrty');
+          this.range.setValue({
+            start: this.bhvsrv.getDate().start,
+            end: this.bhvsrv.getDate().end
+          })
+        }
+      })
+    } else {
+      this.route.navigateByUrl('/offer');
+    }
+    // if (this.getSelectedDays() === 0) {
+    //   if (confirm('Selecione dos fechas consecutivas')) {
+    //     this.range.setValue({
+    //       start: this.bhvsrv.getDate().start,
+    //       end: this.bhvsrv.getDate().end
+    //     })
+    //   } else {
+    //     this.range.setValue({
+    //       start: new Date(),
+    //       end: new Date(new Date().setDate(new Date().getDate() + 1))
+    //     })
+    //   }
+    // } else if (this.getSelectedDays() === -1) {
+    //   this.route.navigateByUrl('/offer');
+    // } else {
+    //   this.route.navigateByUrl('/offer');
+    // }
+
   }
-  constructor(private _adapter: DateAdapter<any>, @Inject(MAT_DATE_LOCALE) private _locale: string, public bhvsrv: BehavService, public route: Router) {
+  constructor(private _adapter: DateAdapter<any>, @Inject(MAT_DATE_LOCALE) private _locale: string,
+    public bhvsrv: BehavService, public route: Router, public dialog: MatDialog) {
     const lang = window.navigator.language;
     _adapter.setLocale(lang)
   }
+
+  ngOnInit(): void {
+    this.range.setValue({
+      start: this.bhvsrv.getDate().start,
+      end: this.bhvsrv.getDate().end
+    })
+  }
+}
+
+@Component({
+  selector: 'app-wrongdate',
+  templateUrl: './wrongdate.html',
+})
+export class WrongDialog {
+
+
+  constructor(
+    public dialogRef: MatDialogRef<WrongDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+  ) { }
+}
+
+export interface DialogData {
+  dialogicon: string;
+  dialogtitle: string
+  dialogtxt: string;
+  dialogpromis: string;
+  show: boolean;
+  logreg: boolean;
 }
