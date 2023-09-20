@@ -25,19 +25,19 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FootComponent } from './foot/foot.component';
 //import { LoginComponent, LogDialog } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
-import { MAT_DATE_LOCALE, MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { LogDialog } from './login/login.component';
 import { WrongDialog } from './bookinghome/bookinghome.component';
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDv6jZQhNN2qMEq4y4tDj3WOVmqs8v5n3c",
-  authDomain: "apartamentolapiramide.firebaseapp.com",
-  projectId: "apartamentolapiramide",
-  storageBucket: "apartamentolapiramide.appspot.com",
-  messagingSenderId: "821555455462",
-  appId: "1:821555455462:web:b71e6ca92e897f1a562227",
-  measurementId: "G-0KXBTDPC3F"
+  apiKey: "AIzaSyBVWxsXq5YLJlhUReBqdO8Q4t74b77cZl8",
+  authDomain: "lapiramide-544e8.firebaseapp.com",
+  databaseURL: "https://lapiramide-544e8-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "lapiramide-544e8",
+  storageBucket: "lapiramide-544e8.appspot.com",
+  messagingSenderId: "973582638272",
+  appId: "1:973582638272:web:9ae7ce129147d4acaba125",
+  measurementId: "G-90ZQQ1GC83"
 };
 
 // Initialize Firebase

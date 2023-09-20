@@ -1,7 +1,8 @@
-import { Component, Inject, Input, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, Output, ViewEncapsulation, Injectable } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DateAdapter, MAT_DATE_LOCALE, MatNativeDateModule, MatRippleModule } from '@angular/material/core';
-import { MatCalendarCellClassFunction, MatDatepickerModule } from '@angular/material/datepicker';
+import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
+import { MatDateRangeSelectionStrategy, DateRange, MAT_DATE_RANGE_SELECTION_STRATEGY, MatDatepickerModule } from '@angular/material/datepicker';
 // Material Form
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
@@ -13,7 +14,27 @@ import { BehavService } from '../services/behav.service';
 import { Router } from '@angular/router';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
+@Injectable()
+export class FiveDayRangeSelectionStrategy<D> implements MatDateRangeSelectionStrategy<D> {
+  constructor(private _dateAdapter: DateAdapter<D>) { }
 
+  selectionFinished(date: D | null): DateRange<D> {
+    return this._createFiveDayRange(date);
+  }
+
+  createPreview(activeDate: D | null): DateRange<D> {
+    return this._createFiveDayRange(activeDate);
+  }
+
+  private _createFiveDayRange(date: D | null): DateRange<D> {
+    if (date) {
+      const start = this._dateAdapter.addCalendarDays(date, 0);
+      const end = this._dateAdapter.addCalendarDays(date, 5);
+      return new DateRange<D>(start, end);
+    }
+    return new DateRange<D>(null, null);
+  }
+}
 
 @Component({
   selector: 'app-bookinghome',
@@ -23,8 +44,8 @@ import { MatCardModule } from '@angular/material/card';
     ReactiveFormsModule, FormsModule,
     MatFormFieldModule, MatInputModule,
     MatNativeDateModule, MatRippleModule,
-    MatButtonModule, MatIconModule, MatCardModule,
-    MatButtonModule],
+    MatButtonModule, MatIconModule, MatCardModule],
+
   templateUrl: './bookinghome.component.html',
   styleUrls: ['./bookinghome.component.css'],
 })
@@ -35,26 +56,10 @@ export class BookinghomeComponent {
     end: new FormControl<Date | null>(null),
   });
   @Input() btnVisible = true;
-  @Input() startDate: Date | undefined;
-  @Input() endDate: Date | undefined;
+  startDate: Date | undefined;
+  endDate: Date | undefined;
 
-
-  // dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
-  //   if (view === 'month') {
-  //     const date = cellDate.getDate();
-  //     return date === 1 || date === 6 ? 'example-custom-date-class' : '';
-  //   }
-  //   return '';
-  // };
-
-  // dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
-  //   if (view === 'month') {
-  //     const day = cellDate.getDay();
-  //     // Marcar solo los sábados y domingos.
-  //     return day === 6 || day === 0 ? 'sunday-date-class' : '';
-  //   }
-  //   return '';
-  // };
+  @Output() ileDni = new EventEmitter<number>()
 
   dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
     if (view === 'month') {
@@ -81,6 +86,7 @@ export class BookinghomeComponent {
       let diffInDays = diffInMs / (1000 * 60 * 60 * 24);
       localStorage.setItem('startdate', startDate.toString() || '')
       localStorage.setItem('enddate', endDate.toString() || '')
+      this.ileDni.emit(diffInDays)
       return Math.round(diffInDays);
     } else if (endDate === startDate) {
       return 0;
@@ -134,6 +140,9 @@ export class BookinghomeComponent {
     })
   }
 }
+
+
+
 
 @Component({
   selector: 'app-wrongdate',

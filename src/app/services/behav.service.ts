@@ -15,6 +15,9 @@ export class BehavService {
   isTablet$ = new BehaviorSubject<boolean>(false);
   appside: boolean | undefined;
   appside$ = new BehaviorSubject<boolean>(false);
+
+  _countDays = 0;
+  _countDays$ = new BehaviorSubject<number>(0);
   constructor(public bpo: BreakpointObserver) {
     this.isMobile = false;
     this.isTablet = false;
@@ -80,6 +83,7 @@ export class BehavService {
     const dateB = parseInt(localStorage.getItem('enddate') || '')
     let start = new Date(dateA);
     let end = new Date(dateB);
+    let countdays = 0;
     if (end < new Date()) {
       start = new Date();
       end = new Date(new Date().setDate(new Date().getDate() + 1));
@@ -88,7 +92,9 @@ export class BehavService {
       start = new Date();
       end = new Date(new Date().setDate(new Date().getDate() + 1));
     }
-
-    return { start, end };
+    const time = end.getTime() - start.getTime();
+    this._countDays = Math.round(time / (1000 * 60 * 60 * 24))
+    countdays = this._countDays;
+    return { start, end, countdays };
   }
 }

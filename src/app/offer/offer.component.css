@@ -1,0 +1,54 @@
+.apartament {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    margin-top: 32px;
+}
+
+.apartament mat-card {
+    border-radius: 0px;
+    margin-top: 32px;
+}
+
+.imgcon {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 320px;
+    position: relative;
+    z-index: -1;
+}
+
+.imgcon img {
+    width: calc(100% / 3);
+}
+
+.descrip {
+    font-size: 16px;
+    line-height: 1.3;
+    font-weight: 200;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+mat-icon {
+    font-size: 24px;
+    margin-right: 16px;
+    width: 36px;
+    height: 36px;
+}
+
+ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+}
+
+ul li {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+}

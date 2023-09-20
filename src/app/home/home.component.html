@@ -5,14 +5,14 @@
             <h1>La Pirámide</h1>
             <p>Selecione las fechas y descubre lo que hemos preparado par Ti</p>
         </div>
-        <app-bookinghome [btnVisible]="true" [startDate]="datestart" [endDate]="dateend"></app-bookinghome>
+        <app-bookinghome [btnVisible]="true"></app-bookinghome>
     </div>
     <div *ngIf="isSmall" class="smallname">
         Apartamentos La Pirámide
     </div>
 </div>
 <div *ngIf="isSmall">
-    <app-bookinghome [btnVisible]="true" [startDate]="datestart" [endDate]="dateend"></app-bookinghome>
+    <app-bookinghome [btnVisible]="true"></app-bookinghome>
 </div>
 <div class="container">
     <div class="cardcontainer">
@@ -22,17 +22,15 @@
             <p>En Fuerteventura hay un lugar donde puedes alojarte y descansar se llama La Pirámide y es genial tiene
                 todo
                 lo que puedes desear</p>
-            <p>Unos apartamentos muy bonitos con vistas al mar y a la montaña con wifi, aire y televisión y una cocina
-                donde
-                hacer lasaña</p>
-
+            <p>Unos apartamentos muy bonitos con vistas a la piscina y al jardin, con wifi, aire y televisión y una
+                cocina donde hacer lasaña</p>
             <p>Una piscina para refrescarte una barbacoa para asar un aparcamiento para tu moto y una recepción para
                 ayudar
             </p>
-
             <p>Un precio muy económico y justo un descuento si reservas ya un trato personalizado y profesional y una
                 experiencia que no olvidarás</p>
         </div>
+
     </div>
     <hr>
     <!-- <div class="cardcontainer">
