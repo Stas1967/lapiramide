@@ -21,6 +21,9 @@ export class OfferComponent {
   datestart: Date;
   dateend: Date;
   countdays: number;
+  cuantadult = {};
+  adult = Array(2).fill(0);
+  child = Array(1).fill(0);
   constructor(public router: Router, public bhvsrv: BehavService,) {
     this.isSmall = bhvsrv.isMobilFu();
     this.datestart = bhvsrv.getDate().start
@@ -30,6 +33,12 @@ export class OfferComponent {
 
   countDays(event: number) {
     this.countdays = event;
+  }
+
+  ngOnInit(): void {
+    for (let index = 0; index < 3; index++) {
+      this.cuantadult = index;
+    }
   }
 
   @HostListener('window:resize', ['$event'])

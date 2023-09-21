@@ -78,7 +78,7 @@ export class BookinghomeComponent {
     return day !== 6 && day !== 0;
   }
 
-  getSelectedDays = (): number => {
+  getSelectedDays() {
     let endDate = this.range.controls.end.value?.getTime() || new Date().getTime();
     let startDate = this.range.controls.start.value?.getTime() || new Date(new Date().setDate(new Date().getDate() + 1)).getTime();
     if (endDate > startDate) {
@@ -86,10 +86,9 @@ export class BookinghomeComponent {
       let diffInDays = diffInMs / (1000 * 60 * 60 * 24);
       localStorage.setItem('startdate', startDate.toString() || '')
       localStorage.setItem('enddate', endDate.toString() || '')
-      this.ileDni.emit(diffInDays)
-      return Math.round(diffInDays);
+      this.ileDni.emit(Math.round(diffInDays))
     } else if (endDate === startDate) {
-      return 0;
+      this.ileDni.emit(0)
     }
     return -1;
   }
@@ -98,7 +97,6 @@ export class BookinghomeComponent {
       const wrd = this.dialog.open(WrongDialog)
       wrd.afterClosed().subscribe((d) => {
         if (d === 'true') {
-          console.log('ewrewrrty');
           this.range.setValue({
             start: this.bhvsrv.getDate().start,
             end: this.bhvsrv.getDate().end
@@ -108,24 +106,6 @@ export class BookinghomeComponent {
     } else {
       this.route.navigateByUrl('/offer');
     }
-    // if (this.getSelectedDays() === 0) {
-    //   if (confirm('Selecione dos fechas consecutivas')) {
-    //     this.range.setValue({
-    //       start: this.bhvsrv.getDate().start,
-    //       end: this.bhvsrv.getDate().end
-    //     })
-    //   } else {
-    //     this.range.setValue({
-    //       start: new Date(),
-    //       end: new Date(new Date().setDate(new Date().getDate() + 1))
-    //     })
-    //   }
-    // } else if (this.getSelectedDays() === -1) {
-    //   this.route.navigateByUrl('/offer');
-    // } else {
-    //   this.route.navigateByUrl('/offer');
-    // }
-
   }
   constructor(private _adapter: DateAdapter<any>, @Inject(MAT_DATE_LOCALE) private _locale: string,
     public bhvsrv: BehavService, public route: Router, public dialog: MatDialog) {

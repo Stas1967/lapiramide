@@ -3,19 +3,19 @@
     flex: 1;
     flex-direction: column;
     margin-top: 32px;
+    gap: 24px;
 }
 
 .apartament mat-card {
     border-radius: 0px;
-    margin-top: 32px;
 }
 
 .imgcon {
+    position: absolute;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     height: 320px;
-    position: relative;
     z-index: -1;
 }
 
@@ -33,7 +33,7 @@
     margin-bottom: 32px;
 }
 
-mat-icon {
+li mat-icon {
     font-size: 24px;
     margin-right: 16px;
     width: 36px;
@@ -51,4 +51,117 @@ ul li {
     align-items: center;
     justify-content: flex-start;
     gap: 12px;
+}
+
+.calline {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 24px;
+    align-items: center;
+}
+
+.personline {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 12px;
+}
+
+.pricedesc {
+    width: 100px;
+    display: inline-block;
+    font-weight: 600;
+}
+
+.pricecont {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.priceitem:nth-of-type(1) {
+    flex-grow: 10;
+    margin-bottom: 16px;
+    font-size: 18px;
+    font-weight: 200;
+    line-height: 1.5;
+}
+
+.priceitem:nth-of-type(2) {
+    flex-grow: 1;
+    margin-bottom: 16px;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+mat-card-actions {
+    align-self: flex-end;
+    margin-top: 32px;
+}
+
+mat-card-actions button {
+    font-size: 18px;
+    font-weight: 200;
+    border-radius: 0;
+}
+
+mat-card-actions button mat-icon {
+    margin-right: 24px;
+}
+
+@media all and (min-width: 1920px) {
+    .personline {
+        align-items: flex-end;
+    }
+}
+
+@media all and (min-width: 1280px) and (max-width: 1919.98px) {
+    .personline {
+        align-items: flex-end;
+    }
+}
+
+@media all and (min-width: 960px) and (max-width: 1279.98px) {
+    .personline {
+        align-items: flex-end;
+    }
+}
+
+@media all and (min-width: 600px) and (max-width: 959.98px) {
+    .personline {
+        align-items: flex-end;
+    }
+}
+
+@media all and (min-width: 320px) and (max-width: 599.98px) {
+    .imgcon {
+        height: 160px;
+    }
+
+    .calline {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 24px;
+        align-items: center;
+    }
+
+    .pricecont {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+    .personline {
+        align-self: flex-end;
+    }
+}
+
+@media all and (max-width: 319.98px) {
+    .personline {
+        align-self: flex-end;
+    }
 }

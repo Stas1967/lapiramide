@@ -1,11 +1,12 @@
 <div class="imgcon">
     <img src="../../assets/images/dormitorio.jpg" alt="">
     <img src="../../assets/images/salon.jpg" alt="">
-    <img src="../../assets/images/poolview.jpg" alt="">
     <img src="../../assets/images/piscinaa.jpg" alt="">
+    <img src="../../assets/images/poolview.jpg" alt="">
     <img src="../../assets/images/96338307.jpg" alt="">
     <img src="../../assets/images/161786574.jpg" alt="">
 </div>
+<div [ngStyle]="isSmall ? {'height.px': 32} : {'height.px': 76}"></div>
 <div class="containeroff">
     <div>
         <h1>Nuestro alojamiento</h1>
@@ -27,7 +28,6 @@
                 <li><mat-icon>balcony</mat-icon>Terraza</li>
                 <li><mat-icon>☕</mat-icon>Cafetera</li>
             </ul>
-
         </span>
         <span style="word-wrap: normal;">
             <mat-accordion>
@@ -60,48 +60,53 @@
         </span>
     </div>
     <div class="cardcontainer">
-        <h1>Haz tu reserva ya - coño!</h1>
+        <h1>Haz tu reserva ya</h1>
         <div class="carditem">
             <h2>Seleccione las fechas</h2>
-            <div style="display: flex; flex-direction: row; flex-wrap: wrap; gap: 24px;">
-                <app-bookinghome #book [btnVisible]="false" (ileDni)="countDays($event)"></app-bookinghome>
+            <div class="calline">
+                <app-bookinghome #book [btnVisible]="false" (ileDni)="countDays($event)"></app-bookinghome> <span>Días
+                    seleccionados&nbsp;{{countdays}}</span>
             </div>
         </div>
     </div>
-    <div class="apartament">
-        <mat-card>
+    <div style="display: flex; flex: 1; justify-content: center; font-size: 26px; font-weight: 200; margin-top: 32px;"
+        *ngIf="countdays == 0">
+        <p>Selecciona por lo menos un día</p>
+    </div>
+    <div class="apartament" *ngIf="countdays > 0">
+        <mat-card *ngFor="let i of adult">
             <mat-card-header>
-                <mat-card-title>Apartamento de 1 dormitorio con vistas a la piscina</mat-card-title>
-                <mat-card-subtitle></mat-card-subtitle>
+                <mat-card-title class="personline">Apartamento de 1 dormitorio con vistas a la piscina
+                    <mat-icon *ngFor="let i of adult" style="font-size: 18px; color: red;">person</mat-icon>
+                    <mat-icon *ngFor="let i of child" style="font-size: 16px; color: rgb(0, 192, 80);">person</mat-icon>
+                </mat-card-title>
+                <mat-card-subtitle>2 adultos + 1 niño</mat-card-subtitle>
             </mat-card-header>
+            <hr>
             <mat-card-content>
-                <p>2 camas individuales<mat-icon>bed</mat-icon> y 1 sofá
-                    cama<mat-icon>chair</mat-icon></p>
-                <p>días de estancia {{countdays}}</p>
-                <p>Precio por noche: 70€</p>
-                <p>A pagar {{countdays * 70 | currency: '€'}}</p>
+
+                <div style="margin-bottom: 18px; font-size: 18px; font-weight: 400;">2 camas individuales y 1 sofá cama
+                </div>
+                <div class="pricecont">
+                    <div class="priceitem">
+                        <img style="float: left; margin-right: 24px;" *ngIf="!isSmall" mat-card-md-image
+                            src="../../assets/images/dormitorio.jpg" alt="">
+                        <div>Una pequeña descripcion del apartamento</div>
+                    </div>
+                    <div class="priceitem">
+                        <div style="text-align: end;">Días de estancia: <span class="pricedesc">{{countdays}}</span>
+                        </div>
+                        <div style="text-align: end;">Precio por noche: <span class="pricedesc">70.00€</span></div>
+                        <div style="text-align: end;">A pagar: <span class="pricedesc">{{countdays * 70 |
+                                currency:'€'}}</span>
+                        </div>
+                    </div>
+                </div>
+
             </mat-card-content>
-            <mat-card-actions style="align-self: flex-end;">
-                <button mat-stroked-button>Lo quiero</button>
-            </mat-card-actions>
-        </mat-card>
-        <mat-card>
-            <mat-card-header>
-                <mat-card-title>Apartamento de 1 dormitorio con vistas a la piscina</mat-card-title>
-                <mat-card-subtitle></mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content>
-                <p>1 cama individual<mat-icon>single_bed</mat-icon> y 1 sofá
-                    cama<mat-icon>chair</mat-icon></p>
-                <p>
-                <p>días de estancia {{countdays}}</p>
-                <p>Precio por noche: 90€</p>
-                <p>A pagar {{countdays * 90 | currency: '€'}}</p>
-            </mat-card-content>
-            <mat-card-actions style="align-self: flex-end;">
-                <button mat-stroked-button>Lo quiero</button>
+            <mat-card-actions>
+                <button mat-raised-button color="accent"><mat-icon>thumb_up_alt</mat-icon>Lo quiero</button>
             </mat-card-actions>
         </mat-card>
     </div>
-
 </div>

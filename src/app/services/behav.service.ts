@@ -84,7 +84,7 @@ export class BehavService {
     let start = new Date(dateA);
     let end = new Date(dateB);
     let countdays = 0;
-    if (end < new Date()) {
+    if (Date.now() > start.getTime()) {
       start = new Date();
       end = new Date(new Date().setDate(new Date().getDate() + 1));
     }
