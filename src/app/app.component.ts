@@ -43,6 +43,7 @@ export class AppComponent {
   links: myRoute[] = [
     { icon: 'home', name: 'Inicio', url: '/' },
     { icon: 'celebration', name: 'Eventos', url: '/events' },
+    { icon: 'admin_panel_settings', name: 'Admin', url: '/administrator' },
     { icon: 'login', name: 'Login', url: '/login' },
   ]
 
@@ -52,6 +53,7 @@ export class AppComponent {
     // { icon: 'newspaper', name: 'Blog', url: '/blog' },
     // { icon: 'euro_symbol', name: 'Trading in a nut', url: '/trading' },
     { icon: 'celebration', name: 'Eventos', url: '/events' },
+    { icon: 'admin_panel_settings', name: 'Admin', url: '/administrator' },
     { icon: 'login', name: 'Login', url: '/login' },
   ]
 

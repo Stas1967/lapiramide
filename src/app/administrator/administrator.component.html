@@ -1,0 +1,53 @@
+<div>
+    <mat-sidenav-container class="blog-container">
+        <mat-sidenav #blognav [opened]="!isSmall" [mode]="!isSmall ? 'side' : 'over'"
+            [fixedInViewport]="isSmall ? true : false">
+            <mat-toolbar style="justify-content: space-around;">
+                <span>Admin</span>
+                <mat-icon>admin_panel_settings</mat-icon>
+            </mat-toolbar>
+            <mat-list #navlist role="list">
+                <div mat-subheader>Generals</div>
+                <mat-list-item *ngFor="let g of general" [routerLink]="g.link" routerLinkActive="active-item"
+                    (click)="closeNav()" [disabled]="g.disabled">
+                    <mat-icon matListItemIcon>{{g.icon}}</mat-icon>
+                    <div matListItemTitle>{{g.name}}</div>
+                    <div matListItemLine>Last update:&nbsp;{{g.updated | date}}</div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <div mat-subheader>Reservas</div>
+                <mat-list-item #navlist *ngFor="let c of chart" routerLinkActive="active-item"
+                    [routerLink]="c.link + '/'+ c.dbid" (click)="closeNav()" [disabled]="c.disabled">
+                    <mat-icon matListItemIcon>{{c.icon}}</mat-icon>
+                    <div matListItemTitle>{{c.name}}</div>
+                    <div matListItemLine>Last update:&nbsp;{{c.updated | date}}</div>
+                </mat-list-item>
+            </mat-list>
+        </mat-sidenav>
+        <mat-sidenav-content #blobcont id="blogcont">
+            <div class="toglemenu">
+                <button *ngIf="isSmall" mat-icon-button (click)="blognav.toggle()">
+                    <mat-icon>menu</mat-icon>
+                </button>
+            </div>
+            <div class="blog-items">
+                <router-outlet (activate)="onActivate($event)"></router-outlet>
+                <!-- <div class="leftrightbtn">
+                    <div class="linkbtn">
+                        <button title="Go back" color="warn" mat-fab (click)="goBack()" [disabled]="backDisable">
+                            <mat-icon>navigate_before</mat-icon>
+                        </button>
+                        <span *ngIf="!backDisable">{{prevLinkTxt}}</span>
+
+                    </div>
+                    <div class="linkbtn">
+                        <span>{{nextLinkTxt}}</span>
+                        <button title="Go ahead" color="warn" mat-fab (click)="goAhead()" [disabled]="aheadDisable">
+                            <mat-icon>navigate_next</mat-icon>
+                        </button>
+                    </div> 
+                </div>-->
+            </div>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

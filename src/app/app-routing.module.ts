@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'events', title: 'Apartamentos La Pirámide- Eventos', loadComponent: () => import('./events/events.component').then(c => c.EventsComponent) },
   { path: 'offer', title: 'Apartamentos La Pirámide- Oferta', loadComponent: () => import('./offer/offer.component').then(c => c.OfferComponent) },
   { path: 'login', title: 'Apartamentos La Pirámide- Login', loadComponent: () => import('./login/login.component').then(c => c.LoginComponent) },
+  { path: 'administrator', title: 'Apartamentos La Pirámide- Admin', loadChildren: () => import('./administrator/administrator.module').then(m => m.AdministratorModule) },
   { path: '**', loadComponent: () => import('./home/home.component').then(c => c.HomeComponent) },
 ];
 
