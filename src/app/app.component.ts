@@ -3,11 +3,15 @@ import { MatSidenav, MatSidenavContent } from '@angular/material/sidenav';
 import { BehavService } from './services/behav.service';
 import { NavigationEnd, NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { trigger, state, transition, animate, style } from '@angular/animations';
+import { AutentService } from './services/autent.service';
+import { fireAuth } from './app.module';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 export interface myRoute {
   icon: string;
   name: string;
   url: string;
 }
+
 const style1 = style({
   marginTop: '3px',
   fontSize: '24px'
@@ -37,29 +41,24 @@ export class AppComponent {
   state = 'hide';
   menuindex = 0;
   spinner = false;
+  loggedin: boolean;
+  auth = fireAuth;
   @ViewChild('sidenav', { static: false }) public sidenav: MatSidenav | undefined;
   @ViewChild('sidecont', { static: false }) public sidecont: MatSidenavContent | undefined;
 
   links: myRoute[] = [
     { icon: 'home', name: 'Inicio', url: '/' },
     { icon: 'celebration', name: 'Eventos', url: '/events' },
-    { icon: 'admin_panel_settings', name: 'Admin', url: '/administrator' },
-    { icon: 'login', name: 'Login', url: '/login' },
-  ]
-
+  ];
   linkssm: myRoute[] = [
     { icon: 'home', name: 'Inicio', url: '/' },
     { icon: 'shop', name: 'Ofertas', url: '/offer' },
-    // { icon: 'newspaper', name: 'Blog', url: '/blog' },
-    // { icon: 'euro_symbol', name: 'Trading in a nut', url: '/trading' },
     { icon: 'celebration', name: 'Eventos', url: '/events' },
-    { icon: 'admin_panel_settings', name: 'Admin', url: '/administrator' },
-    { icon: 'login', name: 'Login', url: '/login' },
-  ]
-
+  ];
   constructor(public bhvsrv: BehavService, public router: Router) {
     this.isSmall = bhvsrv.isMobilFu();
     this.isTabl = bhvsrv.isTabletFu();
+    this.loggedin = false;
     router.events.subscribe((navi) => {
       if (navi instanceof NavigationStart) {
         this.spinner = true;
@@ -82,7 +81,21 @@ export class AppComponent {
       this.sidenav?.close();
     }
   }
+  LogOut() {
+    const auth = fireAuth;
+    this.router.navigateByUrl('/');
+    this.loggedin = false;
+    return signOut(auth);
+  }
+
   ngOnInit() {
+    onAuthStateChanged(this.auth, (user) => {
+      if (user) {
+        this.loggedin = true;
+      } else {
+        this.loggedin = false;
+      }
+    })
     this.onActivate();
     setTimeout(() => {
       this.sidecont?.getElementRef().nativeElement.addEventListener('scroll', () => {
@@ -112,14 +125,12 @@ export class AppComponent {
     });
 
   }
-
   getPosition(event: any): void {
     this.bhvsrv.sideNavFu(event);
   }
   isActivChang(): void {
     this.bhvsrv.appsideNav(false);
   }
-
   prepareRoute(outlet: RouterOutlet) {
     return outlet?.activatedRouteData?.['animation'];
   }

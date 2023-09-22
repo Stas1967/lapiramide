@@ -1,0 +1,83 @@
+.imgScreen {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 24px;
+    flex: 1;
+}
+
+.actionbtn {
+    font-weight: 200;
+    font-size: 18px !important;
+    border-radius: 4px;
+    padding: 12px 24px;
+}
+
+.dialogaction {
+    justify-content: flex-start;
+}
+
+.dialogactionup {
+    justify-content: flex-end;
+}
+
+.imgfield {
+    width: 50%;
+}
+
+.cropper {
+    --cropper-outline-color: rgba(36, 36, 36, 0.8);
+}
+
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.inputfile+label {
+    font-weight: 100;
+    color: white;
+    background-color: rgb(90, 16, 160);
+    display: inline-block;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+}
+
+.inputfile:focus+label,
+.inputfile+label:hover {
+    background-color: rgb(166, 0, 172);
+}
+
+.finput::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+@media all and (min-width: 1280px) and (max-width: 1920px) {}
+
+@media all and (min-width: 960px) and (max-width: 1279.98px) {}
+
+@media all and (min-width: 600px) and (max-width: 959.98px) {}
+
+@media all and (max-width: 599.98px) {
+    .imgScreen {
+        margin-top: 24px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 24px;
+        flex: 1;
+    }
+
+    .imgfield {
+        width: 100%;
+    }
+
+}

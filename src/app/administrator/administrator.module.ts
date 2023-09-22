@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AdministratorRoutingModule } from './administrator-routing.module';
 import { AdministratorComponent } from './administrator.component';
@@ -16,6 +17,10 @@ import { ApartmentsComponent } from './apartments/apartments.component';
 import { EventsComponent } from './events/events.component';
 import { UsersComponent } from './users/users.component';
 import { BookinglistComponent } from './bookinglist/bookinglist.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { CardimgComponent } from './cardimg/cardimg.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -25,7 +30,8 @@ import { BookinglistComponent } from './bookinglist/bookinglist.component';
     ApartmentsComponent,
     EventsComponent,
     UsersComponent,
-    BookinglistComponent
+    BookinglistComponent,
+    CardimgComponent,
   ],
   imports: [
     CommonModule,
@@ -37,7 +43,10 @@ import { BookinglistComponent } from './bookinglist/bookinglist.component';
     MatButtonModule,
     FormsModule,
     MatToolbarModule,
-    FootComponent
+    MatCardModule,
+    FootComponent,
+    ImageCropperModule,
+    MatDialogModule
   ]
 })
 export class AdministratorModule { }

@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { BehavService } from '../services/behav.service';
+import { AutentService } from '../services/autent.service';
 
 @Component({
   selector: 'app-login',
@@ -32,7 +33,7 @@ export class LoginComponent {
   })
 
   auth = fireAuth;
-  constructor(private dialog: MatDialog, private route: Router, public bhvsrv: BehavService,) {
+  constructor(private dialog: MatDialog, private route: Router, public bhvsrv: BehavService) {
     this.isSmall = bhvsrv.isMobilFu();
   }
   @HostListener('window:resize', ['$event'])
@@ -63,8 +64,11 @@ export class LoginComponent {
     const logEmail = this.logform.controls['logemail'].value || '';
     const logPassw = this.logform.controls['logpassw'].value || '';
     await signInWithEmailAndPassword(this.auth, logEmail, logPassw).then((res) => {
-      //this.spinsrv.passSpin(false);
-      this.route.navigate(['/']);
+      if (res) {
+        //this.bhvsrv.passSpin(false);
+        this.route.navigate(['/']);
+      }
+
     }).catch((err) => {
       if (err.code === 'auth/user-not-found') {
         this.logform.setValue({ logemail: '', logpassw: '' })

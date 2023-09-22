@@ -60,22 +60,6 @@ h1 {
     gap: 24px;
 }
 
-.backstage {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 200;
-    background-color: rgba(0, 0, 0, 0.4);
-    display: flex;
-    flex: 1;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 36px;
-}
-
 mat-progress-spinner circle {
     stroke: white;
 }

@@ -1,0 +1,47 @@
+<h2 mat-dialog-title>Upload Image</h2>
+<mat-dialog-actions class="dialogaction">
+    <div>
+        <input type="file" name="file" id="file" accept="image/jpg, image/jpeg, image/png"
+            (change)="fileChangeEvent($event)" class="inputfile" />
+        <label color="primary" fxLayoutAlign.xs="center strech" class="actionbtn mat-elevation-z3" for="file">
+            <mat-icon style="margin-right: 16px; vertical-align: text-top;">image_search</mat-icon> Search
+        </label>
+    </div>
+</mat-dialog-actions>
+<mat-dialog-content>
+    <mat-card>
+        <mat-card-content class="imgScreen">
+            <div class="imgfield">
+                <image-cropper class="cropper" [imageChangedEvent]="imageChangedEventCard" [maintainAspectRatio]="true"
+                    [imageQuality]="80" (imageCropped)="imageCropped($event)" format="jpeg"
+                    [aspectRatio]="imgAspRatioCard">
+                </image-cropper>
+            </div>
+            <div class="imgfield">
+                <image-cropper class="cropper" [imageChangedEvent]="imageChangedEventFull" [maintainAspectRatio]="true"
+                    [imageQuality]="80" (imageCropped)="imageCropped($event)" format="jpeg"
+                    [aspectRatio]="imgAspRatioFull">
+                </image-cropper>
+            </div>
+        </mat-card-content>
+
+    </mat-card>
+    <!-- <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Image Preview</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                     <img id="myimg" [src]="croppedImage" width="280px">
+                </mat-card-content>
+            </mat-card> -->
+</mat-dialog-content>
+<mat-dialog-actions class="dialogactionup">
+    <button class="actionbtn" matDialogClose="cancel" mat-raised-button color="accent" (click)="send()">
+        <mat-icon>cancel</mat-icon>
+        Cancel
+    </button>
+    <button class="actionbtn" matDialogClose="ok" mat-raised-button color="warn" (click)="send()">
+        <mat-icon>upload</mat-icon>
+        Upload
+    </button>
+</mat-dialog-actions>

@@ -16,6 +16,30 @@
             <span *ngIf="!isTabl">{{link.name}}</span>
           </button>
         </span>
+        <span>
+          <button mat-button class="link" [routerLink]="'/login'" *ngIf="!loggedin">
+            <mat-icon class="iconbtn">login</mat-icon>
+            <span *ngIf="!isTabl">Login</span>
+          </button>
+          <button mat-button class="link" [matMenuTriggerFor]="menu" *ngIf="loggedin">
+            <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+              <mat-icon class="iconbtn">admin_panel_settings</mat-icon>
+              <span *ngIf="!isTabl">Admin</span>
+              <mat-icon class="iconbtn">more_vert</mat-icon>
+            </div>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item [routerLink]="'/administrator'">
+              <mat-icon class="iconbtn">admin_panel_settings</mat-icon>
+              <span>Admin Panel</span>
+            </button>
+            <button mat-menu-item style="background-color: red; color: white;" (click)="LogOut()">
+              <mat-icon>logout</mat-icon>
+              <span>Sign Out</span>
+            </button>
+
+          </mat-menu>
+        </span>
       </div>
       <button *ngIf="isSmall" mat-icon-button (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
@@ -30,13 +54,28 @@
       <span>Menu</span>
     </mat-toolbar>
     <mat-nav-list>
-      <mat-list-item *ngFor="let link of linkssm" (isActiveChange)="isActivChang()" [routerLink]="link.url"
-        routerLinkActive="active-item">
+      <mat-list-item *ngFor="let link of linkssm; let ia = index" (isActiveChange)="isActivChang()"
+        [routerLink]="link.url" routerLinkActive="active-item">
         <div class="link">
           <mat-icon class="iconbtn" style="color: rgb(24, 24, 24);">{{link.icon}}</mat-icon>
           <span style="color: rgb(24, 24, 24);">{{link.name}}</span>
         </div>
       </mat-list-item>
+      <mat-list-item (isActiveChange)="isActivChang()" [routerLink]="'/login'" routerLinkActive="active-item"
+        *ngIf="!loggedin">
+        <div class="link">
+          <mat-icon class="iconbtn" style="color: rgb(24, 24, 24);">login</mat-icon>
+          <span style="color: rgb(24, 24, 24);">Login</span>
+        </div>
+      </mat-list-item>
+      <mat-list-item (isActiveChange)="isActivChang()" [routerLink]="'/administrator'" routerLinkActive="active-item"
+        *ngIf="loggedin">
+        <div class="link">
+          <mat-icon class="iconbtn" style="color: rgb(24, 24, 24);">admin_panel_settings</mat-icon>
+          <span style="color: rgb(24, 24, 24);">Admin</span>
+        </div>
+      </mat-list-item>
+
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content class="mat-navsidecontent" #sidecont mat-sidenav-content-collapsed cdkScrollable>
