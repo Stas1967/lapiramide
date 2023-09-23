@@ -15,12 +15,21 @@ export class BehavService {
   isTablet$ = new BehaviorSubject<boolean>(false);
   appside: boolean | undefined;
   appside$ = new BehaviorSubject<boolean>(false);
-
+  spinopen: boolean | undefined;
+  spinopen$ = new BehaviorSubject<boolean>(false);
   _countDays = 0;
   _countDays$ = new BehaviorSubject<number>(0);
   constructor(public bpo: BreakpointObserver) {
     this.isMobile = false;
     this.isTablet = false;
+  }
+  passSpin(value: boolean): boolean {
+    this.spinopen = value;
+    this.spinopen$.next(this.spinopen);
+    return this.spinopen;
+  }
+  isSpinerOn(): boolean {
+    return this.spinopen$.value;
   }
 
 

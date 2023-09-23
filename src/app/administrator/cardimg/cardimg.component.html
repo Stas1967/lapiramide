@@ -1,46 +1,34 @@
 <h2 mat-dialog-title>Upload Image</h2>
 <mat-dialog-actions class="dialogaction">
     <div>
-        <input type="file" name="file" id="file" accept="image/jpg, image/jpeg, image/png"
-            (change)="fileChangeEvent($event)" class="inputfile" />
-        <label color="primary" fxLayoutAlign.xs="center strech" class="actionbtn mat-elevation-z3" for="file">
+        <input type="file" name="file" id="file" accept="image/jpg, image/jpeg, image/png" (change)="fileChange($event)"
+            class="inputfile" />
+        <label color="primary" fxLayoutAlign.xs="center strech"
+            style="font-size: 18px; border-radius: 4px; padding: 12px 24px;" class="actionbtn" class="mat-elevation-z3"
+            for="file">
             <mat-icon style="margin-right: 16px; vertical-align: text-top;">image_search</mat-icon> Search
         </label>
     </div>
 </mat-dialog-actions>
-<mat-dialog-content>
-    <mat-card>
-        <mat-card-content class="imgScreen">
-            <div class="imgfield">
-                <image-cropper class="cropper" [imageChangedEvent]="imageChangedEventCard" [maintainAspectRatio]="true"
-                    [imageQuality]="80" (imageCropped)="imageCropped($event)" format="jpeg"
-                    [aspectRatio]="imgAspRatioCard">
-                </image-cropper>
-            </div>
-            <div class="imgfield">
-                <image-cropper class="cropper" [imageChangedEvent]="imageChangedEventFull" [maintainAspectRatio]="true"
-                    [imageQuality]="80" (imageCropped)="imageCropped($event)" format="jpeg"
-                    [aspectRatio]="imgAspRatioFull">
-                </image-cropper>
-            </div>
-        </mat-card-content>
+<mat-dialog-content class="imgScreen">
+    <div style="max-width: 320px;">
+        <image-cropper [imageChangedEvent]="iceCard" [maintainAspectRatio]="true" [imageQuality]="80" format="jpeg"
+            (imageCropped)="imageCroppedCard($event)" [aspectRatio]="1">
+        </image-cropper>
+    </div>
+    <div style="max-width: 320px;">
+        <image-cropper [imageChangedEvent]="iceFull" [maintainAspectRatio]="true" [imageQuality]="80" format="jpeg"
+            (imageCropped)="imageCroppedFull($event)" [aspectRatio]="16/9">
+        </image-cropper>
+    </div>
 
-    </mat-card>
-    <!-- <mat-card>
-                <mat-card-header>
-                    <mat-card-title>Image Preview</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                     <img id="myimg" [src]="croppedImage" width="280px">
-                </mat-card-content>
-            </mat-card> -->
 </mat-dialog-content>
 <mat-dialog-actions class="dialogactionup">
-    <button class="actionbtn" matDialogClose="cancel" mat-raised-button color="accent" (click)="send()">
+    <button class="actionbtn" matDialogClose="cancel" mat-raised-button color="accent">
         <mat-icon>cancel</mat-icon>
         Cancel
     </button>
-    <button class="actionbtn" matDialogClose="ok" mat-raised-button color="warn" (click)="send()">
+    <button class="actionbtn" matDialogClose="ok" mat-raised-button color="warn" (click)="upload()">
         <mat-icon>upload</mat-icon>
         Upload
     </button>

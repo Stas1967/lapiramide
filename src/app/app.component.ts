@@ -61,11 +61,11 @@ export class AppComponent {
     this.loggedin = false;
     router.events.subscribe((navi) => {
       if (navi instanceof NavigationStart) {
-        this.spinner = true;
+        bhvsrv.passSpin(true);
         this.sidenav?.close();
         const yui = this.sidecont?.getElementRef().nativeElement.scroll({ top: 0, behavior: 'smooth' })
       } else if (navi instanceof NavigationEnd) {
-        this.spinner = false;
+        bhvsrv.passSpin(false);
       }
     })
   }
@@ -89,6 +89,8 @@ export class AppComponent {
   }
 
   ngOnInit() {
+    console.log(this.bhvsrv.isSpinerOn());
+
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
         this.loggedin = true;

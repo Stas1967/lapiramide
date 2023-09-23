@@ -6,7 +6,6 @@ import { ApartmentsComponent } from './apartments/apartments.component';
 import { EventsComponent } from './events/events.component';
 import { UsersComponent } from './users/users.component';
 import { BookinglistComponent } from './bookinglist/bookinglist.component';
-import { CardimgComponent } from './cardimg/cardimg.component';
 
 const routes: Routes = [
   {

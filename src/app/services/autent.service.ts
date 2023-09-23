@@ -15,31 +15,18 @@ export class AutentService {
   constructor(private route: Router) {
     this.isaut = false;
   }
-  isAuth() {
-    let isAuthenticated = false;
-    let uid = '';
-    onAuthStateChanged(this.auth, (user) => {
-      if (user) {
-        isAuthenticated = true;
-        uid = user.uid;
-        return { isAuthenticated, uid }
-      } else {
-        isAuthenticated = false;
-        uid = '';
-        this.route.navigateByUrl('/');
-        return { isAuthenticated, uid }
-      }
-    })
-    console.log(isAuthenticated, uid)
-    return { isAuthenticated, uid }
+  isAuth(): Promise<{ isAuthenticated: boolean, uid: string | null }> {
+    return new Promise((resolve, reject) => {
+      onAuthStateChanged(this.auth, (user) => {
+        if (user) {
+          resolve({ isAuthenticated: true, uid: user.uid });
+        } else {
+          this.route.navigateByUrl('/');
+          resolve({ isAuthenticated: false, uid: null });
+        }
+      })
+    });
   }
 
-  getAuth(value: boolean): boolean {
-    this.isaut = value;
-    this.isaut$.next(value);
-    return this.isaut
-  }
-  returnAuth(): boolean {
-    return this.isaut$.value;
-  }
+
 }

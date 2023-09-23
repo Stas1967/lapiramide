@@ -1,7 +1,7 @@
 import { Component, HostListener, ViewChild } from '@angular/core';
 import { MatSidenav, MatSidenavContent } from '@angular/material/sidenav';
 import { BehavService } from '../services/behav.service';
-import { NavigationStart, Router, RouterEvent } from '@angular/router';
+import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
 
 export interface Section {
   id: number;
@@ -20,6 +20,7 @@ export interface Section {
 })
 export class AdministratorComponent {
   isSmall: boolean;
+  spinner = false;
   @ViewChild('blognav', { static: false }) public blognav: MatSidenav | undefined;
   @ViewChild('blogcont', { static: false }) public blogcont: MatSidenavContent | undefined;
   general: Section[] = [
@@ -33,6 +34,13 @@ export class AdministratorComponent {
   ]
   constructor(public bhvsrv: BehavService, public router: Router) {
     this.isSmall = bhvsrv.isMobilFu();
+    router.events.subscribe((navi) => {
+      if (navi instanceof NavigationStart) {
+        this.spinner = true;
+      } else if (navi instanceof NavigationEnd) {
+        this.spinner = false;
+      }
+    })
   }
   @HostListener('window:resize', ['$event'])
   ngOnResize(): void {
@@ -72,28 +80,4 @@ export class AdministratorComponent {
       this.blognav?.toggle();
     }
   }
-
-  // isActiveChange(g: Section, event: any) {
-  //   const lista = this.getLinkList()
-  //   const curIndex = lista.indexOf(g);
-  //   if (event == true) {
-  //     if (curIndex != 0) {
-  //       const prevIndex = (curIndex - 1) % lista.length;
-  //       const prevLink = lista[prevIndex]
-  //       this.prevURL = prevLink.link;
-  //       this.prevLinkTxt = prevLink.name;
-  //     }
-  //     if (curIndex == 0) {
-  //       this.backDisable = true;
-  //     } else {
-  //       this.backDisable = false;
-  //     }
-  //     //const curLink = lista[curIndex];
-  //     const nextindx = (curIndex + 1) % lista.length;
-  //     const nextLink = lista[nextindx];
-  //     this.nextLinkTxt = nextLink.name;
-  //     this.nextURL = nextLink.link;
-  //     this.subpagelink = nextLink.dbid;
-  //   }
-  // }
 }

@@ -25,7 +25,7 @@
             <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
               <mat-icon class="iconbtn">admin_panel_settings</mat-icon>
               <span *ngIf="!isTabl">Admin</span>
-              <mat-icon class="iconbtn">more_vert</mat-icon>
+              <mat-icon>more_vert</mat-icon>
             </div>
           </button>
           <mat-menu #menu="matMenu">
@@ -83,7 +83,9 @@
     <app-foot></app-foot>
   </mat-sidenav-content>
 </mat-sidenav-container>
-<div *ngIf="spinner" class="backstage">
-  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-  <p style="color: white; font-size: 18px;">Loading ....</p>
+<div *ngIf="bhvsrv.isSpinerOn()">
+  <div class="backstage">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    <p style="color: white; font-size: 18px;">Loading....</p>
+  </div>
 </div>
