@@ -1,7 +1,13 @@
-<h1>Lista de imagenes</h1>
-
-<div style="display: flex;  justify-content: flex-end;">
-    <button mat-fab color="warn" type="button" (click)="openImage()">
-        <mat-icon>image</mat-icon>
-    </button>
+<div class="imgcontainer">
+    <div class="pagetitle">
+        <h1>Lista de imagenes</h1>
+        <button mat-fab color="warn" type="button" (click)="openImage()">
+            <mat-icon>image</mat-icon>
+        </button>
+    </div>
+    <div class="imagenes">
+        <div class="imgitem" *ngFor="let im of imageList">
+            <img class="img" [src]="im.mini" [alt]="im.alt" loading="lazy">
+        </div>
+    </div>
 </div>

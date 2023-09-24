@@ -1,0 +1,12 @@
+.usercontainer {
+    margin-top: 120px;
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+.pagetitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}

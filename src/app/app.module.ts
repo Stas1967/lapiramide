@@ -4,7 +4,7 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { CACHE_SIZE_UNLIMITED, getFirestore, initializeFirestore, memoryLocalCache } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
-import { getDatabase } from 'firebase/database';
+import { getDatabase, ref } from 'firebase/database';
 import { getStorage } from 'firebase/storage';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -48,6 +48,7 @@ export const fireDb = getFirestore(app);
 export const fireRdb = getDatabase(app);
 export const fireAuth = getAuth(app);
 export const fireStorage = getStorage(app);
+export const refdb = ref;
 
 @NgModule({
   declarations: [

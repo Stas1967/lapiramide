@@ -43,6 +43,7 @@ export class AppComponent {
   spinner = false;
   loggedin: boolean;
   auth = fireAuth;
+  jest = false;
   @ViewChild('sidenav', { static: false }) public sidenav: MatSidenav | undefined;
   @ViewChild('sidecont', { static: false }) public sidecont: MatSidenavContent | undefined;
 
@@ -55,7 +56,7 @@ export class AppComponent {
     { icon: 'shop', name: 'Ofertas', url: '/offer' },
     { icon: 'celebration', name: 'Eventos', url: '/events' },
   ];
-  constructor(public bhvsrv: BehavService, public router: Router) {
+  constructor(public bhvsrv: BehavService, public router: Router, private autsrv: AutentService) {
     this.isSmall = bhvsrv.isMobilFu();
     this.isTabl = bhvsrv.isTabletFu();
     this.loggedin = false;
@@ -82,15 +83,13 @@ export class AppComponent {
     }
   }
   LogOut() {
-    const auth = fireAuth;
     this.router.navigateByUrl('/');
     this.loggedin = false;
-    return signOut(auth);
+    localStorage.removeItem('authkey')
+    return signOut(this.auth);
   }
 
   ngOnInit() {
-    console.log(this.bhvsrv.isSpinerOn());
-
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
         this.loggedin = true;
@@ -98,6 +97,7 @@ export class AppComponent {
         this.loggedin = false;
       }
     })
+
     this.onActivate();
     setTimeout(() => {
       this.sidecont?.getElementRef().nativeElement.addEventListener('scroll', () => {
@@ -110,6 +110,7 @@ export class AppComponent {
         if (scrollPosition <= componentPosition) {
           this.state = 'hide';
         }
+
       });
     }, 500)
   }

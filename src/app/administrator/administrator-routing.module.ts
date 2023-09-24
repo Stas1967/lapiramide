@@ -6,6 +6,8 @@ import { ApartmentsComponent } from './apartments/apartments.component';
 import { EventsComponent } from './events/events.component';
 import { UsersComponent } from './users/users.component';
 import { BookinglistComponent } from './bookinglist/bookinglist.component';
+import { AuthGuard } from '../services/auth.guard';
+import { AdminGuard } from '../services/admin.guard';
 
 const routes: Routes = [
   {
@@ -14,7 +16,7 @@ const routes: Routes = [
       { path: 'apartments', title: 'Administrator - Apartamentos', component: ApartmentsComponent },
       { path: 'events', title: 'Administrator - Eventos', component: EventsComponent },
       { path: 'imagelist', title: 'Administrator - Image list', component: ImagelistComponent },
-      { path: 'users', title: 'Administrator - Usuarios', component: UsersComponent },
+      { path: 'users', title: 'Administrator - Usuarios', component: UsersComponent, canActivate: [AdminGuard] },
       { path: 'bookinglist', title: 'Administrator - Reservas', component: BookinglistComponent }
     ]
   }

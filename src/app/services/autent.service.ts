@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
 import { fireAuth, fireDb } from '../app.module';
-import { signOut, onAuthStateChanged } from 'firebase/auth';
+import { signOut, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+
+
+import { BehaviorSubject, Observable, of, from, fromEvent } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { LogDialog } from '../login/login.component';
 
 @Injectable({
   providedIn: 'root'
@@ -10,22 +14,42 @@ import { BehaviorSubject } from 'rxjs';
 export class AutentService {
   db = fireDb;
   auth = fireAuth;
-  isaut: boolean
+  isaut: boolean | undefined;
   isaut$ = new BehaviorSubject<boolean>(false)
-  constructor(private route: Router) {
-    this.isaut = false;
+  constructor(private route: Router, private dialog: MatDialog) {
+    onAuthStateChanged(this.auth, (user) => {
+      if (user) {
+        sessionStorage.setItem('uid', user.uid);
+      } else {
+        sessionStorage.removeItem('uid');
+      }
+    })
   }
-  isAuth(): Promise<{ isAuthenticated: boolean, uid: string | null }> {
-    return new Promise((resolve, reject) => {
-      onAuthStateChanged(this.auth, (user) => {
-        if (user) {
-          resolve({ isAuthenticated: true, uid: user.uid });
-        } else {
-          this.route.navigateByUrl('/');
-          resolve({ isAuthenticated: false, uid: null });
-        }
-      })
+
+  async LogIn(email: string, password: string): Promise<void> {
+    return await signInWithEmailAndPassword(this.auth, email, password).then((res) => {
+      if (res.user) {
+        this.route.navigate(['/']);
+        localStorage.setItem('authkey', 'true');
+      }
+    }).catch((err) => {
+      console.log(err.code);
+      if (err.code === 'auth/invalid-login-credentials') {
+        this.openDialog('person_search', 'Upsss... Algo ha salido mal',
+          'Comprueba los credenciales introducidas y intenta de nuevo', '',
+          false, false);
+      }
+      if (err.code === 'auth/too-many-requests') {
+        this.openDialog('person_search', 'Lo haz intentado demasidas vezes',
+          'Espera unos minutos y intenta de nuevo', '', false, false);
+      }
     });
+
+  }
+  openDialog(icon: string, title: string, text: string, prom: string, show: boolean, logreg: boolean): void {
+    const dialRef = this.dialog.open(LogDialog, {
+      data: { dialogicon: icon, dialogtitle: title, dialogtxt: text, dialogpromis: prom, show: show, logreg: logreg }
+    })
   }
 
 

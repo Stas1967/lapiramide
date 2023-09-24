@@ -56,7 +56,6 @@ export class AdministratorComponent {
         //document.getElementById('blogcont')?.scrollTo({ top: 0, behavior: 'smooth' })
       }
     });
-
   }
   getPosition(event: any): void {
     this.bhvsrv.sideNavFu(event);

@@ -11,12 +11,12 @@
     </div>
 </mat-dialog-actions>
 <mat-dialog-content class="imgScreen">
-    <div style="max-width: 320px;">
+    <div style="max-width: 480px;">
         <image-cropper [imageChangedEvent]="iceCard" [maintainAspectRatio]="true" [imageQuality]="80" format="jpeg"
             (imageCropped)="imageCroppedCard($event)" [aspectRatio]="1">
         </image-cropper>
     </div>
-    <div style="max-width: 320px;">
+    <div style="max-width: 480px;">
         <image-cropper [imageChangedEvent]="iceFull" [maintainAspectRatio]="true" [imageQuality]="80" format="jpeg"
             (imageCropped)="imageCroppedFull($event)" [aspectRatio]="16/9">
         </image-cropper>
@@ -24,11 +24,12 @@
 
 </mat-dialog-content>
 <mat-dialog-actions class="dialogactionup">
-    <button class="actionbtn" matDialogClose="cancel" mat-raised-button color="accent">
+    <button class="actionbtn" [mat-dialog-close]="'Cancel'" mat-raised-button color="accent">
         <mat-icon>cancel</mat-icon>
         Cancel
     </button>
-    <button class="actionbtn" matDialogClose="ok" mat-raised-button color="warn" (click)="upload()">
+    <button class="actionbtn" mat-raised-button color="warn" [mat-dialog-close]="data" (click)="upload()"
+        [disabled]="upldBtn">
         <mat-icon>upload</mat-icon>
         Upload
     </button>

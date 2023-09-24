@@ -29,9 +29,10 @@
 }
 
 
-.cropper {
+image-cropper {
     --cropper-outline-color: rgba(36, 36, 36, 0.8);
 }
+
 
 .inputfile {
     width: 0.1px;

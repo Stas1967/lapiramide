@@ -1,15 +1,13 @@
-<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="24px">
-    <mat-icon style="font-size: 36px;">{{data.dialogicon}}</mat-icon>
+<div mat-dialog-title>
+    <mat-icon>{{data.dialogicon}}</mat-icon>
     <span mat-dialog-title>{{data.dialogtitle}}</span>
 </div>
 <div mat-dialog-content>
     <div [innerHtml]="data.dialogtxt"></div>
-    <p *ngIf="data.show">{{data.dialogpromis}}&nbsp;<a [routerLink]="data.logreg ? '/register' : '/login'"
-            [mat-dialog-close]="true">Click here</a>
-    </p>
+
     <p></p>
 </div>
-<div mat-dialog-actions fxLayoutAlign="end start">
+<div mat-dialog-actions>
     <button mat-button [mat-dialog-close]="true">
         <mat-icon class="iconbtn">close</mat-icon>
         <span>{{data.show ? 'Cancel' : 'Ok'}}</span>

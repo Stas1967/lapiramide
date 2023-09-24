@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AdministratorRoutingModule } from './administrator-routing.module';
 import { AdministratorComponent } from './administrator.component';
@@ -15,7 +14,7 @@ import { FootComponent } from '../foot/foot.component';
 import { ImagelistComponent } from './imagelist/imagelist.component';
 import { ApartmentsComponent } from './apartments/apartments.component';
 import { EventsComponent } from './events/events.component';
-import { UsersComponent } from './users/users.component';
+import { NewUser, UsersComponent } from './users/users.component';
 import { BookinglistComponent } from './bookinglist/bookinglist.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { CardimgComponent } from './cardimg/cardimg.component';
@@ -27,6 +26,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -56,7 +56,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSelectModule,
+    NewUser,
   ]
 })
 export class AdministratorModule { }

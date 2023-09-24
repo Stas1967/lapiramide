@@ -1,35 +1,44 @@
-import { Component, } from '@angular/core';
+import { Component, Inject, } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { child, push } from 'firebase/database';
 
 import { uploadString, ref, getDownloadURL } from 'firebase/storage';
+
 import { ImageCroppedEvent } from 'ngx-image-cropper';
-import { fireStorage } from 'src/app/app.module';
+import { fireRdb, fireStorage, refdb } from 'src/app/app.module';
 import { BehavService } from 'src/app/services/behav.service';
 
-
 export interface DialogData {
-  dialogicon: string;
-  dialogtitle: string
-  dialogtxt: string;
-  dialogpromis: string;
-  show: boolean;
-  logreg: boolean;
+  mini: string;
+  big: string;
+  alt: string;
+  isok: string;
 }
 
 @Component({
   selector: 'lib-cardimg',
   templateUrl: './cardimg.component.html',
   styleUrls: ['./cardimg.component.css'],
-
 })
 export class CardimgComponent {
   storage = fireStorage;
+  realdb = fireRdb;
   iceCard: Event | undefined;
   iceFull: Event | undefined;
   croppedImageCard: any = '';
   croppedImageFull: any = '';
   blobImageCard: string;
   blobImageFull: string;
-  constructor(public bhvsrv: BehavService) {
+  imageName = '';
+  upldBtn = true;
+  mini = '';
+  big = '';
+  constructor(public bhvsrv: BehavService, public dialogRef: MatDialogRef<CardimgComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,) {
     this.blobImageCard = '';
     this.blobImageFull = '';
   }
@@ -37,13 +46,16 @@ export class CardimgComponent {
 
   }
 
+  onNoClick(): void {
+    this.data.isok = 'Cancel';
+    this.dialogRef.close();
+
+  }
+
   async fileChange(event: Event) {
-    this.bhvsrv.passSpin(true);
     this.iceCard = event;
     this.iceFull = event;
-    this.bhvsrv.passSpin(false);
-    // const ko = this.iceCard.target as HTMLInputElement;
-    // const ku = ko.files![0];
+    this.imageName = crypto.randomUUID();
     // const imgUrl = URL.createObjectURL(ku);
     // const response = await fetch(imgUrl);
     // const blob = await response.blob();
@@ -59,30 +71,35 @@ export class CardimgComponent {
 
   imageCroppedCard = async (event: ImageCroppedEvent): Promise<void> => {
     this.croppedImageCard = (event.objectUrl || '');
-    const response = await fetch(this.croppedImageCard);
-    const blob = await response.blob();
-    const reader = new FileReader();
-    // Definir qué hacer cuando la lectura se complete
-    const width = 280;
-    reader.onloadend = () => {
-      const img = new Image();
-      const myFile = reader.result;
-      if (myFile != null) {
-        img.src = myFile.toString();
-      }
-      img.onload = () => {
-        const canvas = document.createElement('canvas');
-        const scaleFact = width / img.width;
-        canvas.width = width;
-        canvas.height = img.height * scaleFact;
-        const ctx = canvas.getContext('2d');
-        if (ctx != null) {
-          ctx.drawImage(img, 0, 0, width, canvas.height);
+    if (this.croppedImageCard) {
+      this.upldBtn = false;
+      const response = await fetch(this.croppedImageCard);
+      const blob = await response.blob();
+      const reader = new FileReader();
+      // Definir qué hacer cuando la lectura se complete
+      const width = 280;
+      reader.onloadend = () => {
+        const img = new Image();
+        const myFile = reader.result;
+        if (myFile != null) {
+          img.src = myFile.toString();
         }
-        this.blobImageCard = canvas.toDataURL('image/jpeg', 0.8);
-      };
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const scaleFact = width / img.width;
+          canvas.width = width;
+          canvas.height = img.height * scaleFact;
+          const ctx = canvas.getContext('2d');
+          if (ctx != null) {
+            ctx.drawImage(img, 0, 0, width, canvas.height);
+          }
+          this.blobImageCard = canvas.toDataURL('image/jpeg', 0.8);
+        };
+      }
+      reader.readAsDataURL(blob);
+    } else {
+      this.upldBtn = true;
     }
-    reader.readAsDataURL(blob);
   }
 
   imageCroppedFull = async (event: ImageCroppedEvent): Promise<void> => {
@@ -113,26 +130,45 @@ export class CardimgComponent {
     reader.readAsDataURL(blob);
   }
 
-  upload() {
-    const filePathCard = 'lapiramide/' + 'mini/';
-    const filePathFull = 'lapiramide/' + 'full/';
-    const imgnameCard = 'nowy2' + '.jpeg';
-    const imgnameFull = 'nowy2' + '.jpeg';
-    const storageRefCard = ref(this.storage, filePathCard + '/' + imgnameCard)
-    const storageRefFull = ref(this.storage, filePathFull + '/' + imgnameFull)
-    const metadata = {
-      cacheControl: 'public, max-age=604800',
-      contentType: 'image/jpeg'
-    }
-    this.bhvsrv.passSpin(true);
-    const uploadTask = uploadString(storageRefCard, this.blobImageCard, 'data_url', metadata).then(() => {
-      uploadString(storageRefFull, this.blobImageFull, 'data_url', metadata)
-    }).then(() => {
-      setTimeout(() => {
+  async upload(): Promise<void> {
+    if (this.imageName != '') {
+      const filePathCard = 'lapiramide/' + 'mini/';
+      const filePathFull = 'lapiramide/' + 'full/';
+      const imgnameCard = this.imageName + '.jpeg';
+      const imgnameFull = this.imageName + '.jpeg';
+      const storageRefCard = ref(this.storage, filePathCard + '/' + imgnameCard)
+      const storageRefFull = ref(this.storage, filePathFull + '/' + imgnameFull)
+      const metadata = {
+        cacheControl: 'public, max-age=604800',
+        contentType: 'image/jpeg'
+      }
+      this.bhvsrv.passSpin(true);
+      //const newKey = push(child(refdb(this.realdb), 'lapiramide')).key
+      await uploadString(storageRefCard, this.blobImageCard, 'data_url', metadata).then(() => {
+        getDownloadURL(storageRefCard).then((curl) => {
+          this.mini = curl
+          this.data.mini = curl;
+          this.data.isok = 'Ok'
+        })
+      }).then(async () => {
+        await uploadString(storageRefFull, this.blobImageFull, 'data_url', metadata).then(() => {
+          getDownloadURL(storageRefFull).then((furl) => {
+            this.big = furl;
+            this.data.big = furl;
+          }).then(() => {
+            push(refdb(this.realdb, 'lapiramide/'), {
+              mini: this.mini,
+              big: this.big,
+              alt: 'Apartamentos La Piramide',
+            })
+          })
+        })
+      }).finally(() => {
+        this.upldBtn = false;
         this.bhvsrv.passSpin(false);
-      }, 500)
-    });;
-
+        this.dialogRef.close();
+      })
+    }
   }
 }
 

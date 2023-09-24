@@ -3,6 +3,7 @@ import { ImgPanel } from '../classes/imginfo';
 import { BehavService } from 'src/app/services/behav.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CardimgComponent } from '../cardimg/cardimg.component';
+import { DatabaseService, ListaImg } from 'src/app/services/database.service';
 
 @Component({
   selector: 'app-imagelist',
@@ -11,18 +12,29 @@ import { CardimgComponent } from '../cardimg/cardimg.component';
 })
 export class ImagelistComponent {
   addImagePanel: boolean = false;
-  constructor(public bhsrv: BehavService, public dialog: MatDialog) {
+  imageList: ListaImg[] = [];
+  tempimglist: ListaImg[] = []
+  mini = '';
+  big = '';
+  isok = '';
 
+  constructor(public bhsrv: BehavService, public dialog: MatDialog, public dbsrv: DatabaseService) { }
+
+  ngOnInit(): void {
+    this.imageList.length = 0;
+    this.imageList = [];
+    this.imageList = this.dbsrv.getImageList();
   }
+
   openImage(): void {
-    this.dialog.open(CardimgComponent, { width: '100%' }).afterClosed().subscribe((dane) => {
-      console.log(dane);
+    const dialogref = this.dialog.open(CardimgComponent, { data: { mini: this.mini, isok: this.isok } })
+    dialogref.afterClosed().subscribe((dane) => {
+      if (dane !== 'Cancel') {
+        this.imageList.push(dane);
+      }
     })
   }
-
-
   closeImagePanel(event: ImgPanel) {
     this.addImagePanel = event.close;
   }
-
 }

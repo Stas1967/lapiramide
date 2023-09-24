@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { doc, getDocFromCache, getDocFromServer } from 'firebase/firestore';
 import { fireDb } from '../app.module';
@@ -104,6 +104,6 @@ export class BehavService {
     const time = end.getTime() - start.getTime();
     this._countDays = Math.round(time / (1000 * 60 * 60 * 24))
     countdays = this._countDays;
-    return { start, end, countdays };
+    return { start: start, end, countdays };
   }
 }
