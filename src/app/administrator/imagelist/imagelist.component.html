@@ -1,12 +1,12 @@
 <div class="imgcontainer">
     <div class="pagetitle">
         <h1>Lista de imagenes</h1>
-        <button mat-fab color="warn" type="button" (click)="openImage()">
+        <button mat-fab color="primary" type="button" (click)="openImage()">
             <mat-icon>image</mat-icon>
         </button>
     </div>
     <div class="imagenes">
-        <div class="imgitem" *ngFor="let im of imageList">
+        <div class="imgitem" *ngFor="let im of imageList | async">
             <img class="img" [src]="im.mini" [alt]="im.alt" loading="lazy">
         </div>
     </div>

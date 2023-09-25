@@ -44,6 +44,7 @@ export class AppComponent {
   loggedin: boolean;
   auth = fireAuth;
   jest = false;
+  displName = '';
   @ViewChild('sidenav', { static: false }) public sidenav: MatSidenav | undefined;
   @ViewChild('sidecont', { static: false }) public sidecont: MatSidenavContent | undefined;
 
@@ -93,6 +94,7 @@ export class AppComponent {
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
         this.loggedin = true;
+        this.displName = user.email || '';
       } else {
         this.loggedin = false;
       }

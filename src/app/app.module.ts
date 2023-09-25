@@ -27,6 +27,7 @@ import { FootComponent } from './foot/foot.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LogDialog } from './login/login.component';
 import { WrongDialog } from './bookinghome/bookinghome.component';
+import { RegisterComponent } from './register/register.component';
 
 
 const firebaseConfig = {
@@ -71,7 +72,6 @@ export const refdb = ref;
     MatProgressSpinnerModule,
     HttpClientModule,
     FootComponent,
-
   ],
   providers: [],
   bootstrap: [AppComponent]

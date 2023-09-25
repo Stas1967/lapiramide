@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 
 import { AdministratorRoutingModule } from './administrator-routing.module';
 import { AdministratorComponent } from './administrator.component';
@@ -14,7 +14,6 @@ import { FootComponent } from '../foot/foot.component';
 import { ImagelistComponent } from './imagelist/imagelist.component';
 import { ApartmentsComponent } from './apartments/apartments.component';
 import { EventsComponent } from './events/events.component';
-import { NewUser, UsersComponent } from './users/users.component';
 import { BookinglistComponent } from './bookinglist/bookinglist.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { CardimgComponent } from './cardimg/cardimg.component';
@@ -26,7 +25,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NewUser } from './users/users.component';
 import { MatSelectModule } from '@angular/material/select';
+
+
+
 
 
 @NgModule({
@@ -35,9 +38,9 @@ import { MatSelectModule } from '@angular/material/select';
     ImagelistComponent,
     ApartmentsComponent,
     EventsComponent,
-    UsersComponent,
     BookinglistComponent,
     CardimgComponent,
+    NewUser,
   ],
   imports: [
     CommonModule,
@@ -57,8 +60,11 @@ import { MatSelectModule } from '@angular/material/select';
     MatFormFieldModule,
     MatInputModule,
     MatProgressSpinnerModule,
+    MatSidenavModule,
+    FormsModule, MatFormFieldModule, MatInputModule,
+    MatIconModule, MatDialogModule, MatButtonModule,
     MatSelectModule,
-    NewUser,
+    NgFor
   ]
 })
 export class AdministratorModule { }

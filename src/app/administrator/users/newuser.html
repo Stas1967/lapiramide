@@ -1,36 +1,25 @@
 <div mat-dialog-title>Nuevo Usuario</div>
 <div mat-dialog-content>
-    <div style="display: flex; flex-direction: column;">
-        <mat-form-field class="full-width">
-            <mat-label>Nombre</mat-label>
-            <input matInput value="">
-        </mat-form-field>
-        <mat-form-field class="full-width">
-            <mat-label>Apellido</mat-label>
-            <input matInput value="">
-        </mat-form-field>
-        <mat-form-field class="full-width">
-            <mat-label>Correo electronico</mat-label>
-            <input matInput value="">
-        </mat-form-field>
-        <mat-form-field class="full-width">
-            <mat-label>Contraseña</mat-label>
-            <input matInput value="">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Departamento</mat-label>
-            <mat-select>
-                <mat-option *ngFor="let dep of departments" [value]="dep.value">
-                    {{dep.viewValue}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-    </div>
-
+    <form [formGroup]="userform">
+        <div class="carditem">
+            <p>Para asignar un nuevo miembro con aceso a la parte de administracion de la página,
+                escribe su correo electronico en el campo y haz click <b>Enviar Invitacion</b></p>
+        </div>
+        <div class="formfield">
+            <mat-form-field style="width: 100%;" appearance="outline">
+                <mat-label>Correo electronico</mat-label>
+                <input matInput value="" formControlName="email">
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            </mat-form-field>
+        </div>
+        <div class="carditem">
+            <p>Cuando aparece un nuevo usurio, puede editar su pertenecia al departamento corespondiente </p>
+        </div>
+    </form>
 </div>
-<div mat-dialog-actions>
-    <button mat-button [mat-dialog-close]="true">
-        <mat-icon class="iconbtn">close</mat-icon>
-        <span>'Ok'</span>
+<div mat-dialog-actions style="display: flex; justify-content: flex-end;">
+    <button mat-raised-button [mat-dialog-close]="true" color="warn" (click)="createUser()">
+        <mat-icon class="iconbtn">insert_invitation</mat-icon>
+        <span>Enviar invitacion</span>
     </button>
 </div>
