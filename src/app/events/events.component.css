@@ -6,3 +6,7 @@
     width: 100%;
     height: 70%;
 }
+
+mat-card {
+    border-radius: 0px;
+}

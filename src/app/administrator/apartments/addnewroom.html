@@ -1,0 +1,54 @@
+<div mat-dialog-title>Nuevo Apartamento</div>
+<div mat-dialog-content>
+    <form [formGroup]="roomform">
+        <div class="formfield">
+            <mat-form-field style="width: 100%;" appearance="outline">
+                <mat-label>Titulo de apartamento</mat-label>
+                <input matInput value="" formControlName="title" placeholder="Apartamento de 1 dormitorio...">
+            </mat-form-field>
+        </div>
+        <div class="formfield">
+            <mat-form-field style="width: 100%;" appearance="outline">
+                <mat-label>Que dispone</mat-label>
+                <input matInput type="text" value="" formControlName="whathave"
+                    placeholder="2 camas individuales y 1 sofá cama">
+            </mat-form-field>
+        </div>
+        <div class="formfield">
+            <mat-form-field style="width: 100%;" appearance="outline">
+                <mat-label>Descripcion corta </mat-label>
+                <input matInput type="text" value="" formControlName="shortdescrip"
+                    placeholder="Algo que describe el apartamento">
+            </mat-form-field>
+        </div>
+        <div class="formfield">
+            <mat-form-field style="width: 100%;" appearance="outline">
+                <mat-label>Adultos </mat-label>
+                <input matInput type="number" value="" formControlName="adults" placeholder="Cuantos adultos">
+            </mat-form-field>
+            <mat-form-field style="width: 100%;" appearance="outline">
+                <mat-label>Niños </mat-label>
+                <input matInput type="number" value="" formControlName="child" placeholder="Cuantos niños">
+            </mat-form-field>
+            <mat-form-field style="width: 100%;" appearance="outline">
+                <mat-label>Precio por noche</mat-label>
+                <input matInput type="number" value="" formControlName="price" placeholder="30">
+            </mat-form-field>
+        </div>
+        <div class="formfield">
+            <mat-form-field style="width: 100%;" appearance="outline">
+                <mat-label>Imagen del apartamento</mat-label>
+                <input matInput type="text" value="" formControlName="image" placeholder="Enlace a la imagen">
+            </mat-form-field>
+            <button mat-fab color="primary" (click)="openRoomImg()">
+                <mat-icon>image</mat-icon>
+            </button>
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions style="display: flex; justify-content: flex-end;">
+    <button mat-raised-button color="warn" [mat-dialog-close]="true" (click)="saveRoom()">
+        <mat-icon class="iconbtn">save</mat-icon>
+        <span>Guardar</span>
+    </button>
+</div>

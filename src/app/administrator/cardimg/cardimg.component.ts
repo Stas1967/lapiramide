@@ -13,6 +13,7 @@ export interface DialogData {
   big: string;
   alt: string;
   isok: string;
+  bigimg: boolean;
 }
 
 @Component({

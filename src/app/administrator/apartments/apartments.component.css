@@ -1,0 +1,62 @@
+.pagetitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 120px;
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-bottom: 24px;
+}
+
+.formfield {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+}
+
+.imgcontainer {
+    margin: 6px;
+}
+
+.imagenes {
+    margin-top: 16px;
+    margin-left: 16px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.imgitem {
+    width: 20vh;
+}
+
+.img {
+    object-fit: cover;
+    vertical-align: bottom;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.img:hover {
+    scale: 1.05;
+}
+
+@media all and (min-width: 1920px) {}
+
+@media all and (min-width: 1280px) and (max-width: 1919.98px) {}
+
+@media all and (min-width: 960px) and (max-width: 1279.98px) {}
+
+@media all and (min-width: 600px) and (max-width: 959.98px) {}
+
+@media all and (max-width: 599.98px) {
+    .formfield {
+        margin-top: 24px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 24px;
+    }
+}

@@ -94,7 +94,6 @@ export class AppComponent {
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
         this.loggedin = true;
-        this.displName = user.email || '';
       } else {
         this.loggedin = false;
       }

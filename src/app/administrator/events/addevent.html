@@ -1,0 +1,82 @@
+<div mat-dialog-title>
+    Añadir evento
+</div>
+<div mat-dialog-content>
+    <form [formGroup]="eventform">
+        <div class="formfield">
+            <mat-form-field style="width: 100%;" appearance="outline">
+                <mat-label>Nombre de evento</mat-label>
+                <input matInput value="" formControlName="eventtitle">
+            </mat-form-field>
+        </div>
+        <div class="formfieldnowrap">
+            <mat-form-field style="width: 100%;" appearance="outline">
+                <mat-label>Imagen del evento</mat-label>
+                <input matInput value="" formControlName="image">
+            </mat-form-field>
+            <button mat-fab type="button" color="primary" (click)="openEventImg()">
+                <mat-icon>image</mat-icon>
+            </button>
+        </div>
+        <div class="formfield">
+            <mat-icon style="width: 56px; color: crimson;">info</mat-icon>
+            <p>La opción <b>Fin</b> indica que el evento o la promoción termina con la fecha del fin, si se ha
+                seleccionado <b>No</b> y repetición esta seleccionada el evento o promoción se repite cada
+                <b>nº</b> días indicados en el formulario
+            </p>
+        </div>
+        <div class="formfield">
+            <mat-form-field style="width: 100%; flex-grow: 2;" appearance="outline">
+                <mat-label>Fecha de inicio</mat-label>
+                <input matInput [matDatepicker]="pickerA" formControlName="startevent" [min]="today"
+                    (dateChange)="startdatechange($event)">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="pickerA"></mat-datepicker-toggle>
+                <mat-datepicker #pickerA></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field style="width: 100%; flex-grow: 2;" appearance="outline">
+                <mat-label>Fecha del fin</mat-label>
+                <input matInput [matDatepicker]="pickerS" formControlName="endevent" [min]="today"
+                    (dateChange)="enddatechange($event)">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="pickerS"></mat-datepicker-toggle>
+                <mat-datepicker #pickerS></mat-datepicker>
+            </mat-form-field>
+            <div style=" width: 120px; flex-grow: 1;">
+                <mat-slide-toggle #promo matInput formControlName="finpromo">{{promo.checked === true ? 'Fin' :
+                    'No'}}</mat-slide-toggle>
+            </div>
+        </div>
+        <div class="formfield">
+            <mat-form-field style="width: 100%;" appearance="outline">
+                <mat-label>Descripcion de evento</mat-label>
+                <textarea matInput value="" formControlName="eventdescrip"></textarea>
+            </mat-form-field>
+        </div>
+        <hr>
+        <div>
+            <h2>Repeticion del evento o promocion</h2>
+        </div>
+        <div class="formfield">
+            <div style="width: 100%;">
+                <mat-slide-toggle #repi matInput formControlName="repeate">{{repi.checked === true ? 'Se repite' :
+                    'No se repite'}}</mat-slide-toggle>
+            </div>
+            <mat-form-field style="width: 100%;" appearance="outline">
+                <mat-label>Cada cuanto dias</mat-label>
+                <input matInput value="" formControlName="cuantdays">
+            </mat-form-field>
+        </div>
+    </form>
+</div>
+
+<div mat-dialog-actions style="display: flex; justify-content: flex-end;">
+    <button mat-raised-button color="accent" [mat-dialog-close]="true">
+        <mat-icon class="iconbtn">cancel</mat-icon>
+        <span>Cancel</span>
+    </button>
+    <button mat-raised-button color="warn" [mat-dialog-close]="true" (click)="saveEvent()">
+        <mat-icon class="iconbtn">save</mat-icon>
+        <span>Guardar</span>
+    </button>
+</div>

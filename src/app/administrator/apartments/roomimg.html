@@ -1,0 +1,13 @@
+<div class="imgcontainer" mat-dialog-content>
+    <div class="imagenes">
+        <div class="imgitem" *ngFor="let im of imageList | async">
+            <a [mat-dialog-close]="data.bigimg ? im.big : im.mini"><img class="img" [src]="im.mini" [alt]="im.alt"
+                    loading="lazy"></a>
+        </div>
+        <!-- <div *ngof="data.bigimg === true">
+        <div class="imgitem" *ngFor="let im of imageList | async">
+            <a [mat-dialog-close]="im.mini"><img class="img" [src]="im.mini" [alt]="im.alt" loading="lazy"></a>
+        </div>
+        </div> -->
+    </div>
+</div>

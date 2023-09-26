@@ -29,7 +29,6 @@ export interface Employers {
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent {
-  db = fireDb
   rdb = fireRdb;
   auth = fireAuth;
   displayedColumns: string[] = ['position', 'name', 'email', 'office', 'uid'];

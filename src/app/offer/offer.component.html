@@ -53,7 +53,7 @@
                         ✔Adosado ✔Perchero ✔Papel higiénico ✔Sofá cama ✔Zona de comedor ✔Mesa de comedor<br>
                         ✔Toda la unidad en la planta baja<br>
                         ✔Acceso a pisos superiores solo mediante escaleras<br>
-                        ✔Toda la unidad accesible en silla de ruedas</p>
+                        ✔Unidades disponibles accesibles en silla de ruedas</p>
                 </mat-expansion-panel>
             </mat-accordion>
 
@@ -74,35 +74,41 @@
         <p>Selecciona por lo menos un día</p>
     </div>
     <div class="apartament" *ngIf="countdays > 0">
-        <mat-card *ngFor="let i of adult">
-            <mat-card-header>
-                <mat-card-title class="personline">Apartamento de 1 dormitorio con vistas a la piscina
-                    <mat-icon *ngFor="let i of adult" style="font-size: 18px; color: red;">person</mat-icon>
-                    <mat-icon *ngFor="let i of child" style="font-size: 16px; color: rgb(0, 192, 80);">person</mat-icon>
-                </mat-card-title>
-                <mat-card-subtitle>2 adultos + 1 niño</mat-card-subtitle>
+
+        <mat-card *ngFor="let room of roomList; let i = index">
+            <mat-card-header style="gap: 24px">
+                <mat-card-title class="personline">{{room.title}}</mat-card-title>
+                <div style="display: flex; flex-direction: row;">
+                    <mat-icon *ngFor="let ad of Adults(room.adults)"
+                        style="font-size: 32px; color: red; width: 32px;">person</mat-icon>
+                    <mat-icon *ngFor="let ch of Childrend(room.child)"
+                        style="align-self: flex-end; font-size: 18px; color: rgb(0, 192, 80); width: 32px;">person</mat-icon>
+                </div>
             </mat-card-header>
+            <mat-card-subtitle style="margin-left: 32px;">
+                <span>{{room.adults}}&nbsp;adultos</span>
+                <span *ngIf="room.child > 0">&nbsp;+&nbsp;{{room.child}}&nbsp;niño/s&nbsp;</span>
+            </mat-card-subtitle>
             <hr>
             <mat-card-content>
-
-                <div style="margin-bottom: 18px; font-size: 18px; font-weight: 400;">2 camas individuales y 1 sofá cama
+                <div style="margin-bottom: 18px; font-size: 18px; font-weight: 400;">{{room.whathave}}
                 </div>
                 <div class="pricecont">
                     <div class="priceitem">
                         <img style="float: left; margin-right: 24px;" *ngIf="!isSmall" mat-card-md-image
-                            src="../../assets/images/dormitorio.jpg" alt="">
-                        <div>Una pequeña descripcion del apartamento</div>
+                            src="{{room.image}}" alt="">
+                        <div>{{room.shortdescrip}}</div>
                     </div>
                     <div class="priceitem">
                         <div style="text-align: end;">Días de estancia: <span class="pricedesc">{{countdays}}</span>
                         </div>
-                        <div style="text-align: end;">Precio por noche: <span class="pricedesc">70.00€</span></div>
-                        <div style="text-align: end;">A pagar: <span class="pricedesc">{{countdays * 70 |
+                        <div style="text-align: end;">Precio por noche: <span class="pricedesc">{{room.price | currency:
+                                '€'}}</span></div>
+                        <div style="text-align: end;">A pagar: <span class="pricedesc">{{countdays * room.price |
                                 currency:'€'}}</span>
                         </div>
                     </div>
                 </div>
-
             </mat-card-content>
             <mat-card-actions>
                 <button mat-raised-button color="accent"><mat-icon>thumb_up_alt</mat-icon>Lo quiero</button>

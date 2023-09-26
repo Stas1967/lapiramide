@@ -7,6 +7,11 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { Rooms } from '../administrator/apartments/apartments.component';
+import { fireRdb, refdb } from '../app.module';
+import { MatTableDataSource } from '@angular/material/table';
+import { onValue } from 'firebase/database';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-offer',
@@ -21,9 +26,11 @@ export class OfferComponent {
   datestart: Date;
   dateend: Date;
   countdays: number;
-  cuantadult = {};
-  adult = Array(2).fill(0);
-  child = Array(1).fill(0);
+  roomList: Rooms[] | undefined;
+  rdb = fireRdb;
+  adult = 0;
+  child = 0;
+  dataSource!: MatTableDataSource<Rooms>;
   constructor(public router: Router, public bhvsrv: BehavService,) {
     this.isSmall = bhvsrv.isMobilFu();
     this.datestart = bhvsrv.getDate().start
@@ -35,10 +42,32 @@ export class OfferComponent {
     this.countdays = event;
   }
 
+  Adults(inumber: number): Array<number> {
+    return Array(inumber).fill(0);
+  }
+  Childrend(inumber: number): Array<number> {
+    return Array(inumber).fill(0);;
+  }
+  getRoomsAsync(): void {
+    let templist: Rooms[] = [];
+    onValue(refdb(this.rdb, 'apartments'), (snap) => {
+      templist = [];
+      snap.forEach((urx) => {
+        const data = urx.val() as Rooms
+        templist.push(data);
+      })
+      //this.dataSource = new MatTableDataSource(templist);
+      this.roomList = templist
+      templist.forEach((rft) => {
+        this.adult = rft.adults;
+        this.child = rft.child;
+      })
+    })
+
+  }
+
   ngOnInit(): void {
-    for (let index = 0; index < 3; index++) {
-      this.cuantadult = index;
-    }
+    this.getRoomsAsync();
   }
 
   @HostListener('window:resize', ['$event'])
