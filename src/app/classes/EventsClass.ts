@@ -7,5 +7,6 @@ export interface MyEvent {
     eventdescrip: string,
     repeate: boolean,
     finpromo: boolean,
+    isPromo: boolean,
     cuantdays: number,
 }

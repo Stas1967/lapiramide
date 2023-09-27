@@ -18,6 +18,7 @@ export interface Employers {
   secondname: string;
   email: number;
   office: string[];
+  isadmin: boolean;
 }
 
 @Component({
@@ -51,6 +52,7 @@ export class UsersComponent {
           value: '0',
           viewValue: 'VIP'
         },
+        isadmin: false,
       })
     })
   }
@@ -96,32 +98,39 @@ export class NewUser {
   })
 
   constructor(private bvhsrv: BehavService) { }
-  email = this.userform.controls.email.value || '';
+
   actionCodeSettings = {
-    // URL you want to redirect back to. The domain (www.example.com) for this
-    // URL must be in the authorized domains list in the Firebase Console.
-    //url: 'https://lapiramide-544e8.web.app/register?email=${encodeURIComponent(' + this.email + ')}',
-    // This must be true.
+    // // URL you want to redirect back to. The domain (www.example.com) for this
+    // // URL must be in the authorized domains list in the Firebase Console.
+    url: 'http://localhost:4200/login?email=' + this.userform.controls.email.value,
+    //url: 'https://lapiramide-544e8.web.app/login?email=' + 'blizoomnet@gmail.com',
+    // // This must be true.
     handleCodeInApp: true,
   };
+
+
   createUser(): void {
+    console.log(this.userform.controls.email.value);
     if (this.userform.valid) {
       push(refdb(this.realdb, 'tempemploye/'), {
-        email: this.email,
+        email: this.userform.controls.email.value,
         office: 2,
+        isadmin: false,
       })
     }
-    //this.bvhsrv.passSpin(true);
-    // sendSignInLinkToEmail(this.auth, this.email, this.actionCodeSettings).then((res) => {
-    //   // zapisac jakies dane 
-    //   window.localStorage.setItem('emailForSignIn', this.email);
-    // }).catch((err) => {
-    //   if (err.code === 'auth/quota-exceeded') {
-    //     if (window.confirm('Ya es suficiente por hoy. Descansa coño, toma te una cerveza o fuma te un porro')) {
-    //       this.bvhsrv.passSpin(false);
-    //     }
-    //   }
-    // });
+    this.bvhsrv.passSpin(true);
+    sendSignInLinkToEmail(this.auth, this.userform.controls.email.value || '', this.actionCodeSettings).then((res) => {
+      console.log(res);
+
+      window.localStorage.setItem('emailForSignIn', this.userform.controls.email.value || '');
+    }).catch((err) => {
+      if (err.code === 'auth/quota-exceeded') {
+        if (window.confirm('Ya es suficiente por hoy.')) {
+          this.bvhsrv.passSpin(false);
+        }
+      }
+    });
+    this.bvhsrv.passSpin(false);
   }
 
 

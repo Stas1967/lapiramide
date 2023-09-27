@@ -9,7 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { BehavService } from '../services/behav.service';
 import { AutentService } from '../services/autent.service';
@@ -33,8 +33,13 @@ export class LoginComponent {
   })
 
   auth = fireAuth;
-  constructor(private dialog: MatDialog, private route: Router, public bhvsrv: BehavService, private autsrv: AutentService) {
+  constructor(private dialog: MatDialog, private route: Router, public ac: ActivatedRoute,
+    public bhvsrv: BehavService, private autsrv: AutentService) {
     this.isSmall = bhvsrv.isMobilFu();
+    ac.queryParams.subscribe((param) => {
+      console.log(param['email']);
+
+    })
   }
   @HostListener('window:resize', ['$event'])
   ngOnResize() {

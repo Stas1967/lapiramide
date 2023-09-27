@@ -11,7 +11,7 @@
                 (click)="closeNav()" [disabled]="g.disabled">
                 <mat-icon matListItemIcon>{{g.icon}}</mat-icon>
                 <div matListItemTitle>{{g.name}}</div>
-                <div matListItemLine>Last update:&nbsp;{{g.updated | date}}</div>
+                <!-- <div matListItemLine>Last update:&nbsp;{{g.updated | date}}</div> -->
             </mat-list-item>
             <mat-divider></mat-divider>
             <div mat-subheader>Reservas</div>
@@ -19,7 +19,7 @@
                 [routerLink]="c.link + '/'+ c.dbid" (click)="closeNav()" [disabled]="c.disabled">
                 <mat-icon matListItemIcon>{{c.icon}}</mat-icon>
                 <div matListItemTitle>{{c.name}}</div>
-                <div matListItemLine>Last update:&nbsp;{{c.updated | date}}</div>
+                <!-- <div matListItemLine>Last update:&nbsp;{{c.updated | date}}</div> -->
             </mat-list-item>
         </mat-list>
     </mat-sidenav>

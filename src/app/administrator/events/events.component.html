@@ -31,14 +31,32 @@
         <td mat-cell *matCellDef="let eve"> {{eve.endevent | date}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="promo">
+        <th mat-header-cell *matHeaderCellDef> Promo </th>
+        <td mat-cell *matCellDef="let eve"> {{eve.isPromo ? 'Promo' : 'Evento'}} </td>
+    </ng-container>
+
     <ng-container matColumnDef="repeate">
         <th mat-header-cell *matHeaderCellDef> Repetido </th>
-        <td mat-cell *matCellDef="let eve"> {{eve.repeate}} </td>
+        <td mat-cell *matCellDef="let eve"> {{eve.repeate ? 'Repetido': 'Una Vez'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef><mat-icon>more_vert</mat-icon> </th>
+        <td mat-cell *matCellDef="let eve">
+            <button mat-icon-button (click)="deleteEvent(eve)">
+                <mat-icon style="color: crimson;">delete</mat-icon>
+            </button>
+        </td>
     </ng-container>
 
     <ng-container matColumnDef="edit">
         <th mat-header-cell *matHeaderCellDef><mat-icon>more_vert</mat-icon> </th>
-        <td mat-cell *matCellDef="let eve"> </td>
+        <td mat-cell *matCellDef="let eve">
+            <button mat-icon-button (click)="editEvent(eve)">
+                <mat-icon style="color: rgb(6, 67, 197);">edit</mat-icon>
+            </button>
+        </td>
     </ng-container>
 
 

@@ -1,17 +1,22 @@
 <div mat-dialog-title>
-    Añadir evento
+    <div>
+        <mat-slide-toggle #titleslid style="margin-right: 32px;" [checked]="isPromo"
+            (change)="promoChange($event)"></mat-slide-toggle>
+        {{titleslid.checked == false ? 'Añadir evento' : 'Crea una promoción'}}
+    </div>
 </div>
 <div mat-dialog-content>
     <form [formGroup]="eventform">
         <div class="formfield">
             <mat-form-field style="width: 100%;" appearance="outline">
-                <mat-label>Nombre de evento</mat-label>
+                <mat-label>Nombre de {{titleslid.checked == false ? 'evento' : 'promocion'}}</mat-label>
                 <input matInput value="" formControlName="eventtitle">
             </mat-form-field>
         </div>
         <div class="formfieldnowrap">
+            <img [src]="imgEveChang" alt="" width="80px" height="60px">
             <mat-form-field style="width: 100%;" appearance="outline">
-                <mat-label>Imagen del evento</mat-label>
+                <mat-label>Imagen del {{titleslid.checked == false ? 'evento' : 'promocion'}}</mat-label>
                 <input matInput value="" formControlName="image">
             </mat-form-field>
             <button mat-fab type="button" color="primary" (click)="openEventImg()">
@@ -49,13 +54,13 @@
         </div>
         <div class="formfield">
             <mat-form-field style="width: 100%;" appearance="outline">
-                <mat-label>Descripcion de evento</mat-label>
+                <mat-label>Descripcion de {{titleslid.checked == false ? 'evento' : 'promocion'}}</mat-label>
                 <textarea matInput value="" formControlName="eventdescrip"></textarea>
             </mat-form-field>
         </div>
         <hr>
         <div>
-            <h2>Repeticion del evento o promocion</h2>
+            <h2>Repeticion de {{titleslid.checked == false ? 'evento' : 'promocion'}}</h2>
         </div>
         <div class="formfield">
             <div style="width: 100%;">
@@ -75,8 +80,12 @@
         <mat-icon class="iconbtn">cancel</mat-icon>
         <span>Cancel</span>
     </button>
-    <button mat-raised-button color="warn" [mat-dialog-close]="true" (click)="saveEvent()">
+    <button *ngIf="!isEdited" mat-raised-button color="warn" (click)="saveEvent()">
         <mat-icon class="iconbtn">save</mat-icon>
         <span>Guardar</span>
+    </button>
+    <button *ngIf="isEdited" mat-raised-button color="warn" (click)="updateEvent(eve)">
+        <mat-icon class="iconbtn">save</mat-icon>
+        <span>Actualizar</span>
     </button>
 </div>

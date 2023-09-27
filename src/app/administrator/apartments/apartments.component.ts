@@ -157,8 +157,6 @@ export class AddNewRoom {
         image: '',
       })
     }
-
-
   }
 }
 
