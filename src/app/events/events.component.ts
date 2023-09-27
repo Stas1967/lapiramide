@@ -33,11 +33,6 @@ export class EventsComponent {
     })
   }
 
-  convertToArray<T>(input: T): T[] {
-
-    return [input]
-  }
-
   ngOnInit(): void {
     this.getEvents();
   }

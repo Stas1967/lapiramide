@@ -11,7 +11,6 @@ import { Rooms } from '../administrator/apartments/apartments.component';
 import { fireRdb, refdb } from '../app.module';
 import { MatTableDataSource } from '@angular/material/table';
 import { onValue } from 'firebase/database';
-import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-offer',
@@ -45,7 +44,7 @@ export class OfferComponent {
   Adults(inumber: number): Array<number> {
     return Array(inumber).fill(0);
   }
-  Childrend(inumber: number): Array<number> {
+  Childrends(inumber: number): Array<number> {
     return Array(inumber).fill(0);;
   }
   getRoomsAsync(): void {

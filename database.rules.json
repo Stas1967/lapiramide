@@ -1,6 +1,17 @@
 {
   "rules": {
     ".read": true,
-    ".write": true
+    "apartments": {
+      ".write": "auth !== null"
+    },
+    "eventos": {
+      ".write": "auth !== null"
+    },
+    "lapiramide": {
+      ".write": "auth !== null"
+    },
+    "users": {
+      ".write": "auth !== null"
+    }
   }
 }

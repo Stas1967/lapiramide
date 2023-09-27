@@ -29,6 +29,25 @@
     vertical-align: bottom;
     max-width: 100%;
     max-height: 100%;
+    cursor: pointer;
+}
+
+.formfield {
+    margin-top: 18px;
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+}
+
+.formfieldnowrap {
+    margin-top: 6px;
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+}
+
+.dialogactionup {
+    justify-content: flex-end;
 }
 
 
@@ -42,4 +61,6 @@
     .imgcontainer {
         margin-top: 80px;
     }
+
+
 }

@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Enlaces</h1>
+<hr>
+<div mat-dialog-content>
+    <div>
+        <mat-label>Enlace de imagen pequeño</mat-label>
+        <div class="formfieldnowrap">
+            <mat-form-field appearance="outline" style="width: 100%;">
+                <input #miniinput matInput type="text" value="{{links.small}}" readonly>
+            </mat-form-field>
+            <button mat-fab (click)="copytoClipboardMini(miniinput)">
+                <mat-icon>content_copy</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <div>
+        <mat-label>Enlace de imagen grande</mat-label>
+        <div class="formfieldnowrap">
+            <mat-form-field appearance="outline" style="width: 100%;">
+                <input #biginput matInput type="text" value="{{links.full}}" readonly>
+            </mat-form-field>
+            <button mat-fab (click)="copytoClipboardBig(biginput)">
+                <mat-icon>content_copy</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>
+<mat-dialog-actions class="dialogactionup">
+    <button class="actionbtn" [mat-dialog-close]="'Cancel'" mat-raised-button color="accent">
+        <mat-icon>close</mat-icon>
+        Cerrar
+    </button>
+</mat-dialog-actions>

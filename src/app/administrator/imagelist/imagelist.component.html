@@ -5,9 +5,18 @@
             <mat-icon>image</mat-icon>
         </button>
     </div>
+    <div style="display: flex; justify-content: flex-end;">
+        <button type="button" mat-icon-button (click)="minibtn()">
+            <mat-icon>photo</mat-icon>
+        </button>
+        <button type="button" mat-icon-button (click)="bigbtn()">
+            <mat-icon>panorama</mat-icon>
+        </button>
+    </div>
     <div class="imagenes">
         <div class="imgitem" *ngFor="let im of imageList | async">
-            <img class="img" [src]="im.mini" [alt]="im.alt" loading="lazy">
+            <img mat-card-image class="img" [src]="bigmini ? im.mini : im.big" [alt]="im.alt" loading="lazy"
+                (click)="openLinkDial(im)">
         </div>
     </div>
 </div>

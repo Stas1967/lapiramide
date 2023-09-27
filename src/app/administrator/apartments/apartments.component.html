@@ -34,9 +34,22 @@
         <td mat-cell *matCellDef="let room"> {{room.price | currency: '€'}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef><mat-icon>more_vert</mat-icon> </th>
+        <td mat-cell *matCellDef="let room">
+            <button mat-icon-button (click)="deleteApartment(room)">
+                <mat-icon style="color: crimson;">delete</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
     <ng-container matColumnDef="edit">
         <th mat-header-cell *matHeaderCellDef><mat-icon>more_vert</mat-icon> </th>
-        <td mat-cell *matCellDef="let room"> </td>
+        <td mat-cell *matCellDef="let room">
+            <button mat-icon-button (click)="editApartment(room)">
+                <mat-icon style="color: rgb(6, 67, 197);">edit</mat-icon>
+            </button>
+        </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

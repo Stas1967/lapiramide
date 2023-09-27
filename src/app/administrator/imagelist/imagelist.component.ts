@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { ImgPanel } from '../classes/imginfo';
 import { BehavService } from 'src/app/services/behav.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CardimgComponent } from '../cardimg/cardimg.component';
 import { DatabaseService, ListaImg } from 'src/app/services/database.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { BehaviorSubject } from 'rxjs';
+import { Clipboard } from '@angular/cdk/clipboard';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-imagelist',
@@ -20,6 +22,7 @@ export class ImagelistComponent {
   big = '';
   isok = '';
   dataSource!: MatTableDataSource<any>;
+  bigmini = true;
   constructor(public bhsrv: BehavService, public dialog: MatDialog, public dbsrv: DatabaseService) { }
 
   ngOnInit(): void {
@@ -29,7 +32,7 @@ export class ImagelistComponent {
   }
 
   openImage(): void {
-    const dialogref = this.dialog.open(CardimgComponent, { data: { mini: this.mini, isok: this.isok } })
+    const dialogref = this.dialog.open(CardimgComponent, { disableClose: true, data: { mini: this.mini || '', isok: this.isok } });
     dialogref.afterClosed().subscribe((dane) => {
       if (dane !== 'Cancel') {
         this.tempimglist.push(dane);
@@ -39,4 +42,44 @@ export class ImagelistComponent {
   closeImagePanel(event: ImgPanel) {
     this.addImagePanel = event.close;
   }
+  openLinkDial(im: ListaImg) {
+    this.dialog.open(ImgLink, { width: '100%', disableClose: true, data: { small: im.mini, full: im.big } });
+  }
+
+  minibtn(): void {
+    this.bigmini = true;
+  }
+  bigbtn(): void {
+    this.bigmini = false;
+  }
+}
+
+@Component({
+  selector: 'dial-imglink',
+  templateUrl: './imglinkdial.html',
+  styleUrls: ['./imagelist.component.css']
+})
+
+export class ImgLink {
+  constructor(public dialogRef: MatDialogRef<ImgLink>, @Inject(MAT_DIALOG_DATA) public links: CopyLink,
+    public clipboard: Clipboard, private snack: MatSnackBar) { }
+
+  copytoClipboardBig(biginput: any) {
+    const hu = this.clipboard.copy(biginput.value)
+    if (hu === true) {
+      this.snack.open('Link copiado a Clipboard', 'Ok', { duration: 2000 })
+    }
+  }
+  copytoClipboardMini(miniinput: any) {
+    const hu = this.clipboard.copy(miniinput.value)
+    if (hu === true) {
+      this.snack.open('Link copiado a Clipboard', 'Ok', { duration: 2000 })
+    }
+
+  }
+}
+
+export interface CopyLink {
+  small: string,
+  full: string
 }

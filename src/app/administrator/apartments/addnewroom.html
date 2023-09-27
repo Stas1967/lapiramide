@@ -1,4 +1,4 @@
-<div mat-dialog-title>Nuevo Apartamento</div>
+<div mat-dialog-title>{{roomtitle}}</div>
 <div mat-dialog-content>
     <form [formGroup]="roomform">
         <div class="formfield">
@@ -36,9 +36,12 @@
             </mat-form-field>
         </div>
         <div class="formfield">
+
+            <img [src]="imgRoomChang" alt="" width="80px" height="80px">
+
             <mat-form-field style="width: 100%;" appearance="outline">
                 <mat-label>Imagen del apartamento</mat-label>
-                <input matInput type="text" value="" formControlName="image" placeholder="Enlace a la imagen">
+                <input #imgl matInput type="text" value="" formControlName="image" placeholder="Enlace a la imagen">
             </mat-form-field>
             <button mat-fab color="primary" (click)="openRoomImg()">
                 <mat-icon>image</mat-icon>
@@ -47,8 +50,16 @@
     </form>
 </div>
 <div mat-dialog-actions style="display: flex; justify-content: flex-end;">
-    <button mat-raised-button color="warn" [mat-dialog-close]="true" (click)="saveRoom()">
+    <button mat-raised-button color="accent" [mat-dialog-close]="true">
+        <mat-icon class="iconbtn">cancel</mat-icon>
+        <span>Cancel</span>
+    </button>
+    <button *ngIf="!isRoomId" mat-raised-button color="warn" [mat-dialog-close]="true" (click)="saveRoom()">
         <mat-icon class="iconbtn">save</mat-icon>
         <span>Guardar</span>
+    </button>
+    <button *ngIf="isRoomId" mat-raised-button color="warn" [mat-dialog-close]="true" (click)="updateRoom(roomid)">
+        <mat-icon class="iconbtn">save</mat-icon>
+        <span>Actualizar</span>
     </button>
 </div>

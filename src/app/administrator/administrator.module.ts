@@ -11,7 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FootComponent } from '../foot/foot.component';
-import { ImagelistComponent } from './imagelist/imagelist.component';
+import { ImagelistComponent, ImgLink } from './imagelist/imagelist.component';
 import { AddNewRoom, RoomImg } from './apartments/apartments.component';
 
 import { BookinglistComponent } from './bookinglist/bookinglist.component';
@@ -31,6 +31,7 @@ import { NewEvent } from './events/events.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     NewUser,
     AddNewRoom,
     RoomImg,
-    NewEvent
+    NewEvent,
+    ImgLink
   ],
   imports: [
     CommonModule,
@@ -67,7 +69,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatSelectModule,
     MatNativeDateModule, MatDatepickerModule,
     NgFor,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatSnackBarModule
   ]
 })
 export class AdministratorModule { }
