@@ -2,9 +2,10 @@
     <div [ngClass]="isSmall ? 'ofsm' : 'ofxl'">
         <div class="titlebox">
             <div>
-                <div class="title">
+                <h1>
                     Registrar nuevo usuario
-                </div>
+                    {{memail}}
+                </h1>
 
             </div>
         </div>
@@ -23,29 +24,18 @@
                 </div>
                 <div class="formfield">
                     <mat-form-field class="full-width">
+                        <mat-label>Documento</mat-label>
+                        <input matInput value="" formControlName="dnidoc">
+                    </mat-form-field>
+                    <mat-form-field class="full-width">
                         <mat-label>Correo electronico</mat-label>
                         <input matInput value="" formControlName="email">
                     </mat-form-field>
-                    <mat-form-field class="full-width">
-                        <mat-label>Contraseña</mat-label>
-                        <input matInput value="" formControlName="password">
-                    </mat-form-field>
                 </div>
                 <div class="formfield">
-                    <mat-form-field class="full-width">
-                        <mat-label>Documento</mat-label>
-                        <input matInput value="" formControlName="dni">
-                    </mat-form-field>
-                </div>
-                <div class="formbox">
-                    <mat-form-field>
-                        <mat-label>Email</mat-label>
-                        <input matInput value="" formControlName="logemail">
-                        <mat-error *ngIf="logform.invalid">{{getEmailErrorMsg()}}</mat-error>
-                    </mat-form-field>
                     <mat-form-field>
                         <mat-label>Password</mat-label>
-                        <input matInput value="" formControlName="logpassw" [type]="hidefpass ? 'password' : 'text'"
+                        <input matInput value="" formControlName="password" [type]="hidefpass ? 'password' : 'text'"
                             autocomplete="on">
                         <button mat-icon-button matSuffix (click)="hidefpass = !hidefpass"
                             [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidefpass">
@@ -53,13 +43,11 @@
                         </button>
                         <mat-error *ngIf="logform.invalid">{{getPassErrorMsg()}}</mat-error>
                     </mat-form-field>
-                    <div>
-                        <a href="#">Forgot Password</a>
-                    </div>
 
+                </div>
+                <div class="formbox">
                     <button class="loginbtn" mat-stroked-button (click)="LogUser()"
-                        [disabled]="!logform.valid"><mat-icon>login</mat-icon>Login</button>
-
+                        [disabled]="!logform.valid"><mat-icon>login</mat-icon>Estoy listo</button>
                 </div>
             </form>
         </div>

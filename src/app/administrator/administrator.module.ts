@@ -25,13 +25,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { NewUser } from './users/users.component';
+import { EditUser, NewUser } from './users/users.component';
 import { MatSelectModule } from '@angular/material/select';
 import { NewEvent } from './events/events.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     AddNewRoom,
     RoomImg,
     NewEvent,
-    ImgLink
+    ImgLink,
+    EditUser
   ],
   imports: [
     CommonModule,
@@ -70,7 +73,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatNativeDateModule, MatDatepickerModule,
     NgFor,
     MatSlideToggleModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatCheckboxModule,
+    MatRadioModule
   ]
 })
 export class AdministratorModule { }

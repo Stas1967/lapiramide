@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRippleModule } from '@angular/material/core';
@@ -23,6 +23,7 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
   templateUrl: './events.component.html',
   standalone: true,
   styleUrls: ['./events.component.css'],
+  encapsulation: ViewEncapsulation.None,
   imports: [CommonModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule,
     MatIconModule, MatSelectModule, MatDialogModule, MatButtonModule, MatTableModule,
     ReactiveFormsModule, MatRippleModule,],

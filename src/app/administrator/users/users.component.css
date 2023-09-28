@@ -14,3 +14,24 @@
     flex-direction: row;
     gap: 24px;
 }
+
+mat-form-field {
+    width: 100%;
+}
+
+@media all and (min-width: 1920px) {}
+
+@media all and (min-width: 1280px) and (max-width: 1919.98px) {}
+
+@media all and (min-width: 960px) and (max-width: 1279.98px) {}
+
+@media all and (min-width: 600px) and (max-width: 959.98px) {}
+
+@media all and (max-width: 599.98px) {
+    .formfield {
+        margin-top: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+}

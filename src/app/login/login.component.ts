@@ -33,13 +33,10 @@ export class LoginComponent {
   })
 
   auth = fireAuth;
-  constructor(private dialog: MatDialog, private route: Router, public ac: ActivatedRoute,
+  constructor(private dialog: MatDialog, private route: Router,
     public bhvsrv: BehavService, private autsrv: AutentService) {
     this.isSmall = bhvsrv.isMobilFu();
-    ac.queryParams.subscribe((param) => {
-      console.log(param['email']);
 
-    })
   }
   @HostListener('window:resize', ['$event'])
   ngOnResize() {

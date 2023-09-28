@@ -3,16 +3,16 @@ import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { fireAuth, fireDb } from '../app.module';
-import { Router } from '@angular/router';
+
+import { fireAuth, fireRdb, refdb } from '../app.module';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BehavService } from '../services/behav.service';
-import { AutentService } from '../services/autent.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { MatSelectModule } from '@angular/material/select';
+import { remove, set } from 'firebase/database';
 
 @Component({
   selector: 'app-register',
@@ -28,21 +28,34 @@ export class RegisterComponent {
   hiderpass = true;
   wrongpass = false;
   logform = new FormGroup({
-    logemail: new FormControl('', [Validators.email, Validators.required, Validators.pattern('[a-z0-9]{3,}@[a-z]{2,}.[a-z]{2,}')]),
-    logpassw: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    firstname: new FormControl(''),
+    secondname: new FormControl(''),
+    email: new FormControl('', [Validators.email, Validators.required, Validators.pattern('[a-z0-9]{3,}@[a-z]{2,}.[a-z]{2,}')]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    dnidoc: new FormControl(''),
   })
 
   auth = fireAuth;
-  db = fireDb;
-  constructor(private dialog: MatDialog, private route: Router, public bhvsrv: BehavService, private autsrv: AutentService) {
+  rdb = fireRdb;
+  memail = '';
+  codekey = '';
+  constructor(public bhvsrv: BehavService, public acRoute: ActivatedRoute, private route: Router) {
     this.isSmall = bhvsrv.isMobilFu();
+  }
+  ngOnInit(): void {
+    this.acRoute.queryParams.subscribe((param) => {
+      this.memail = param['encodeEmail'];
+      this.codekey = param['codeKey'];
+      const emailctrl = this.logform.controls['email'];
+      emailctrl.setValue(this.memail)
+    })
   }
   @HostListener('window:resize', ['$event'])
   ngOnResize() {
     this.isSmall = this.bhvsrv.isMobilFu();
   }
   getEmailErrorMsg(): string {
-    const emailctrl = this.logform.controls['logemail'];
+    const emailctrl = this.logform.controls['email'];
     if (emailctrl.hasError('required')) {
       return 'Email is required' || '';
     } else if (emailctrl.hasError('pattern')) {
@@ -52,7 +65,7 @@ export class RegisterComponent {
   }
 
   getPassErrorMsg(): string {
-    const fpass = this.logform.controls['logpassw'];
+    const fpass = this.logform.controls['password'];
     if (fpass.hasError('required')) {
       return 'Password is required' || '';
     } else if (this.wrongpass === true) {
@@ -62,20 +75,25 @@ export class RegisterComponent {
   }
 
   LogUser(): void {
-    const email = this.logform.controls['logemail'].value || '';
-    const password = this.logform.controls['logpassw'].value || '';
+    const email = this.logform.controls['email'].value || '';
+    const password = this.logform.controls['password'].value || '';
+    this.bhvsrv.passSpin(true);
     createUserWithEmailAndPassword(this.auth, email, password)
-      .then(async (userCredential) => {
-        // El usuario se ha creado exitosamente
-        // actualizar el registro previamente creado con añadir nuevo usuario
-        const user = userCredential.user;
-        await setDoc(doc(this.db, "empleados", user.uid), this.logform.value);
+      .then(async () => {
+        onAuthStateChanged(this.auth, async (user) => {
+          await set(refdb(this.rdb, "users/" + user?.uid), this.logform.value);
+        })
+      }).finally(() => {
+        remove(refdb(this.rdb, "tempuser/" + this.codekey))
+        this.route.navigateByUrl('/')
+        this.bhvsrv.passSpin(false);
       })
       .catch((error) => {
         // Ha ocurrido un error
         const errorCode = error.code;
         const errorMessage = error.message;
       });
+    this.bhvsrv.passSpin(false);
   }
 }
 

@@ -1,17 +1,25 @@
 {
   "rules": {
-    ".read": true,
     "apartments": {
-      ".write": "auth !== null"
+      ".read": true,
+      ".write": "root.child('users').child(auth.uid).child('isAdmin').val() === true"
     },
+
     "eventos": {
-      ".write": "auth !== null"
+      ".read": true,
+      ".write": "root.child('users').child(auth.uid).child('isAdmin').val() === true"
     },
     "lapiramide": {
-      ".write": "auth !== null"
+      ".read": "root.child('users').hasChild(auth.uid)",
+      ".write": "root.child('users').child(auth.uid).child('isAdmin').val() === true"
     },
     "users": {
-      ".write": "auth !== null"
+      ".read": "root.child('users').child(auth.uid).child('isAdmin').val() === true",
+      ".write": "root.child('users').child(auth.uid).child('isAdmin').val() === true"
+    },
+    "tempusers": {
+      ".read": "root.child('users').hasChild(auth.uid)",
+      ".write": "root.child('users').hasChild(auth.uid)"
     }
   }
 }

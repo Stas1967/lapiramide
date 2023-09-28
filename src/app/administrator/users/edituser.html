@@ -1,0 +1,61 @@
+<div mat-dialog-title>
+    Editar usuario
+</div>
+<div mat-dialog-content>
+    <form [formGroup]="logform">
+        <div class="formfield">
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Nombre</mat-label>
+                <input matInput value="" formControlName="firstname">
+            </mat-form-field>
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Apellido</mat-label>
+                <input matInput value="" formControlName="secondname">
+            </mat-form-field>
+        </div>
+        <div class="formfield">
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Documento</mat-label>
+                <input matInput value="" formControlName="dni">
+            </mat-form-field>
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Correo electronico</mat-label>
+                <input matInput value="" formControlName="email" readonly>
+            </mat-form-field>
+        </div>
+        <div class="formfield">
+            <mat-form-field style="width: 100%; flex-grow: 2;" appearance="outline">
+                <mat-label>Fecha de nacimiento</mat-label>
+                <input matInput [matDatepicker]="pickerS" formControlName="birdday">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="pickerS"></mat-datepicker-toggle>
+                <mat-datepicker #pickerS></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>DNI</mat-label>
+                <input matInput value="" formControlName="dni">
+            </mat-form-field>
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Departamento</mat-label>
+                <input matInput value="" formControlName="department">
+            </mat-form-field>
+        </div>
+        <div class="formfield">
+            <mat-radio-group aria-label="Select an option" [value]="userLevel" color="warn"
+                (change)="radioChange($event)">
+                <mat-radio-button value="0">Administrator</mat-radio-button>
+                <mat-radio-button value="1">Moderator</mat-radio-button>
+                <mat-radio-button value="2">Ninguno</mat-radio-button>
+            </mat-radio-group>
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions style="display: flex; justify-content: flex-end;">
+    <button mat-raised-button color="accent" [mat-dialog-close]="true">
+        <mat-icon class="iconbtn">cancel</mat-icon>
+        <span>Cancel</span>
+    </button>
+    <button class="loginbtn" mat-raised-button colo="warn" [disabled]="!logform.valid" (click)="updateUser(usr.id)">
+        <mat-icon class="iconbtn">save</mat-icon>
+        <span>Guardar</span></button>
+</div>
