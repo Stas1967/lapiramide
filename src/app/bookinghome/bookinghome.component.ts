@@ -6,7 +6,7 @@ import { MatDateRangeSelectionStrategy, DateRange, MAT_DATE_RANGE_SELECTION_STRA
 // Material Form
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldAppearance, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -56,6 +56,7 @@ export class BookinghomeComponent {
     end: new FormControl<Date | null>(null),
   });
   @Input() btnVisible = true;
+  @Input() aperance: MatFormFieldAppearance = 'fill'
   startDate: Date | undefined;
   endDate: Date | undefined;
 

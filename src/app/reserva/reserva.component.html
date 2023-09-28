@@ -1,0 +1,88 @@
+<div class="imgcon">
+    <img src="../../assets/images/dormitorio.jpg" alt="">
+    <img src="../../assets/images/salon.jpg" alt="">
+    <img src="../../assets/images/piscinaa.jpg" alt="">
+    <img src="../../assets/images/poolview.jpg" alt="">
+    <img src="../../assets/images/96338307.jpg" alt="">
+    <img src="../../assets/images/161786574.jpg" alt="">
+</div>
+<div [ngStyle]="isSmall ? {'height.px': 32} : {'height.px': 76}"></div>
+<div class="contoff" style="margin-top: 84px;">
+    <h1>Formulario de reserva</h1>
+
+    <div class="cardcont">
+        <p class="radfont">Rellena el formulario para que sepamos algo de ti</p>
+        <div style="margin-top: 32px;">
+            <div class="formfield">
+                <div style="font-size: 24px; font-weight: 200;">Días&nbsp;<b>{{countdays}}</b></div>
+                <app-bookinghome class="topitem" [btnVisible]="false" [aperance]="'outline'"
+                    (ileDni)="countDays($event)"></app-bookinghome>
+                <mat-form-field class="topitem" appearance="outline">
+                    <mat-label>Adultos</mat-label>
+                    <input type="number" matInput value="" readonly>
+                    <mat-icon matSuffix>school</mat-icon>
+                    <mat-hint>De cuantas persona hablamos</mat-hint>
+                </mat-form-field>
+                <mat-form-field class="topitem" appearance="outline">
+                    <mat-label>Niñ@s</mat-label>
+                    <input type="number" matInput value="" readonly>
+                    <mat-icon matSuffix>child_care</mat-icon>
+                    <mat-hint>Los niñ@s bienvenidos</mat-hint>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="formfield">
+            <mat-form-field appearance="outline">
+                <mat-label>Nombre & apellido</mat-label>
+                <input matInput value="">
+                <mat-icon matSuffix>face</mat-icon>
+                <mat-hint>Di nos su nombre y apellido</mat-hint>
+            </mat-form-field>
+
+        </div>
+        <div class="formfield">
+            <mat-form-field appearance="outline">
+                <mat-label>Correo electronico</mat-label>
+                <input matInput value="">
+                <mat-icon matSuffix>contact_mail</mat-icon>
+                <mat-hint>El correo para dar las noticias </mat-hint>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Telefono</mat-label>
+                <input matInput value="">
+                <mat-icon matSuffix>phone_enabled</mat-icon>
+                <mat-hint>Tu telefono para poder comunicar con tigo</mat-hint>
+            </mat-form-field>
+        </div>
+        <div style="margin-top: 12px;">
+            <h2>Como te gusta alojarse</h2>
+            <mat-radio-group class="radiobtn" aria-label="Select an option" [value]="'0'" color="warn">
+                <mat-radio-button value="0"><span class="radfont">Solo Cama</span></mat-radio-button>
+                <mat-radio-button value="1"><span class="radfont">Desayuno</span></mat-radio-button>
+                <mat-radio-button value="2"><span class="radfont">Media pension</span></mat-radio-button>
+                <mat-radio-button value="3"><span class="radfont">Pension completa</span></mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <div class="formfield">
+            <mat-form-field appearance="outline">
+                <mat-label>Mensaje</mat-label>
+                <textarea matInput value=""></textarea>
+                <mat-icon matSuffix>message</mat-icon>
+                <mat-hint>Deja nos un mensaje si deseas</mat-hint>
+            </mat-form-field>
+
+        </div>
+
+        <div style="margin-top: 24px; margin-bottom: 12px; ">
+            <hr>
+            <div style="display: flex; justify-content: flex-end; gap: 32px;">
+                <button mat-raised-button color="accent" routerLink="/">
+                    <mat-icon class="iconbtn">cancel</mat-icon>
+                    <span>Cancelar</span>
+                </button>
+                <button mat-raised-button color="warn">
+                    <mat-icon class="iconbtn">send</mat-icon>
+                    <span>Enviar</span></button>
+            </div>
+        </div>
+    </div>

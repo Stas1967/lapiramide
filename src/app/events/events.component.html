@@ -1,15 +1,30 @@
 <div class="topimg">
 </div>
 <!-- <img src="../../assets/images/barbaqu.jpg" alt="" width="100%"> -->
-<div class="container" style="margin-top: 76px;">
+<div class="container">
     <h1>Los eventos que no puedes perder</h1>
 </div>
 <div class="container">
-    <div class="cardcontainer">
-        <mat-card class="carditem" *ngFor="let eve of eventList | async">
-            <img src="{{eve.image}}" alt="" width="100%">
-            <mat-card-title>{{eve.eventtitle}}</mat-card-title>
-            <p>{{eve.eventdescrip}}</p>
+    <div class="cardcoevent">
+        <mat-card class="cardcoitem" *ngFor="let eve of eventList | async; let i = index">
+            <div style="position: relative;">
+                <img src="{{eve.image}}" alt="" width="100%">
+                <div class="cardevent">
+                    <mat-card-title>{{eve.eventtitle}}</mat-card-title>
+                </div>
+            </div>
+            <mat-card-content>
+                <p>{{eve.eventdescrip}}</p>
+                <div *ngIf="eve.repeate">
+                    <p>El siguiente evento tenemos<br>
+                        <b>{{eve.startevent | date: 'dd MMMM'}}</b> y <b>{{eve.endevent | date: 'dd MMMM'}}</b>
+                    </p>
+                </div>
+                <p>Promo: {{eve.isPromo}}</p>
+                <p>Fech fin: {{eve.finpromo}}</p>
+                <p>Repetido: {{eve.repeate}}</p>
+                <p>Cada {{eve.cuantdays}} Dias</p>
+            </mat-card-content>
         </mat-card>
     </div>
 </div>

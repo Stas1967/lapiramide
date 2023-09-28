@@ -1,5 +1,7 @@
 {
   "rules": {
+    ".read": false,
+    ".write": false,
     "apartments": {
       ".read": true,
       ".write": "root.child('users').child(auth.uid).child('isAdmin').val() === true"
@@ -16,10 +18,6 @@
     "users": {
       ".read": "root.child('users').child(auth.uid).child('isAdmin').val() === true",
       ".write": "root.child('users').child(auth.uid).child('isAdmin').val() === true"
-    },
-    "tempusers": {
-      ".read": "root.child('users').hasChild(auth.uid)",
-      ".write": "root.child('users').hasChild(auth.uid)"
     }
   }
 }

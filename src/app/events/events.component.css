@@ -7,6 +7,70 @@
     height: 70%;
 }
 
+.cardcoevent {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.cardcoitem {
+    width: calc(900px / 2);
+}
+
 mat-card {
     border-radius: 0px;
+}
+
+p {
+    font-size: 18px;
+    font-weight: 200;
+    line-height: 1.5;
+    white-space: unset;
+    word-wrap: break-word;
+}
+
+
+
+
+
+.cardevent {
+    position: absolute;
+    bottom: 6px;
+    left: 0;
+    right: 0;
+    padding: 16px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+@media all and (min-width: 1920px) {}
+
+@media all and (min-width: 1280px) and (max-width: 1919.98px) {}
+
+@media all and (min-width: 960px) and (max-width: 1279.98px) {}
+
+@media all and (min-width: 600px) and (max-width: 959.98px) {}
+
+@media all and (max-width: 599.98px) {
+    .topimg {
+        background-image: url(../../assets/images/barbaqu.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top;
+        width: 100%;
+        height: 20%;
+    }
+
+    .cardcoevent {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        gap: 24px;
+    }
+
+    .cardcoitem {
+        width: 100%;
+    }
 }

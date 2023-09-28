@@ -1,6 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { BehavService } from '../services/behav.service';
 import { BookinghomeComponent } from '../bookinghome/bookinghome.component';
 import { MatCardModule } from '@angular/material/card';
@@ -16,7 +16,7 @@ import { onValue } from 'firebase/database';
   selector: 'app-offer',
   standalone: true,
   imports: [CommonModule, BookinghomeComponent, MatCardModule, MatButtonModule,
-    MatIconModule, MatExpansionModule],
+    MatIconModule, MatExpansionModule, RouterOutlet, RouterModule],
   templateUrl: './offer.component.html',
   styleUrls: ['./offer.component.css']
 })

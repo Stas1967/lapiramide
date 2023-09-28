@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { fireAuth, fireDb, fireRdb, refdb } from 'src/app/app.module';
+import { fireAuth, fireRdb, refdb } from 'src/app/app.module';
 import { ActionCodeOperation, onAuthStateChanged, sendSignInLinkToEmail } from 'firebase/auth';
 import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -219,7 +219,7 @@ export class NewUser {
   actionCodeSettings = {
     // // URL you want to redirect back to. The domain (www.example.com) for this
     // // URL must be in the authorized domains list in the Firebase Console.
-    url: 'http://localhost:4200/login?encodeEmail=' + this.userform.controls.email.value + ';?codeKey?' + this.emkey,
+    url: 'http://localhost:4200/register?encodeEmail=' + encodeURIComponent(this.userform.controls.email.value || '') + '&codeKey=' + encodeURIComponent(this.emkey),
     //url: 'https://lapiramide-544e8.web.app/login?email=' + 'blizoomnet@gmail.com',
     // // This must be true.
     handleCodeInApp: true,

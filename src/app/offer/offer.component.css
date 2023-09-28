@@ -21,6 +21,7 @@
 
 .imgcon img {
     width: calc(100% / 3);
+    opacity: 0.6;
 }
 
 .descrip {
