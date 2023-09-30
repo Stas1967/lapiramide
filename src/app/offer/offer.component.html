@@ -130,7 +130,8 @@
                 </div>
             </mat-card-content>
             <mat-card-actions>
-                <button mat-raised-button color="accent" (click)="loQuiero(room)"><mat-icon>thumb_up_alt</mat-icon>Lo
+                <button [disabled]="isAdmin" mat-raised-button color="accent"
+                    (click)="loQuiero(room)"><mat-icon>thumb_up_alt</mat-icon>Lo
                     quiero</button>
             </mat-card-actions>
         </mat-card>

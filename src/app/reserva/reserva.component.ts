@@ -1,4 +1,4 @@
-import { Component, Inject, ViewEncapsulation, inject } from '@angular/core';
+import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -6,15 +6,16 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MAT_SNACK_BAR_DATA, MatSnackBar, MatSnackBarModule, MatSnackBarRef } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule, MatSnackBarRef } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { BehavService } from '../services/behav.service';
 import { BookinghomeComponent } from '../bookinghome/bookinghome.component';
 import { MatRadioChange, MatRadioModule } from '@angular/material/radio';
 import { MatRippleModule } from '@angular/material/core';
 import { fireAuth, fireRdb, refdb } from '../app.module';
-import { ref, set } from 'firebase/database';
-import { signInAnonymously, updateCurrentUser, updateEmail, updateProfile } from 'firebase/auth';
+import { onValue, set, update } from 'firebase/database';
+import { signInAnonymously } from 'firebase/auth';
+import { AutentService } from '../services/autent.service';
 
 @Component({
   selector: 'app-reserva',
@@ -45,14 +46,16 @@ export class ReservaComponent {
   Alojamiento = 'Solo Cama';
   AloNum = 0;
   Modificator = false;
+  isNewRecord = true;
   reform = new FormGroup({
     fullname: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.email, Validators.required, Validators.pattern('[a-z0-9]{3,}@[a-z]{2,}.[a-z]{2,}')]),
     phone: new FormControl('', Validators.required),
     country: new FormControl('', Validators.required),
     message: new FormControl(''),
+    alojamiento: new FormControl(this.AloNum)
   })
-  constructor(public router: Router, public bhvsrv: BehavService, public acRoute: ActivatedRoute, private snack: MatSnackBar) {
+  constructor(public router: Router, public bhvsrv: BehavService, public acRoute: ActivatedRoute, private snack: MatSnackBar, public autsrv: AutentService) {
     this.isSmall = bhvsrv.isMobilFu();
   }
 
@@ -67,14 +70,6 @@ export class ReservaComponent {
   }
 
   ngOnInit(): void {
-    this.reform.setValue({
-      fullname: 'Tomasz Wroblewski',
-      email: 'vizaint@gmail.com',
-      phone: '682544944',
-      message: 'Fajna wiadomosc',
-      country: 'Kongo'
-    })
-
     this.acRoute.queryParams.subscribe((pa) => {
       this.Breakfast = pa['BF'] === 'true';
       this.HalfBoard = pa['HD'] === 'true';
@@ -102,68 +97,108 @@ export class ReservaComponent {
     return (this.CuotaOpt * this.countdays) + (this.Price * this.countdays)
   }
   sendToServer(): void {
-    const getmail = localStorage.getItem('email')
-    if (getmail == this.reform.controls.email.value) { }
-    const msnak = this.snack.openFromComponent(SnackMsg, { verticalPosition: 'top', horizontalPosition: 'right' });
-    msnak.onAction().subscribe(() => {
-      this.Modificator = true;
-    });
     const checkkey = localStorage.getItem('key');
-    let anouser = ''
-    if (localStorage.getItem('key') == null) {
-      signInAnonymously(this.auth).then((res) => {
+    const getmail = localStorage.getItem('email');
+    if (this.reform.valid) {
+      if (checkkey == null) {
+        signInAnonymously(this.auth).then((res) => {
+          if (res) {
+            localStorage.setItem('key', res.user.uid)
+            set(refdb(this.rdb, 'reservas/' + res.user.uid), this.FormData(true)).then(() => {
+              this.reform.reset();
+              this.router.navigateByUrl('events')
+            }).catch((err) => {
+              console.log(err);
+            })
+          }
+        }).catch((err) => {
+          console.log(err);
+        })
+      }
+    } else if (checkkey != null) {
+      const msnak = this.snack.openFromComponent(SnackMsg, { verticalPosition: 'top', horizontalPosition: 'right' });
+      msnak.onAction().subscribe(() => {
+        console.log('reservas/' + checkkey);
+        onValue(refdb(this.rdb, 'reservas/' + checkkey), (snap) => {
+          if (snap.exists()) {
+            const dane = snap.val();
+            console.log(dane);
+            this.reform.setValue({
+              fullname: dane.fullname,
+              email: dane.email,
+              phone: dane.phone,
+              message: dane.message,
+              country: dane.country,
+              alojamiento: dane.alonum
+            })
+            this.AloNum = dane.alonum;
+          } else {
+            this.snack.open('Tu reserva fue procesada si lo desas puedes crear nueva', 'Ok', { duration: 5000 })
+            localStorage.removeItem('enddate');
+            localStorage.removeItem('startdate');
+            localStorage.removeItem('email');
+            localStorage.removeItem('phone');
+            localStorage.removeItem('key');
+            this.autsrv.LogOut();
+            this.router.navigateByUrl('offer');
 
-        console.log(res);
-        anouser = res.user.uid
-        if (checkkey === anouser) {
-          console.log('Ya tienes una reserva');
-        } else {
-          localStorage.setItem('key', res.user.uid)
-          set(refdb(this.rdb, 'reservas/' + res.user.uid), this.FormData()).catch((err) => {
-            console.log(err);
-          })
-        }
-      })
+          }
+        })
+        this.Modificator = true;
+      });
     } else {
-      console.log('Puedes login');
-      set(refdb(this.rdb, 'reservas/' + checkkey), this.FormData()).catch((err) => {
-        console.log(err);
-      })
+      this.snack.open('Los campos con (*) son obligatorios', 'Ok', { duration: 5000 })
     }
-    //set(refdb(this.rdb, 'reservas/'), data);
   }
-
   editInServer(): void {
+    const checkkey = localStorage.getItem('key');
+    if (this.reform.valid) {
+      update(refdb(this.rdb, 'reservas/' + checkkey), this.FormData(false)).catch((err) => {
+        console.log(err);
+      }).then(() => {
+        this.reform.reset();
+        this.router.navigateByUrl('events')
+      })
+      // else {
+      //     const snkfd = this.snack.open('Cambia algun dato si lo deseas o descubre eventos que hemos preparado', 'Ok', { verticalPosition: 'top', horizontalPosition: 'right' });
+
+      //   }
+    }
 
   }
-
-  FormData(): any {
+  FormData(isNewRecord: boolean) {
     const fromdate = localStorage.getItem('startdate')
     const todate = localStorage.getItem('enddate')
-    const dzis = new Date();
+    const hoy = new Date();
     const checkin = Number(fromdate);
     const chckout = Number(todate);
-    const adddate = dzis.getUTCFullYear() + '' + (dzis.getMonth() + 1) + '' + dzis.getDate();
+    const adddate = hoy.getUTCFullYear() + '' + (hoy.getMonth() + 1) + '' + hoy.getDate();
     const reres = 'OF-' + this.Adults + '+' + this.Child + '-A-' + this.AloNum + '-' + adddate;
-    const data = {
+    const data: { [key: string]: string | number } = {
       noreserva: reres,
-      fullname: this.reform.controls.fullname.value,
-      email: this.reform.controls.email.value,
-      phone: this.reform.controls.phone.value,
-      message: this.reform.controls.message.value,
-      country: this.reform.controls.country.value,
+      fullname: this.reform.controls.fullname.value || '',
+      email: this.reform.controls.email.value || '',
+      phone: this.reform.controls.phone.value || '',
+      message: this.reform.controls.message.value || '',
+      country: this.reform.controls.country.value || '',
       checkin: checkin,
       chckout: chckout,
       audlts: this.Adults,
       children: this.Child,
       pricetopay: this.ToPay(),
       alojam: this.Alojamiento,
-      createdAt: new Date().getTime(),
+      alonum: this.AloNum,
     }
-    localStorage.setItem('email', data.email || '');
-    localStorage.setItem('phone', data.phone || '');
+    if (isNewRecord == true) {
+      data['createdAt'] = new Date().getTime();
+    } else {
+      data['modifiedAt'] = new Date().getTime();
+    }
+    localStorage.setItem('email', data['email'].toString());
+    localStorage.setItem('phone', data['phone'].toString());
     return data;
   }
+
   cancel(): void {
     this.router.navigateByUrl('/');
   }

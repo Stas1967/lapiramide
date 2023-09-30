@@ -25,7 +25,7 @@
                     (ileDni)="countDays($event)"></app-bookinghome>
             </div>
         </div>
-        <form [formGroup]="reform">
+        <form [formGroup]="reform" [noValidate]="true">
             <div class="formfield">
                 <mat-form-field appearance="outline">
                     <mat-label for="name">Nombre & apellido</mat-label>
@@ -57,17 +57,21 @@
             </div>
             <div style="margin-top: 12px;">
                 <h2>Como te gustaría alojarse</h2>
-                <mat-radio-group class="radiobtn" aria-label="Select an option" [value]="'0'" color="warn"
+                <mat-radio-group class="radiobtn" aria-label="Select an option" [value]="AloNum" color="warn"
                     (change)="radChange($event)">
-                    <mat-radio-button aria-label="Solo Cama" value="0"><span class="radfont">Solo
+                    <mat-radio-button aria-label="Solo Cama" [value]="0"><span class="radfont">Solo
                             Cama</span></mat-radio-button>
-                    <mat-radio-button aria-label="Desayuno" value="1" *ngIf="Breakfast"><span
+                    <mat-radio-button aria-label="Desayuno" [value]="1" *ngIf="Breakfast"><span
                             class="radfont">Desayuno</span></mat-radio-button>
-                    <mat-radio-button aria-label="Half Board" value="2" *ngIf="HalfBoard"><span class="radfont">Media
+                    <mat-radio-button aria-label="Half Board" [value]="2" *ngIf="HalfBoard"><span class="radfont">Media
                             pension</span></mat-radio-button>
-                    <mat-radio-button aria-label="Full Board" value="3" *ngIf="FullBoard"><span class="radfont">Pension
+                    <mat-radio-button aria-label="Full Board" [value]="3" *ngIf="FullBoard"><span
+                            class="radfont">Pension
                             completa</span></mat-radio-button>
                 </mat-radio-group>
+                <mat-form-field style="display: none;">
+                    <input matInput formControlName="alojamiento" [value]="AloNum">
+                </mat-form-field>
             </div>
             <div class="formfield">
                 <mat-form-field appearance="outline">
@@ -83,21 +87,22 @@
                 <p>Tu calculo</p>
                 <b>{{ToPay() | currency: '€'}}</b>
             </div>
-        </form>
-        <div style="margin-top: 24px; margin-bottom: 12px; ">
-            <hr>
-            <div style="display: flex; justify-content: flex-end; gap: 32px;">
-                <button mat-raised-button color="accent" (click)="cancel()">
-                    <mat-icon class="iconbtn">cancel</mat-icon>
-                    <span>Cancelar</span>
-                </button>
-                <button *ngIf="!Modificator" mat-raised-button color="warn" (click)="sendToServer()">
-                    <mat-icon class="iconbtn">send</mat-icon>
-                    <span>Enviar</span></button>
+            <div style="margin-top: 24px; margin-bottom: 12px; ">
+                <hr>
+                <div style="display: flex; justify-content: flex-end; gap: 32px;">
+                    <button mat-raised-button color="accent" (click)="cancel()">
+                        <mat-icon class="iconbtn">cancel</mat-icon>
+                        <span>Cancelar</span>
+                    </button>
+                    <button *ngIf="!Modificator" type="submit" mat-raised-button color="warn" (click)="sendToServer()">
+                        <mat-icon class="iconbtn">send</mat-icon>
+                        <span>Enviar</span></button>
 
-                <button *ngIf="Modificator" mat-raised-button color="warn" (click)="editInServer()">
-                    <mat-icon class="iconbtn">send</mat-icon>
-                    <span>Modificar</span></button>
+                    <button *ngIf="Modificator" mat-raised-button type="submit" color="warn" (click)="editInServer()">
+                        <mat-icon class="iconbtn">send</mat-icon>
+                        <span>Modificar</span></button>
+                </div>
             </div>
-        </div>
+        </form>
+
     </div>

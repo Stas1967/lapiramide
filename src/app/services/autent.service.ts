@@ -33,7 +33,6 @@ export class AutentService {
         localStorage.setItem('authkey', 'true');
       }
     }).catch((err) => {
-      console.log(err.code);
       if (err.code === 'auth/invalid-login-credentials') {
         this.openDialog('person_search', 'Upsss... Algo ha salido mal',
           'Comprueba los credenciales introducidas y intenta de nuevo', '',
@@ -50,6 +49,10 @@ export class AutentService {
     const dialRef = this.dialog.open(LogDialog, {
       data: { dialogicon: icon, dialogtitle: title, dialogtxt: text, dialogpromis: prom, show: show, logreg: logreg }
     })
+  }
+
+  LogOut() {
+    this.auth.signOut();
   }
 
 

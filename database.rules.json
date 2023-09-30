@@ -4,20 +4,26 @@
     ".write": false,
     "apartments": {
       ".read": true,
-      ".write": "root.child('users').child(auth.uid).child('isAdmin').val() === true"
+      ".write": "root.child('users').child(auth.uid).child('isAdmin').val() == true"
     },
-
     "eventos": {
       ".read": true,
-      ".write": "root.child('users').child(auth.uid).child('isAdmin').val() === true"
+      ".write": "root.child('users').child(auth.uid).child('isAdmin').val() == true"
     },
     "lapiramide": {
       ".read": "root.child('users').hasChild(auth.uid)",
-      ".write": "root.child('users').child(auth.uid).child('isAdmin').val() === true"
+      ".write": "root.child('users').child(auth.uid).child('isAdmin').val() == true"
     },
     "users": {
-      ".read": "root.child('users').child(auth.uid).child('isAdmin').val() === true",
-      ".write": "root.child('users').child(auth.uid).child('isAdmin').val() === true"
+      ".read": "root.child('users').child(auth.uid).child('isAdmin').val() == true",
+      ".write": "root.child('users').child(auth.uid).child('isAdmin').val() == true"
+    },
+    "reservas": {
+      ".read": "root.child('users').child(auth.uid).child('isAdmin').val() == true",
+      "$entrada_id": {
+        ".read": "auth != null && auth.uid == $entrada_id || root.child('users').child(auth.uid).child('isAdmin').val() == true",
+        ".write": "auth != null && auth.uid == $entrada_id"
+      }
     }
   }
 }

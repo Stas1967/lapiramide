@@ -89,7 +89,7 @@ export class AppComponent {
   }
   ngOnInit() {
     onAuthStateChanged(this.auth, (user) => {
-      console.log(user?.isAnonymous);
+      console.log(user?.uid);
       if (user?.isAnonymous == true) {
         this.loggedin = false;
         this.isAnonimo = true;

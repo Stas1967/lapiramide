@@ -1,8 +1,10 @@
 <div style="display: flex; flex-direction: row;">
-    <p matSnackBarLabel style="font-size: 18px; margin-right: 16px;">Ya haz hecho una reserva con estos datos <br>
-        Si quieres añadr algunos cambios<br>Puedes hacer click en "Modificar".<br></p>
+    <p matSnackBarLabel style="font-size: 18px; margin-right: 16px;">Ya tienes una reserva <br>
+        Si quieres añadr algunos cambios<br>Puedes hacer click en "Modificar".<br>Si quieres hacer más reservas con el
+        mismo nombre<br> contacte con nostros directamente, por telefono o por email</p>
     <div style="display: flex; justify-content: flex-end; align-items: flex-end;" matSnackBarActions>
         <button style="align-self: flex-end; color: whitesmoke; background-color: rgb(255, 0, 0);" mat-icon-button
-            matSnackBarAction (click)="snackBarRef.dismissWithAction()"><mat-icon>done</mat-icon></button>
+            (click)="snackBarRef.dismissWithAction()"><mat-icon>done</mat-icon></button>
+        <button mat-icon-button (click)="snackBarRef.dismiss()"><mat-icon>cancel</mat-icon></button>
     </div>
 </div>
