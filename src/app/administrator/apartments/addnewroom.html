@@ -33,8 +33,37 @@
             <mat-form-field style="width: 100%;" appearance="outline">
                 <mat-label>Precio por noche</mat-label>
                 <input matInput type="number" value="" formControlName="price" placeholder="30">
+                <span matTextPrefix>€&nbsp;</span>
+                <span matTextSuffix>.00</span>
             </mat-form-field>
         </div>
+        <div class="cardcontainer">
+            <p>Indica el precio de cada opcion de alojamiento y/o marca si esta disponible en esta oferta</p>
+        </div>
+        <div class="formfield">
+            <mat-form-field appearance="outline">
+                <mat-label>Desayuno</mat-label>
+                <input matInput type="number" value="" placeholder="Desayuno" formControlName="breakfast">
+                <span matTextPrefix>€&nbsp;</span>
+                <span matTextSuffix>.00</span>
+                <mat-checkbox matSuffix [checked]="breakfastch" (change)="breakCh($event)"></mat-checkbox>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Media pensión</mat-label>
+                <input matInput type="number" value="" placeholder="Media pensión" formControlName="halfboard">
+                <span matTextPrefix>€&nbsp;</span>
+                <span matTextSuffix>.00</span>
+                <mat-checkbox matSuffix [checked]="halfboardch" (change)="halfCh($event)"></mat-checkbox>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Pensión completa</mat-label>
+                <input matInput type="number" value="" placeholder="Pensión completa" formControlName="fullboard">
+                <span matTextPrefix>€&nbsp;</span>
+                <span matTextSuffix>.00</span>
+                <mat-checkbox matSuffix [checked]="fullboardch" (change)="fullCh($event)"></mat-checkbox>
+            </mat-form-field>
+        </div>
+
         <div class="formfield">
             <img [src]="imgRoomChang" alt="" width="80px" height="80px">
             <mat-form-field style="width: 100%;" appearance="outline">

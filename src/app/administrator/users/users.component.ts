@@ -33,8 +33,8 @@ export interface Employers {
   selector: 'app-users',
   standalone: true,
   imports: [CommonModule, FormsModule, MatFormFieldModule, MatInputModule,
-    MatIconModule, MatSelectModule, MatDialogModule, MatButtonModule, MatTableModule,
-    MatSnackBarModule],
+    MatIconModule, MatSelectModule, MatDialogModule, MatButtonModule,
+    MatTableModule, MatSnackBarModule],
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
@@ -189,7 +189,7 @@ export class EditUser {
         isAdmin: this.isAdmin,
         isModerator: this.isModerator
       }).then(() => {
-        this.snack.open('Actualizacion con exito', 'Ok', { duration: 2000, verticalPosition: 'top', horizontalPosition: 'right' })
+        this.snack.open('Actualización con exito', 'Ok', { duration: 2000, verticalPosition: 'top', horizontalPosition: 'right' })
         this.bhvsrv.passSpin(false);
         this.dialRef.close();
       }).catch((err) => {

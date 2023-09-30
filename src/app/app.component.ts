@@ -11,12 +11,10 @@ export interface myRoute {
   name: string;
   url: string;
 }
-
 const style1 = style({
   marginTop: '3px',
   fontSize: '24px'
 })
-
 const style2 = style({
   marginTop: '3px',
   fontSize: '24px'
@@ -45,9 +43,9 @@ export class AppComponent {
   auth = fireAuth;
   jest = false;
   displName = '';
+  isAnonimo = false;
   @ViewChild('sidenav', { static: false }) public sidenav: MatSidenav | undefined;
   @ViewChild('sidecont', { static: false }) public sidecont: MatSidenavContent | undefined;
-
   links: myRoute[] = [
     { icon: 'home', name: 'Inicio', url: '/' },
     { icon: 'celebration', name: 'Eventos', url: '/events' },
@@ -71,7 +69,6 @@ export class AppComponent {
       }
     })
   }
-
   @HostListener('window:resize', ['$event'])
   ngOnResize() {
     this.isSmall = this.bhvsrv.isMobilFu();
@@ -86,19 +83,23 @@ export class AppComponent {
   LogOut() {
     this.router.navigateByUrl('/');
     this.loggedin = false;
+    this.isAnonimo = false;
     localStorage.removeItem('authkey')
     return signOut(this.auth);
   }
-
   ngOnInit() {
     onAuthStateChanged(this.auth, (user) => {
-      if (user) {
+      console.log(user?.isAnonymous);
+      if (user?.isAnonymous == true) {
+        this.loggedin = false;
+        this.isAnonimo = true;
+      }
+      if (user?.isAnonymous == false) {
         this.loggedin = true;
       } else {
         this.loggedin = false;
       }
     })
-
     this.onActivate();
     setTimeout(() => {
       this.sidecont?.getElementRef().nativeElement.addEventListener('scroll', () => {
@@ -111,11 +112,9 @@ export class AppComponent {
         if (scrollPosition <= componentPosition) {
           this.state = 'hide';
         }
-
       });
     }, 500)
   }
-
   onActivate() {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationStart) {

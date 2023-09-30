@@ -48,10 +48,6 @@ export class RegisterComponent {
       this.codekey = param['codeKey'];
       const emailctrl = this.logform.controls['email'];
       emailctrl.setValue(this.memail)
-      console.log(this.memail);
-      console.log(this.codekey);
-
-
     })
   }
   @HostListener('window:resize', ['$event'])

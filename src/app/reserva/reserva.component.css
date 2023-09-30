@@ -60,13 +60,86 @@ mat-form-field {
     width: 100%;
 }
 
+.topitem {
+    width: 100%;
+}
+
+.backwrap {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.wrapbtn {
+    background-color: crimson;
+    color: white;
+    font-size: 18px;
+    padding: 16px 24px;
+    align-self: center;
+    cursor: pointer;
+}
+
+.urldata {
+    display: flex;
+    flex: 1 100%;
+    flex-flow: row wrap;
+    gap: 24px;
+}
+
+.urldataitem {
+    flex-grow: 2;
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    font-size: 24px;
+    font-weight: 200;
+}
+
+.price {
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: 200;
+}
+
+
 @media all and (min-width: 1920px) {}
 
 @media all and (min-width: 1280px) and (max-width: 1919.98px) {}
 
 @media all and (min-width: 960px) and (max-width: 1279.98px) {}
 
-@media all and (min-width: 600px) and (max-width: 959.98px) {}
+@media all and (min-width: 600px) and (max-width: 959.98px) {
+    .contoff {
+        width: 90%;
+        padding: 16px;
+    }
+
+    .formfield {
+        margin-top: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .radiobtn {
+        margin-top: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .backwrap {
+        flex-direction: column;
+    }
+
+    .wrapbtn {
+        margin-bottom: 24px;
+    }
+}
 
 @media all and (max-width: 599.98px) {
     .contoff {
@@ -86,5 +159,17 @@ mat-form-field {
         display: flex;
         flex-direction: column;
         gap: 24px;
+    }
+
+    .backwrap {
+        flex-direction: column;
+    }
+
+    .wrapbtn {
+        margin-bottom: 24px;
+    }
+
+    .urldataitem {
+        flex-direction: column;
     }
 }

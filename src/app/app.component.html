@@ -17,9 +17,21 @@
           </button>
         </span>
         <span>
-          <button mat-button class="link" [routerLink]="'/login'" *ngIf="!loggedin">
+          <span *ngIf="!loggedin">
+            <button mat-button class="link" [routerLink]="'/login'" *ngIf="!isAnonimo">
+              <mat-icon class="iconbtn">login</mat-icon>
+              <span *ngIf="!isTabl">Login</span>
+            </button>
+          </span>
+          <span *ngIf="loggedin">
+            <button mat-button class="link" (click)="LogOut()" *ngIf="isAnonimo">
+              <mat-icon class="iconbtn">login</mat-icon>
+              <span *ngIf="!isTabl">SingOut</span>
+            </button>
+          </span>
+          <button mat-button class="link" (click)="LogOut()" *ngIf="isAnonimo">
             <mat-icon class="iconbtn">login</mat-icon>
-            <span *ngIf="!isTabl">Login</span>
+            <span *ngIf="!isTabl">SingOut</span>
           </button>
           <button mat-button class="link" [matMenuTriggerFor]="menu" *ngIf="loggedin">
             <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
@@ -31,13 +43,16 @@
           <mat-menu #menu="matMenu">
             <button mat-menu-item [routerLink]="'/administrator'">
               <mat-icon class="iconbtn">admin_panel_settings</mat-icon>
-              <span>Admin Panel</span>
+              <span>Admininistrator</span>
+            </button>
+            <button mat-menu-item [routerLink]="'/administrator/bookinglist'">
+              <mat-icon class="iconbtn">list</mat-icon>
+              <span>Lista de reservas</span>
             </button>
             <button mat-menu-item style="background-color: red; color: white;" (click)="LogOut()">
               <mat-icon>logout</mat-icon>
               <span>Sign Out</span>
             </button>
-
           </mat-menu>
         </span>
       </div>
@@ -75,7 +90,12 @@
           <span style="color: rgb(24, 24, 24);">Admin</span>
         </div>
       </mat-list-item>
-
+      <mat-list-item (click)="LogOut()" style="background-color: red;">
+        <div class="link" style="color: whitesmoke;">
+          <mat-icon>logout</mat-icon>
+          <span>Sign Out</span>
+        </div>
+      </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content class="mat-navsidecontent" #sidecont mat-sidenav-content-collapsed cdkScrollable>

@@ -62,7 +62,31 @@ export class OfferComponent {
         this.child = rft.child;
       })
     })
+  }
 
+  loQuiero(rm: Rooms): void {
+    this.router.navigate(['/reserva'],
+      {
+        queryParams: {
+          SetP: encodeURIComponent(rm.price),
+          SetB: encodeURIComponent(rm.breakfast),
+          SetH: encodeURIComponent(rm.halfboard),
+          SetF: encodeURIComponent(rm.fullboard),
+          C: crypto.randomUUID(),
+          BF: encodeURIComponent(rm.isbreakfast),
+          HD: encodeURIComponent(rm.ishalfboard),
+          FA: encodeURIComponent(rm.isfullboard),
+          Ad: encodeURIComponent(rm.adults),
+          Ch: encodeURIComponent(rm.child)
+
+        }
+      })
+    // this.bhvsrv.setRoomData({
+    //   Breakfast: rm.isbreakfast,
+    //   HalfBoard: rm.ishalfboard,
+    //   FullBoard: rm.isfullboard
+    // })
+    //this.router.navigate(['/reserva']);
   }
 
   ngOnInit(): void {

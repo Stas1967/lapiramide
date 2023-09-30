@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { CACHE_SIZE_UNLIMITED, connectFirestoreEmulator, getFirestore, initializeFirestore, memoryLocalCache } from 'firebase/firestore';
-import { connectAuthEmulator, getAuth } from 'firebase/auth';
-import { connectDatabaseEmulator, getDatabase, ref } from 'firebase/database';
-import { connectStorageEmulator, getStorage } from 'firebase/storage';
+import { CACHE_SIZE_UNLIMITED, getFirestore, initializeFirestore, memoryLocalCache } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
+import { getDatabase, ref } from 'firebase/database';
+import { getStorage } from 'firebase/storage';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +25,7 @@ import { FootComponent } from './foot/foot.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LogDialog } from './login/login.component';
 import { WrongDialog } from './bookinghome/bookinghome.component';
+import { SnackMsg } from './reserva/reserva.component';
 
 
 const firebaseConfig = {
@@ -69,6 +70,7 @@ export const refdb = ref;
     AppComponent,
     LogDialog,
     WrongDialog,
+    SnackMsg
   ],
   imports: [
     BrowserModule,

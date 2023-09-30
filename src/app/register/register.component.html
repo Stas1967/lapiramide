@@ -30,6 +30,7 @@
                     <mat-form-field class="full-width">
                         <mat-label>Correo electronico</mat-label>
                         <input matInput value="" formControlName="email">
+                        <mat-error *ngIf="logform.invalid">{{getEmailErrorMsg()}}</mat-error>
                     </mat-form-field>
                 </div>
                 <div class="formfield">

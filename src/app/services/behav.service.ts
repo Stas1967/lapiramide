@@ -3,6 +3,16 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { doc, getDocFromCache, getDocFromServer } from 'firebase/firestore';
 import { fireDb } from '../app.module';
+export class FoodPas {
+  Breakfast: boolean;
+  HalfBoard: boolean;
+  FullBoard: boolean;
+  constructor(Breakfast: boolean, HalfBoard: boolean, FullBoard: boolean) {
+    this.Breakfast = Breakfast;
+    this.HalfBoard = HalfBoard;
+    this.FullBoard = FullBoard;
+  }
+}
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +29,19 @@ export class BehavService {
   spinopen$ = new BehaviorSubject<boolean>(false);
   _countDays = 0;
   _countDays$ = new BehaviorSubject<number>(0);
+  roomData: FoodPas = { Breakfast: false, HalfBoard: false, FullBoard: false };
+  _roomdata$ = new BehaviorSubject<FoodPas>({ Breakfast: false, HalfBoard: false, FullBoard: false })
   constructor(public bpo: BreakpointObserver) {
     this.isMobile = false;
     this.isTablet = false;
+  }
+  setRoomData(data: FoodPas) {
+    this.roomData = data;
+    this._roomdata$.next(this.roomData)
+  }
+
+  getRoomData() {
+    return this._roomdata$.value;
   }
   passSpin(value: boolean): boolean {
     this.spinopen = value;

@@ -43,6 +43,12 @@
     scale: 1.05;
 }
 
+.radiobtn {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+}
+
 @media all and (min-width: 1920px) {}
 
 @media all and (min-width: 1280px) and (max-width: 1919.98px) {}

@@ -19,6 +19,13 @@
     z-index: -1;
 }
 
+.icofood {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
 .imgcon img {
     width: calc(100% / 3);
     opacity: 0.6;

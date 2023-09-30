@@ -109,10 +109,29 @@
                         </div>
                     </div>
                 </div>
+                <div>
+                    <p style="font-size: 20px; font-weight: 400;">Opciones disponibles con tu reserva, por elegir.</p>
+                    <div style="display: flex; flex-direction: column; gap: 12px; font-size: 18px; font-weight: 200;">
+                        <div *ngIf="room.isbreakfast" class="icofood">
+                            <mat-icon style="width: 40px; height: 40px;">🧆</mat-icon>
+                            <span>Opción con un delicioso desayuno</span>
+                        </div>
+                        <div *ngIf="room.ishalfboard" class="icofood">
+                            <mat-icon style="width: 40px; height: 40px;">🌭</mat-icon>
+                            <span>Desayuno y la cena, para disfrutar del día</span>
+                        </div>
+                        <div *ngIf="room.isfullboard" class="icofood">
+                            <mat-icon style="width: 40px; height: 40px;">🍖</mat-icon>
+                            <span>Si te gusta nuestra cosina</span>
+                        </div>
+
+
+                    </div>
+                </div>
             </mat-card-content>
             <mat-card-actions>
-                <a mat-raised-button color="accent" [routerLink]="'/reserva'"><mat-icon>thumb_up_alt</mat-icon>Lo
-                    quiero</a>
+                <button mat-raised-button color="accent" (click)="loQuiero(room)"><mat-icon>thumb_up_alt</mat-icon>Lo
+                    quiero</button>
             </mat-card-actions>
         </mat-card>
     </div>
