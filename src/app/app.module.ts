@@ -26,6 +26,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { LogDialog } from './login/login.component';
 import { WrongDialog } from './bookinghome/bookinghome.component';
 import { SnackMsg } from './reserva/reserva.component';
+import { BoodocComponent } from './boodoc/boodoc.component';
+
 
 
 const firebaseConfig = {
@@ -70,7 +72,8 @@ export const refdb = ref;
     AppComponent,
     LogDialog,
     WrongDialog,
-    SnackMsg
+    SnackMsg,
+    BoodocComponent
   ],
   imports: [
     BrowserModule,

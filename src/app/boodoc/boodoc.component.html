@@ -1,0 +1,72 @@
+<mat-dialog-content>
+    <h1>Gracias por reservar con nostros</h1>
+    <p>Aqui tienes tu resumen de la reserva, haz click en guradar para guardar una copia. </p>
+</mat-dialog-content>
+<div #mydiv id="mydiv" style="padding: 16px; ">
+    <div>
+        <h1>Aparatmentos La Pirámide</h1>
+        <address>
+            Apartamentos La Pirámide<br>
+            C/Berlina 7<br>
+            36510 Costa Antigua<br>
+            Tel: 928 163 008<br>
+            Email: <a href="mailto:apartamentoslapiramide@gmail.com">Apartamentos La Pirámide</a>
+        </address>
+        <hr>
+        <h2>{{docu['noreserva']}}</h2>
+        <h2> A nombre de {{docu['fullname']}}</h2>
+        <hr>
+        <div class="pdoc">
+            <span>Check In:</span>
+            <span>{{docu['checkin'] | date}}</span>
+        </div>
+        <div class="pdoc">
+            <span>Check Out:</span>
+            <span>{{docu['checkout'] | date}}</span>
+        </div>
+        <div class="pdoc">
+            <span>Adultos</span>
+            <span>{{docu['adults']}}</span>
+        </div>
+        <div class="pdoc">
+            <span>Niñ@s</span>
+            <span>{{docu['children']}}</span>
+        </div>
+        <div class="pdoc">
+            <span>Alojamiento</span>
+            <span>{{docu['alojam']}}</span>
+        </div>
+        <hr>
+        <div class="pdoc">
+            <address>
+                {{docu['fullname']}}<br>
+                {{docu['country']}}<br>
+
+            </address>
+            <address>
+                {{docu['email']}}<br>
+                {{docu['phone']}}<br>
+            </address>
+        </div>
+        <hr>
+        <div>
+            <span>{{docu['message']}}
+            </span>
+        </div>
+        <hr>
+        <div class="pdoc">
+            <span>La cuenta</span>
+            <span>{{docu['pricetopay'] | currency}}</span>
+        </div>
+    </div>
+</div>
+<mat-dialog-actions style="display: flex; justify-content: flex-end;">
+    <button class="actionbtn" [mat-dialog-close]="'close'" mat-raised-button color="accent">
+        <mat-icon>cancel</mat-icon>
+        Cerrar
+    </button>
+    <button class="actionbtn" mat-raised-button color="warn" (click)="saveAsImage()">
+        <mat-icon>upload</mat-icon>
+        Guardar
+    </button>
+</mat-dialog-actions>

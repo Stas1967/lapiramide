@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -16,6 +16,8 @@ import { fireAuth, fireRdb, refdb } from '../app.module';
 import { onValue, set, update } from 'firebase/database';
 import { signInAnonymously } from 'firebase/auth';
 import { AutentService } from '../services/autent.service';
+import { BoodocComponent } from '../boodoc/boodoc.component';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-reserva',
@@ -43,7 +45,7 @@ export class ReservaComponent {
   Child = 0;
   CuotaOpt = 0;
   Cuota = 0;
-  Alojamiento = 'Solo Cama';
+  Alojamiento: string | undefined;
   AloNum = 0;
   Modificator = false;
   isNewRecord = true;
@@ -55,7 +57,8 @@ export class ReservaComponent {
     message: new FormControl(''),
     alojamiento: new FormControl(this.AloNum)
   })
-  constructor(public router: Router, public bhvsrv: BehavService, public acRoute: ActivatedRoute, private snack: MatSnackBar, public autsrv: AutentService) {
+  constructor(public router: Router, public bhvsrv: BehavService, public acRoute: ActivatedRoute,
+    private snack: MatSnackBar, public autsrv: AutentService, public dialog: MatDialog) {
     this.isSmall = bhvsrv.isMobilFu();
   }
 
@@ -104,7 +107,9 @@ export class ReservaComponent {
         signInAnonymously(this.auth).then((res) => {
           if (res) {
             localStorage.setItem('key', res.user.uid)
-            set(refdb(this.rdb, 'reservas/' + res.user.uid), this.FormData(true)).then(() => {
+            set(refdb(this.rdb, 'reservas/' + res.user.uid), this.FormData(true)).then((res) => {
+              this.dialog.open(BoodocComponent, { disableClose: true, })
+            }).then(() => {
               this.reform.reset();
               this.router.navigateByUrl('events')
             }).catch((err) => {
@@ -118,7 +123,6 @@ export class ReservaComponent {
     } else if (checkkey != null) {
       const msnak = this.snack.openFromComponent(SnackMsg, { verticalPosition: 'top', horizontalPosition: 'right' });
       msnak.onAction().subscribe(() => {
-        console.log('reservas/' + checkkey);
         onValue(refdb(this.rdb, 'reservas/' + checkkey), (snap) => {
           if (snap.exists()) {
             const dane = snap.val();
@@ -132,6 +136,7 @@ export class ReservaComponent {
               alojamiento: dane.alonum
             })
             this.AloNum = dane.alonum;
+            this.Alojamiento = dane.alojam;
           } else {
             this.snack.open('Tu reserva fue procesada si lo desas puedes crear nueva', 'Ok', { duration: 5000 })
             localStorage.removeItem('enddate');
@@ -153,14 +158,17 @@ export class ReservaComponent {
   editInServer(): void {
     const checkkey = localStorage.getItem('key');
     if (this.reform.valid) {
-      update(refdb(this.rdb, 'reservas/' + checkkey), this.FormData(false)).catch((err) => {
+      update(refdb(this.rdb, 'reservas/' + checkkey), this.FormData(false)).then((rs) => {
+        this.dialog.open(BoodocComponent, { disableClose: true, })
+      }).catch((err) => {
         console.log(err);
       }).then(() => {
         this.reform.reset();
         this.router.navigateByUrl('events')
       })
       // else {
-      //     const snkfd = this.snack.open('Cambia algun dato si lo deseas o descubre eventos que hemos preparado', 'Ok', { verticalPosition: 'top', horizontalPosition: 'right' });
+      //     const snkfd = this.snack.open('Cambia algun dato si lo deseas o descubre eventos que hemos preparado', 'Ok',
+      //      { verticalPosition: 'top', horizontalPosition: 'right' });
 
       //   }
     }
@@ -171,8 +179,8 @@ export class ReservaComponent {
     const todate = localStorage.getItem('enddate')
     const hoy = new Date();
     const checkin = Number(fromdate);
-    const chckout = Number(todate);
-    const adddate = hoy.getUTCFullYear() + '' + (hoy.getMonth() + 1) + '' + hoy.getDate();
+    const checkout = Number(todate);
+    const adddate = hoy.getUTCFullYear() + '' + (hoy.getMonth() + 1) + '' + hoy.getDate() + '' + hoy.getHours() + '' + hoy.getMinutes();
     const reres = 'OF-' + this.Adults + '+' + this.Child + '-A-' + this.AloNum + '-' + adddate;
     const data: { [key: string]: string | number } = {
       noreserva: reres,
@@ -182,11 +190,12 @@ export class ReservaComponent {
       message: this.reform.controls.message.value || '',
       country: this.reform.controls.country.value || '',
       checkin: checkin,
-      chckout: chckout,
-      audlts: this.Adults,
+      checkout: checkout,
+      daystostay: this.countdays,
+      adults: this.Adults,
       children: this.Child,
       pricetopay: this.ToPay(),
-      alojam: this.Alojamiento,
+      alojam: this.Alojamiento || '',
       alonum: this.AloNum,
     }
     if (isNewRecord == true) {
@@ -215,4 +224,5 @@ export class ReservaComponent {
 export class SnackMsg {
   snackBarRef = inject(MatSnackBarRef);
 }
+
 
