@@ -1,0 +1,56 @@
+<mat-dialog-content #mydiv id="mydiv" style="padding: 16px; ">
+
+    <div>
+        <h2>{{data['noreserva']}}</h2>
+        <h2> A nombre de {{data['fullname']}}</h2>
+        <hr>
+        <div class="pdoc">
+            <span class="label">Check In:</span>
+            <span>{{data['checkin'] | date}}</span>
+        </div>
+        <div class="pdoc">
+            <span class="label">Check Out:</span>
+            <span>{{data['checkout'] | date}}</span>
+        </div>
+        <div class="pdoc">
+            <span class="label">Adultos</span>
+            <span>{{data['adults']}}</span>
+        </div>
+        <div class="pdoc">
+            <span class="label">Niñ@s</span>
+            <span>{{data['children']}}</span>
+        </div>
+        <div class="pdoc">
+            <span class="label">Alojamiento</span>
+            <span>{{data['alojam']}}</span>
+        </div>
+        <hr>
+        <div class="pdoc">
+            <address>
+                <span class="label">Nombre: </span> {{data['fullname']}}<br>
+                <span class="label">Pais/Region: </span>{{data['country']}}<br>
+
+            </address>
+            <address>
+                <span class="label">Email: </span>{{data['email']}}<br>
+                <span class="label">Telefono: </span>{{data['phone']}}<br>
+            </address>
+        </div>
+        <hr>
+        <div>
+            <span>{{data['message']}}
+            </span>
+        </div>
+        <hr>
+        <div class="pdoc">
+            <span class="label">La cuenta</span>
+            <span>{{data['pricetopay'] | currency}}</span>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions style="display: flex; justify-content: flex-end;">
+    <button class="actionbtn" [mat-dialog-close]="'close'" mat-raised-button color="accent">
+        <mat-icon>cancel</mat-icon>
+        Cerrar
+    </button>
+</mat-dialog-actions>

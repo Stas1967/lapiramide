@@ -18,6 +18,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatBadgeModule } from '@angular/material/badge';
 // Material Form
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FootComponent } from './foot/foot.component';
@@ -25,7 +26,7 @@ import { FootComponent } from './foot/foot.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LogDialog } from './login/login.component';
 import { WrongDialog } from './bookinghome/bookinghome.component';
-import { SnackMsg } from './reserva/reserva.component';
+import { LostData, SnackMsg } from './reserva/reserva.component';
 import { BoodocComponent } from './boodoc/boodoc.component';
 
 
@@ -73,7 +74,8 @@ export const refdb = ref;
     LogDialog,
     WrongDialog,
     SnackMsg,
-    BoodocComponent
+    BoodocComponent,
+    LostData
   ],
   imports: [
     BrowserModule,
@@ -88,6 +90,7 @@ export const refdb = ref;
     MatDialogModule,
     MatMenuModule,
     MatProgressSpinnerModule,
+    MatBadgeModule,
     HttpClientModule,
     FootComponent,
   ],

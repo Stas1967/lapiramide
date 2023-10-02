@@ -20,6 +20,7 @@
     },
     "reservas": {
       ".read": "root.child('users').child(auth.uid).child('isAdmin').val() == true",
+      ".write": "root.child('users').child(auth.uid).child('isAdmin').val() == true",
       "$entrada_id": {
         ".read": "auth != null && auth.uid == $entrada_id || root.child('users').child(auth.uid).child('isAdmin').val() == true",
         ".write": "auth != null && auth.uid == $entrada_id"

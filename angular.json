@@ -20,7 +20,8 @@
             "tsConfig": "tsconfig.app.json",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.css"],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": ["html2canvas", "hammerjs"]
           },
           "configurations": {
             "production": {
@@ -51,6 +52,7 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {},
           "configurations": {
             "production": {
               "browserTarget": "lapiramide:build:production"

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { fireAuth, fireDb } from '../app.module';
+import { fireAuth, fireDb, fireRdb, refdb } from '../app.module';
 import { signOut, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
 import { Router } from '@angular/router';
 
@@ -7,12 +7,12 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, from, fromEvent } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { LogDialog } from '../login/login.component';
+import { onValue } from 'firebase/database';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AutentService {
-  db = fireDb;
   auth = fireAuth;
   isaut: boolean | undefined;
   isaut$ = new BehaviorSubject<boolean>(false)

@@ -15,7 +15,10 @@
 }
 
 .cardcoitem {
-    width: calc(900px / 2);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 24px;
 }
 
 mat-card {

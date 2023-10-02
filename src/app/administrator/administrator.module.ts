@@ -14,7 +14,7 @@ import { FootComponent } from '../foot/foot.component';
 import { ImagelistComponent, ImgLink } from './imagelist/imagelist.component';
 import { AddNewRoom, RoomImg } from './apartments/apartments.component';
 
-import { BookinglistComponent } from './bookinglist/bookinglist.component';
+import { BookinglistComponent, ViewRez } from './bookinglist/bookinglist.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { CardimgComponent } from './cardimg/cardimg.component';
 import { MatCardModule } from '@angular/material/card';
@@ -34,6 +34,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { MatRadioModule } from '@angular/material/radio';
     RoomImg,
     NewEvent,
     ImgLink,
-    EditUser
+    EditUser,
+    ViewRez
   ],
   imports: [
     CommonModule,
@@ -75,7 +77,8 @@ import { MatRadioModule } from '@angular/material/radio';
     MatSlideToggleModule,
     MatSnackBarModule,
     MatCheckboxModule,
-    MatRadioModule
+    MatRadioModule,
+    MatTableModule
   ]
 })
 export class AdministratorModule { }

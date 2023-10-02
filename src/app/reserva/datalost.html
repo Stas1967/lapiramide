@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Falta datos</h1>
+<mat-dialog-content>
+    <p>Porfavor selecione una oferta para realizar la reserva ⏪</p>
+</mat-dialog-content>
+<mat-dialog-actions style="display: flex; justify-content: flex-end;">
+    <button mat-raised-button color="accent" [mat-dialog-close]="true" routerLink="/">
+        <mat-icon class="iconbtn">cancel</mat-icon>
+        <span>Cancel</span>
+    </button>
+    <button mat-raised-button color="warn" [mat-dialog-close]="true" routerLink="offer">
+        <mat-icon class="iconbtn">done</mat-icon>
+        <span>Voy a buscar</span>
+    </button>
+</mat-dialog-actions>

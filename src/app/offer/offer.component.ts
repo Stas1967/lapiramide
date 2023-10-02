@@ -75,7 +75,6 @@ export class OfferComponent {
           SetB: encodeURIComponent(rm.breakfast),
           SetH: encodeURIComponent(rm.halfboard),
           SetF: encodeURIComponent(rm.fullboard),
-          C: crypto.randomUUID(),
           BF: encodeURIComponent(rm.isbreakfast),
           HD: encodeURIComponent(rm.ishalfboard),
           FA: encodeURIComponent(rm.isfullboard),

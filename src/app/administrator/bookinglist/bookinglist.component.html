@@ -1,1 +1,60 @@
-<p>bookinglist works!</p>
+<div class="pagetitle">
+    <h1>Reservas nuevas</h1>
+</div>
+
+<table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let i = index"> {{i + 1}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="aloja">
+        <th mat-header-cell *matHeaderCellDef>Alojamiento </th>
+        <td mat-cell *matCellDef="let room"> {{room.alojam }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="checkin">
+        <th mat-header-cell *matHeaderCellDef>Check In </th>
+        <td mat-cell *matCellDef="let room"> {{room.checkin | date }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="checkout">
+        <th mat-header-cell *matHeaderCellDef>Check Out </th>
+        <td mat-cell *matCellDef="let room"> {{room.checkout | date }} </td>
+    </ng-container>
+    <ng-container matColumnDef="adults">
+        <th mat-header-cell *matHeaderCellDef>Adultos </th>
+        <td mat-cell *matCellDef="let room"> {{room.adults }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="child">
+        <th mat-header-cell *matHeaderCellDef>Niñ@s </th>
+        <td mat-cell *matCellDef="let room"> {{room.children }} </td>
+    </ng-container>
+    <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef>Precio </th>
+        <td mat-cell *matCellDef="let room"> {{room.pricetopay | currency: '€' }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef><mat-icon>more_vert</mat-icon> </th>
+        <td mat-cell *matCellDef="let eve">
+            <button mat-icon-button (click)="deleteRez(eve)">
+                <mat-icon style="color: crimson;">delete</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef><mat-icon>more_vert</mat-icon> </th>
+        <td mat-cell *matCellDef="let eve">
+            <button mat-icon-button (click)="viewRez(eve)">
+                <mat-icon style="color: rgb(6, 67, 197);">edit</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

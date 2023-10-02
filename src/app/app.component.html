@@ -33,7 +33,8 @@
             <mat-icon class="iconbtn">login</mat-icon>
             <span *ngIf="!isTabl">SingOut</span>
           </button>
-          <button mat-button class="link" [matMenuTriggerFor]="menu" *ngIf="loggedin">
+          <button mat-button class="link" [matMenuTriggerFor]="menu" *ngIf="loggedin" [matBadge]="rezsize"
+            [matBadgeHidden]="badgehidden" matBadgeSize="medium" matBadgePosition="before">
             <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
               <mat-icon class="iconbtn">admin_panel_settings</mat-icon>
               <span *ngIf="!isTabl">Admin</span>
@@ -86,8 +87,12 @@
       <mat-list-item (isActiveChange)="isActivChang()" [routerLink]="'/administrator'" routerLinkActive="active-item"
         *ngIf="loggedin">
         <div class="link">
-          <mat-icon class="iconbtn" style="color: rgb(24, 24, 24);">admin_panel_settings</mat-icon>
-          <span style="color: rgb(24, 24, 24);">Admin</span>
+          <div>
+            <mat-icon class="iconbtn" style="color: rgb(24, 24, 24);">admin_panel_settings</mat-icon>
+            <span style="color: rgb(24, 24, 24);">Admin</span>
+          </div>
+          <span [matBadge]="rezsize" style="margin-left: 16px;"></span>
+
         </div>
       </mat-list-item>
       <mat-list-item (click)="LogOut()" style="background-color: red;">

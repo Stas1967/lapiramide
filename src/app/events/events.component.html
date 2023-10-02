@@ -5,26 +5,40 @@
     <h1>Los eventos que no puedes perder</h1>
 </div>
 <div class="container">
+    <div class="CardItem">
+
+
+    </div>
     <div class="cardcoevent">
-        <mat-card class="cardcoitem" *ngFor="let eve of eventList | async; let i = index">
-            <div style="position: relative;">
-                <img src="{{eve.image}}" alt="" width="100%">
-                <div class="cardevent">
-                    <mat-card-title>{{eve.eventtitle}}</mat-card-title>
-                </div>
+        <div *ngIf="!isEvent" class="cardcoitem">
+            <mat-icon style="font-size: 48px; color: rgb(87, 87, 87); width: 56px; height: 56px;">nearby_error
+            </mat-icon>
+            <div style="text-align: center; line-height: 1.5;">
+                <p>🎉 Próximamente no hay ningun evento a la vista. 🧬</p>
+                <p>🤗 Pero no te desanimas, visita nos con frecuencia 🍷</p>
             </div>
-            <mat-card-content>
-                <p>{{eve.eventdescrip}}</p>
-                <div *ngIf="eve.repeate">
-                    <p>El siguiente evento tenemos<br>
-                        <b>{{eve.startevent | date: 'dd MMMM'}}</b> y <b>{{eve.endevent | date: 'dd MMMM'}}</b>
-                    </p>
+        </div>
+        <div *ngIf="isEvent" class="cardcoitem">
+            <mat-card style="width: calc(90% / 2);" *ngFor="let eve of eventList | async; let i = index">
+                <div style="position: relative;">
+                    <img src="{{eve.image}}" alt="" width="100%">
+                    <div class="cardevent">
+                        <mat-card-title>{{eve.eventtitle}}</mat-card-title>
+                    </div>
                 </div>
-                <p>Promo: {{eve.isPromo}}</p>
-                <p>Fech fin: {{eve.finpromo}}</p>
-                <p>Repetido: {{eve.repeate}}</p>
-                <p>Cada {{eve.cuantdays}} Dias</p>
-            </mat-card-content>
-        </mat-card>
+                <mat-card-content>
+                    <p>{{eve.eventdescrip}}</p>
+                    <div *ngIf="eve.repeate">
+                        <p>El siguiente evento tenemos<br>
+                            <b>{{eve.startevent | date: 'dd MMMM'}}</b> y <b>{{eve.endevent | date: 'dd MMMM'}}</b>
+                        </p>
+                    </div>
+                    <p>Promo: {{eve.isPromo}}</p>
+                    <p>Fech fin: {{eve.finpromo}}</p>
+                    <p>Repetido: {{eve.repeate}}</p>
+                    <p>Cada {{eve.cuantdays}} Dias</p>
+                </mat-card-content>
+            </mat-card>
+        </div>
     </div>
 </div>

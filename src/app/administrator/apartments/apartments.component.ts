@@ -87,7 +87,7 @@ export class ApartmentsComponent {
         fullboard: room.fullboard,
         isbreakfast: room.isbreakfast,
         ishalfboard: room.ishalfboard,
-        isfullboard: room.isfullboard
+        isfullboard: room.isfullboard,
       }
     })
   }

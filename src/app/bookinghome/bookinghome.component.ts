@@ -130,8 +130,6 @@ export class BookinghomeComponent {
   templateUrl: './wrongdate.html',
 })
 export class WrongDialog {
-
-
   constructor(
     public dialogRef: MatDialogRef<WrongDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,

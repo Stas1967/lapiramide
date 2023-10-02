@@ -17,7 +17,7 @@ import { onValue, set, update } from 'firebase/database';
 import { signInAnonymously } from 'firebase/auth';
 import { AutentService } from '../services/autent.service';
 import { BoodocComponent } from '../boodoc/boodoc.component';
-import html2canvas from 'html2canvas';
+
 
 @Component({
   selector: 'app-reserva',
@@ -85,7 +85,11 @@ export class ReservaComponent {
       this.Price = Number(pa['SetP'])
     })
     this.countdays = this.bhvsrv.getDate().countdays;
+    if (Number.isNaN(this.Adults) && Number.isNaN(this.Child)) {
+      this.dialog.open(LostData)
+    }
   }
+
   countDays(event: number) {
     this.countdays = event;
   }
@@ -107,18 +111,22 @@ export class ReservaComponent {
         signInAnonymously(this.auth).then((res) => {
           if (res) {
             localStorage.setItem('key', res.user.uid)
+            this.bhvsrv.passSpin(true);
             set(refdb(this.rdb, 'reservas/' + res.user.uid), this.FormData(true)).then((res) => {
               this.dialog.open(BoodocComponent, { disableClose: true, })
             }).then(() => {
               this.reform.reset();
-              this.router.navigateByUrl('events')
+              this.router.navigateByUrl('events');
+              this.bhvsrv.passSpin(false);
             }).catch((err) => {
               console.log(err);
             })
+            this.bhvsrv.passSpin(false);
           }
         }).catch((err) => {
           console.log(err);
         })
+        this.bhvsrv.passSpin(false);
       }
     } else if (checkkey != null) {
       const msnak = this.snack.openFromComponent(SnackMsg, { verticalPosition: 'top', horizontalPosition: 'right' });
@@ -158,8 +166,10 @@ export class ReservaComponent {
   editInServer(): void {
     const checkkey = localStorage.getItem('key');
     if (this.reform.valid) {
+      this.bhvsrv.passSpin(true);
       update(refdb(this.rdb, 'reservas/' + checkkey), this.FormData(false)).then((rs) => {
-        this.dialog.open(BoodocComponent, { disableClose: true, })
+        this.dialog.open(BoodocComponent, { disableClose: true, });
+
       }).catch((err) => {
         console.log(err);
       }).then(() => {
@@ -224,5 +234,10 @@ export class ReservaComponent {
 export class SnackMsg {
   snackBarRef = inject(MatSnackBarRef);
 }
+@Component({
+  selector: 'app-datalost',
+  templateUrl: './datalost.html',
+})
+export class LostData { }
 
 

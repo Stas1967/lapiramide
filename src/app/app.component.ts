@@ -4,8 +4,10 @@ import { BehavService } from './services/behav.service';
 import { NavigationEnd, NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { trigger, state, transition, animate, style } from '@angular/animations';
 import { AutentService } from './services/autent.service';
-import { fireAuth } from './app.module';
+import { fireAuth, fireRdb, refdb } from './app.module';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { onValue } from 'firebase/database';
+import { Employers } from './administrator/users/users.component';
 export interface myRoute {
   icon: string;
   name: string;
@@ -33,6 +35,7 @@ const style2 = style({
   ]
 })
 export class AppComponent {
+  rdb = fireRdb;
   title = 'Apartamentos La Piramide';
   isSmall: boolean;
   isTabl: boolean;
@@ -44,6 +47,9 @@ export class AppComponent {
   jest = false;
   displName = '';
   isAnonimo = false;
+  isAdmin = false;
+  rezsize = 0;
+  badgehidden = true;
   @ViewChild('sidenav', { static: false }) public sidenav: MatSidenav | undefined;
   @ViewChild('sidecont', { static: false }) public sidecont: MatSidenavContent | undefined;
   links: myRoute[] = [
@@ -88,8 +94,22 @@ export class AppComponent {
     return signOut(this.auth);
   }
   ngOnInit() {
+
     onAuthStateChanged(this.auth, (user) => {
-      console.log(user?.uid);
+      onValue(refdb(this.rdb, 'users/' + user?.uid), (urx) => {
+        const dane = urx.val() as Employers
+        if (dane.isAdmin == true) {
+          onValue(refdb(this.rdb, 'reservas'), (rex) => {
+            if (rex.exists()) {
+              this.badgehidden = false;
+              this.rezsize = rex.size;
+            } else {
+              this.badgehidden = true;
+              this.rezsize = 0;
+            }
+          })
+        }
+      })
       if (user?.isAnonymous == true) {
         this.loggedin = false;
         this.isAnonimo = true;
