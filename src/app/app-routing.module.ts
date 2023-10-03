@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'login', title: 'Apartamentos La Pirámide - Login', loadComponent: () => import('./login/login.component').then(c => c.LoginComponent) },
   { path: 'register', title: 'Aparatamentos La Pirámide - Registro', loadComponent: () => import('./register/register.component').then(c => c.RegisterComponent) },
   { path: 'administrator', title: 'Apartamentos La Pirámide- Admin', loadChildren: () => import('./administrator/administrator.module').then(m => m.AdministratorModule), canActivate: [AuthGuard] },
-  { path: '**', loadComponent: () => import('./home/home.component').then(c => c.HomeComponent) },
+  { path: '**', loadComponent: () => import('./pagenotfound/pagenotfound.component').then(c => c.PagenotfoundComponent) },
 ];
 
 @NgModule({

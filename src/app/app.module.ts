@@ -34,13 +34,10 @@ import { BoodocComponent } from './boodoc/boodoc.component';
 const firebaseConfig = {
   //apiKey: "",
   apiKey: "AIzaSyBVWxsXq5YLJlhUReBqdO8Q4t74b77cZl8",
-  //authDomain: 'localhost',
-  //databaseURL: 'http://localhost:9000/',
   authDomain: "lapiramide-544e8.firebaseapp.com",
   databaseURL: "https://lapiramide-544e8-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "lapiramide-544e8",
   storageBucket: "lapiramide-544e8.appspot.com",
-  //storageBucket: "http://localhost:9199/",
   messagingSenderId: "973582638272",
   appId: "1:973582638272:web:9ae7ce129147d4acaba125",
   measurementId: "G-90ZQQ1GC83"
@@ -55,18 +52,6 @@ export const fireRdb = getDatabase(app);
 export const fireAuth = getAuth(app);
 export const fireStorage = getStorage(app);
 export const refdb = ref;
-
-// if (location.hostname === 'localhost') {
-//   connectFirestoreEmulator(fireDb, 'localhost', 8080);
-//   connectDatabaseEmulator(fireRdb, 'localhost', 9000);
-//   connectAuthEmulator(fireAuth, 'http://localhost:9099');
-//   connectStorageEmulator(fireStorage, 'localhost', 9199);
-// }
-
-// if (location.hostname === 'localhost') {
-//   firebaseConfig.authDomain = 'localhost'
-//   firebaseConfig.databaseURL = 'http://localhost:9000/';
-// }
 
 @NgModule({
   declarations: [

@@ -50,6 +50,8 @@ export class AppComponent {
   isAdmin = false;
   rezsize = 0;
   badgehidden = true;
+  isBlocked = true;
+
   @ViewChild('sidenav', { static: false }) public sidenav: MatSidenav | undefined;
   @ViewChild('sidecont', { static: false }) public sidecont: MatSidenavContent | undefined;
   links: myRoute[] = [
@@ -94,7 +96,12 @@ export class AppComponent {
     return signOut(this.auth);
   }
   ngOnInit() {
-
+    // let startDate = new Date();
+    // let endDate = new Date(2023, 9, 9);
+    // if (startDate > endDate) {
+    //   this.router.navigateByUrl('pagenotfound');
+    //   this.isBlocked = false;
+    // };
     onAuthStateChanged(this.auth, (user) => {
       onValue(refdb(this.rdb, 'users/' + user?.uid), (urx) => {
         const dane = urx.val() as Employers

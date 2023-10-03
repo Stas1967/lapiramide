@@ -9,57 +9,59 @@
         <div *ngIf="isSmall" [ngClass]="{'titlexl' : !isSmall, 'titlesm' : isSmall}">{{title}}
         </div>
       </div>
-      <div *ngIf="!isSmall" class="menubtn">
-        <span *ngFor="let link of links; let i = index">
-          <button mat-button class="link" [routerLink]="link.url">
-            <mat-icon class="iconbtn">{{link.icon}}</mat-icon>
-            <span *ngIf="!isTabl">{{link.name}}</span>
-          </button>
-        </span>
-        <span>
-          <span *ngIf="!loggedin">
-            <button mat-button class="link" [routerLink]="'/login'" *ngIf="!isAnonimo">
-              <mat-icon class="iconbtn">login</mat-icon>
-              <span *ngIf="!isTabl">Login</span>
+      <span *ngIf="isBlocked">
+        <div *ngIf="!isSmall" class="menubtn">
+          <span *ngFor="let link of links; let i = index">
+            <button mat-button class="link" [routerLink]="link.url">
+              <mat-icon class="iconbtn">{{link.icon}}</mat-icon>
+              <span *ngIf="!isTabl">{{link.name}}</span>
             </button>
           </span>
-          <span *ngIf="loggedin">
+          <span>
+            <span *ngIf="!loggedin">
+              <button mat-button class="link" [routerLink]="'/login'" *ngIf="!isAnonimo">
+                <mat-icon class="iconbtn">login</mat-icon>
+                <span *ngIf="!isTabl">Login</span>
+              </button>
+            </span>
+            <span *ngIf="loggedin">
+              <button mat-button class="link" (click)="LogOut()" *ngIf="isAnonimo">
+                <mat-icon class="iconbtn">login</mat-icon>
+                <span *ngIf="!isTabl">SingOut</span>
+              </button>
+            </span>
             <button mat-button class="link" (click)="LogOut()" *ngIf="isAnonimo">
               <mat-icon class="iconbtn">login</mat-icon>
               <span *ngIf="!isTabl">SingOut</span>
             </button>
+            <button mat-button class="link" [matMenuTriggerFor]="menu" *ngIf="loggedin" [matBadge]="rezsize"
+              [matBadgeHidden]="badgehidden" matBadgeSize="medium" matBadgePosition="before">
+              <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+                <mat-icon class="iconbtn">admin_panel_settings</mat-icon>
+                <span *ngIf="!isTabl">Admin</span>
+                <mat-icon>more_vert</mat-icon>
+              </div>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item [routerLink]="'/administrator'">
+                <mat-icon class="iconbtn">admin_panel_settings</mat-icon>
+                <span>Admininistrator</span>
+              </button>
+              <button mat-menu-item [routerLink]="'/administrator/bookinglist'">
+                <mat-icon class="iconbtn">list</mat-icon>
+                <span>Lista de reservas</span>
+              </button>
+              <button mat-menu-item style="background-color: red; color: white;" (click)="LogOut()">
+                <mat-icon>logout</mat-icon>
+                <span>Sign Out</span>
+              </button>
+            </mat-menu>
           </span>
-          <button mat-button class="link" (click)="LogOut()" *ngIf="isAnonimo">
-            <mat-icon class="iconbtn">login</mat-icon>
-            <span *ngIf="!isTabl">SingOut</span>
-          </button>
-          <button mat-button class="link" [matMenuTriggerFor]="menu" *ngIf="loggedin" [matBadge]="rezsize"
-            [matBadgeHidden]="badgehidden" matBadgeSize="medium" matBadgePosition="before">
-            <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
-              <mat-icon class="iconbtn">admin_panel_settings</mat-icon>
-              <span *ngIf="!isTabl">Admin</span>
-              <mat-icon>more_vert</mat-icon>
-            </div>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item [routerLink]="'/administrator'">
-              <mat-icon class="iconbtn">admin_panel_settings</mat-icon>
-              <span>Admininistrator</span>
-            </button>
-            <button mat-menu-item [routerLink]="'/administrator/bookinglist'">
-              <mat-icon class="iconbtn">list</mat-icon>
-              <span>Lista de reservas</span>
-            </button>
-            <button mat-menu-item style="background-color: red; color: white;" (click)="LogOut()">
-              <mat-icon>logout</mat-icon>
-              <span>Sign Out</span>
-            </button>
-          </mat-menu>
-        </span>
-      </div>
-      <button *ngIf="isSmall" mat-icon-button (click)="sidenav.toggle()">
-        <mat-icon>menu</mat-icon>
-      </button>
+        </div>
+        <button *ngIf="isSmall" mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </span>
     </div>
   </mat-toolbar>
 </div>
@@ -69,7 +71,7 @@
     <mat-toolbar class="sidenavtoolbar">
       <span>Menu</span>
     </mat-toolbar>
-    <mat-nav-list>
+    <mat-nav-list *ngIf="isBlocked">
       <mat-list-item *ngFor="let link of linkssm; let ia = index" (isActiveChange)="isActivChang()"
         [routerLink]="link.url" routerLinkActive="active-item">
         <div class="link">
