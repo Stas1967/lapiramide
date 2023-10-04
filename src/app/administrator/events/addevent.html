@@ -1,7 +1,6 @@
 <div mat-dialog-title>
     <div>
-        <mat-slide-toggle #titleslid style="margin-right: 32px;" [checked]="isPromo"
-            (change)="promoChange($event)"></mat-slide-toggle>
+        <mat-slide-toggle #titleslid style="margin-right: 32px;" [checked]="isPromo" (change)="promoChange($event)"></mat-slide-toggle>
         {{titleslid.checked == false ? 'Añadir evento' : 'Crea una promoción'}}
     </div>
 </div>
@@ -33,16 +32,14 @@
         <div class="formfield">
             <mat-form-field style="width: 100%; flex-grow: 2;" appearance="outline">
                 <mat-label>Fecha de inicio</mat-label>
-                <input matInput [matDatepicker]="pickerA" formControlName="startevent" [min]="today"
-                    (dateChange)="startdatechange($event)">
+                <input matInput [matDatepicker]="pickerA" formControlName="startevent" [min]="today" (dateChange)="startdatechange($event)">
                 <mat-hint>MM/DD/YYYY</mat-hint>
                 <mat-datepicker-toggle matIconSuffix [for]="pickerA"></mat-datepicker-toggle>
                 <mat-datepicker #pickerA></mat-datepicker>
             </mat-form-field>
             <mat-form-field style="width: 100%; flex-grow: 2;" appearance="outline">
                 <mat-label>Fecha del fin</mat-label>
-                <input matInput [matDatepicker]="pickerS" formControlName="endevent" [min]="today"
-                    (dateChange)="enddatechange($event)">
+                <input matInput [matDatepicker]="pickerS" formControlName="endevent" [min]="today" (dateChange)="enddatechange($event)">
                 <mat-hint>MM/DD/YYYY</mat-hint>
                 <mat-datepicker-toggle matIconSuffix [for]="pickerS"></mat-datepicker-toggle>
                 <mat-datepicker #pickerS></mat-datepicker>
@@ -69,7 +66,7 @@
             </div>
             <mat-form-field style="width: 100%;" appearance="outline">
                 <mat-label>Cada cuanto dias</mat-label>
-                <input matInput value="" formControlName="cuantdays">
+                <input matInput value="" type="number" formControlName="cuantdays">
             </mat-form-field>
         </div>
     </form>

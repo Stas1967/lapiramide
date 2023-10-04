@@ -18,7 +18,16 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+
     gap: 24px;
+}
+
+.citem {
+    width: 320px;
+}
+
+.carddescrip {
+    text-align: center;
 }
 
 mat-card {

@@ -32,7 +32,7 @@ export class EventsComponent {
   rdb = fireRdb;
   dataSource!: MatTableDataSource<any>;
   displayedColumns: string[] = ['position', 'img', 'evento', 'startevent', 'endevent', 'promo', 'repeate', 'delete', 'edit'];
-  dateA: Date | undefined;
+
   sevenday: Date | undefined;
   constructor(public dialog: MatDialog) { }
   openDialog(): void {
@@ -74,11 +74,6 @@ export class EventsComponent {
   }
   ngOnInit(): void {
     this.getEvents();
-    this.dateA = new Date(new Date().setDate(new Date().getDate()));
-    const dateanum = this.dateA.getTime();
-    if (dateanum <= Date.now()) {
-      this.dateA = new Date(new Date().setDate(new Date().getDate() + 7));
-    }
   }
 }
 

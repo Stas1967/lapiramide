@@ -6,7 +6,7 @@ const routes: Routes = [
 
   { path: '', title: 'Aparatamentos La Pirámide - Home', loadComponent: () => import('./home/home.component').then(c => c.HomeComponent) },
   { path: 'about', title: 'Apartamentos La Pirámide - About', loadComponent: () => import('./about/about.component').then(c => c.AboutComponent) },
-  { path: 'events', title: 'Apartamentos La Pirámide - Eventos', loadComponent: () => import('./events/events.component').then(c => c.EventsComponent) },
+  { path: 'events', title: 'Apartamentos La Pirámide - Eventos', loadComponent: () => import('./eventos/eventos.component').then(c => c.EventosComponent) },
   { path: 'offer', title: 'Apartamentos La Pirámide - Oferta', loadComponent: () => import('./offer/offer.component').then(c => c.OfferComponent) },
   { path: 'reserva', title: 'Apartamentos La Pirámide - Reseravs', loadComponent: () => import('./reserva/reserva.component').then(c => c.ReservaComponent) },
   { path: 'login', title: 'Apartamentos La Pirámide - Login', loadComponent: () => import('./login/login.component').then(c => c.LoginComponent) },

@@ -19,7 +19,7 @@
             </div>
         </div>
         <div *ngIf="isEvent" class="cardcoitem">
-            <mat-card style="width: calc(90% / 2);" *ngFor="let eve of eventList | async; let i = index">
+            <mat-card class="citem" *ngFor="let eve of eventList | async; let i = index">
                 <div style="position: relative;">
                     <img src="{{eve.image}}" alt="" width="100%">
                     <div class="cardevent">
@@ -27,16 +27,12 @@
                     </div>
                 </div>
                 <mat-card-content>
-                    <p>{{eve.eventdescrip}}</p>
-                    <div *ngIf="eve.repeate">
-                        <p>El siguiente evento tenemos<br>
-                            <b>{{eve.startevent | date: 'dd MMMM'}}</b> y <b>{{eve.endevent | date: 'dd MMMM'}}</b>
+                    <p [innerHTML]="eve.eventdescrip"></p>
+                    <div *ngIf="eve.repeate" class="carddescrip">
+                        <p>El próximo evento tenemos<br>
+                            <b>{{returnDateF(eve.startevent, eve.cuantdays) | date: "d 'de' MMMM":"es"}}</b> y <b>{{returnDateL(eve.endevent, eve.cuantdays) | date:"d 'de' MMMM":"es"}}</b>
                         </p>
                     </div>
-                    <p>Promo: {{eve.isPromo}}</p>
-                    <p>Fech fin: {{eve.finpromo}}</p>
-                    <p>Repetido: {{eve.repeate}}</p>
-                    <p>Cada {{eve.cuantdays}} Dias</p>
                 </mat-card-content>
             </mat-card>
         </div>

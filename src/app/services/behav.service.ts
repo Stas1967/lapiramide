@@ -91,22 +91,6 @@ export class BehavService {
     return this.appside
   }
 
-  async getBlogDoc(pti: string) {
-    const buip = doc(this.db, 'blog', pti);
-    try {
-      const docache = await getDocFromCache(buip);
-      if (docache.exists()) {
-        return docache
-      } else {
-        const doserv = await getDocFromServer(buip)
-        return doserv
-      }
-    } catch (error) {
-      const doc = await getDocFromServer(buip)
-      return doc
-    }
-  }
-
   getDate() {
     const dateA = parseInt(localStorage.getItem('startdate') || '')
     const dateB = parseInt(localStorage.getItem('enddate') || '')

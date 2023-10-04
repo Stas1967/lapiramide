@@ -12,16 +12,16 @@ import { MatIconModule } from '@angular/material/icon';
   selector: 'app-events',
   standalone: true,
   imports: [CommonModule, MatCardModule, MatIconModule],
-  templateUrl: './events.component.html',
-  styleUrls: ['./events.component.css']
+  templateUrl: './eventos.component.html',
+  styleUrls: ['./eventos.component.css']
 })
-export class EventsComponent {
+export class EventosComponent {
   rdb = fireRdb;
   dataSource!: MatTableDataSource<any>;
   eventList: BehaviorSubject<MyEvent[]> | undefined;
-
   ulist: any[] = [];
   isEvent = true;
+  dateA: Date | undefined;
   getEvents = async () => {
     let templist: MyEvent[] = [];
     onValue(refdb(this.rdb, 'eventos'), (snap) => {
@@ -31,17 +31,42 @@ export class EventsComponent {
         snap.forEach((urx) => {
           const data = urx.val() as MyEvent
           templist.push(data);
-        })
+        },)
         this.dataSource = new MatTableDataSource(templist);
         this.eventList = this.dataSource.connect();
       } else {
         this.isEvent = false
       }
-
-    })
+    }, { onlyOnce: true })
   }
 
   ngOnInit(): void {
     this.getEvents();
+    this.dateA = new Date(new Date().setDate(new Date().getDate()));
+    const dateanum = this.dateA.getTime();
+    if (dateanum <= Date.now()) {
+      this.dateA = new Date(new Date().setDate(new Date().getDate() + 7));
+    }
+  }
+  returnDate(): Date {
+    this.dateA = new Date();
+    this.dateA = new Date(new Date().setDate(new Date().getDate() + 7));
+    return this.dateA;
+  }
+  returnDateF(fd: number, days: number): Date {
+    let firstDate = new Date(fd);
+    const dateF = firstDate.getTime();
+    if (dateF <= Date.now()) {
+      firstDate.setDate(firstDate.getDate() + days)
+    }
+    return firstDate;
+  }
+  returnDateL(ld: number, days: number): Date {
+    let lastDate = new Date(ld);
+    const dateL = lastDate.getTime();
+    if (dateL <= Date.now()) {
+      lastDate.setDate(lastDate.getDate() + days)
+    }
+    return lastDate;
   }
 }

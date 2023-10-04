@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { CACHE_SIZE_UNLIMITED, getFirestore, initializeFirestore, memoryLocalCache } from 'firebase/firestore';
+import { getFirestore, initializeFirestore, persistentLocalCache, persistentSingleTabManager } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { getDatabase, ref } from 'firebase/database';
 import { getStorage } from 'firebase/storage';
@@ -28,6 +28,9 @@ import { LogDialog } from './login/login.component';
 import { WrongDialog } from './bookinghome/bookinghome.component';
 import { LostData, SnackMsg } from './reserva/reserva.component';
 import { BoodocComponent } from './boodoc/boodoc.component';
+import '@angular/common/locales/global/es';
+import '@angular/common/locales/es';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 
 
@@ -46,7 +49,8 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-initializeFirestore(app, { cacheSizeBytes: CACHE_SIZE_UNLIMITED })
+initializeFirestore(app, { localCache: persistentLocalCache({ tabManager: persistentSingleTabManager({}) }) })
+
 export const fireDb = getFirestore(app);
 export const fireRdb = getDatabase(app);
 export const fireAuth = getAuth(app);
@@ -79,7 +83,10 @@ export const refdb = ref;
     HttpClientModule,
     FootComponent,
   ],
-  providers: [],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'es-ES' },
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

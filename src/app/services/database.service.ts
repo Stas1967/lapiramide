@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { fireRdb } from '../app.module';
+import { fireRdb, refdb } from '../app.module';
 import { onValue, ref } from 'firebase/database';
+import { MyEvent } from '../classes/EventsClass';
 export class ListaImg {
   id: string;
   mini: string;
@@ -33,4 +34,22 @@ export class DatabaseService {
     }, { onlyOnce: true });
     return imglist;
   }
+
+  getEvents = async () => {
+    let templist: MyEvent[] = [];
+    onValue(refdb(this.realdb, 'eventos'), (snap) => {
+      templist = [];
+      if (snap.exists()) {
+        snap.forEach((urx) => {
+          const data = urx.val() as MyEvent
+          templist.push(data);
+        },)
+
+      } else {
+
+      }
+    }, { onlyOnce: true })
+  }
+
 }
+
