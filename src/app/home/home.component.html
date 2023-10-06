@@ -1,11 +1,19 @@
 <div class="jumbo">
 
     <img src="../../assets/images/piscina.jpg" alt="Apartamentos La Piramide" width="100%">
-    <!-- <div style="position: absolute; right: 20px; bottom: 30px; color: antiquewhite;">Tu bedzie event</div> -->
+    <div *ngIf="!isSmall" class="event" cdkDrag cdkDragBoundary=".jumbo">
+        <svg class="drag" width="24px" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
+            <path d="M0 0h24v24H0z" fill="none"></path>
+        </svg>
+        <div class="halfcir" routerLink="events">
+            <span>🧬 No te pierdas 🎉<br> nuestros eventos</span>
+        </div>
+    </div>
     <div *ngIf="!isSmall" class="slogan">
         <div class="cardcontainer">
             <h1>La Pirámide</h1>
-            <p>Selecione las fechas y descubre lo que hemos preparado para Ti</p>
+            <p>Seleccione las fechas y descubre lo que hemos preparado para Ti</p>
         </div>
         <app-bookinghome [btnVisible]="true"></app-bookinghome>
     </div>
@@ -28,7 +36,8 @@
                 <b>“La Pirámide”</b> y es genial tiene todo lo que puedes
                 desear
             </p>
-            <p>Unos apartamentos amplios y muy bonitos con vistas a la
+            <p><img src="https://firebasestorage.googleapis.com/v0/b/aparthotellapiramide.appspot.com/o/lapiramide%2Fmini%2Fd6827f86-b9ba-4e0f-a885-282d2469d7f4.jpeg?alt=media&token=f31bca89-b660-46cd-af8b-eac28ad2c480"
+                    alt=" Apartamentos La Piramide" class="imgontxtleft">Unos apartamentos amplios y muy bonitos con vistas a la
                 piscina y al jardín, con wifi gratis, televisión y una cocina
                 equipada para para reponer fuerzas.</p>
             <p>El complejo alberga un bar piscina que ofrece
@@ -49,12 +58,12 @@
         <div class="carditem">
             <h1>Descripción de los Apartamentos</h1>
             <hr>
-            <p><img src="https://firebasestorage.googleapis.com/v0/b/lapiramide-544e8.appspot.com/o/lapiramide%2Fmini%2Fc5571606-c40b-4974-a4c8-10d83301b809.jpeg?alt=media&token=74bbf404-8fe1-402b-a161-06059ac4fafe"
+            <p><img src="https://firebasestorage.googleapis.com/v0/b/aparthotellapiramide.appspot.com/o/lapiramide%2Fmini%2Ffc704d57-a372-431e-baec-bb34f725d522.jpeg?alt=media&token=de28c163-05b8-4124-9d7f-0238dcc9e70c"
                     alt=" Apartamentos La Piramide" class="imgontxtright">Todos los apartamentos cuentan con un balcón o
                 terraza
                 con vistas a la piscina. Incluyen una sala de estar con
                 sofá cama y TV de pantalla plana.</p>
-            <p><img src="https://firebasestorage.googleapis.com/v0/b/lapiramide-544e8.appspot.com/o/lapiramide%2Fmini%2Fb2d17705-40df-480e-a40a-684118716bb2.jpeg?alt=media&token=b020ed56-56df-4cc8-9781-4e4a699ce19e"
+            <p><img src="https://firebasestorage.googleapis.com/v0/b/aparthotellapiramide.appspot.com/o/lapiramide%2Fmini%2Fcb474c4f-59f4-4034-b39f-41fdbfa4722c.jpeg?alt=media&token=463d0f77-4aad-49b7-b4b8-43475ad20741"
                     alt=" Apartamentos La Piramide" class="imgontxtleft">Hay caja fuerte disponible por un suplemento,
                 además de un baño
                 privado. La zona de cocina está equipada con nevera,

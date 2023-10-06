@@ -32,19 +32,28 @@ import '@angular/common/locales/global/es';
 import '@angular/common/locales/es';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 
-
-
 const firebaseConfig = {
-  //apiKey: "",
-  apiKey: "AIzaSyBVWxsXq5YLJlhUReBqdO8Q4t74b77cZl8",
-  authDomain: "lapiramide-544e8.firebaseapp.com",
-  databaseURL: "https://lapiramide-544e8-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "lapiramide-544e8",
-  storageBucket: "lapiramide-544e8.appspot.com",
-  messagingSenderId: "973582638272",
-  appId: "1:973582638272:web:9ae7ce129147d4acaba125",
-  measurementId: "G-90ZQQ1GC83"
+  apiKey: "AIzaSyAsuvgLiqYqpGnG0-msCc7c9kdOIDkpMXg",
+  authDomain: "aparthotellapiramide.firebaseapp.com",
+  databaseURL: "https://aparthotellapiramide-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "aparthotellapiramide",
+  storageBucket: "aparthotellapiramide.appspot.com",
+  messagingSenderId: "898011423719",
+  appId: "1:898011423719:web:4b0b980da2aabda56d1342",
+  measurementId: "G-JEMSNSLHY7"
 };
+
+// const firebaseConfig = {
+//   //apiKey: "",
+//   apiKey: "AIzaSyBVWxsXq5YLJlhUReBqdO8Q4t74b77cZl8",
+//   authDomain: "lapiramide-544e8.firebaseapp.com",
+//   databaseURL: "https://lapiramide-544e8-default-rtdb.europe-west1.firebasedatabase.app",
+//   projectId: "lapiramide-544e8",
+//   storageBucket: "lapiramide-544e8.appspot.com",
+//   messagingSenderId: "973582638272",
+//   appId: "1:973582638272:web:9ae7ce129147d4acaba125",
+//   measurementId: "G-90ZQQ1GC83"
+// };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

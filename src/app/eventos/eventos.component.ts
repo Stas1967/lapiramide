@@ -42,11 +42,6 @@ export class EventosComponent {
 
   ngOnInit(): void {
     this.getEvents();
-    this.dateA = new Date(new Date().setDate(new Date().getDate()));
-    const dateanum = this.dateA.getTime();
-    if (dateanum <= Date.now()) {
-      this.dateA = new Date(new Date().setDate(new Date().getDate() + 7));
-    }
   }
   returnDate(): Date {
     this.dateA = new Date();
@@ -57,7 +52,7 @@ export class EventosComponent {
     let firstDate = new Date(fd);
     const dateF = firstDate.getTime();
     if (dateF <= Date.now()) {
-      firstDate.setDate(firstDate.getDate() + days)
+      firstDate.setDate(firstDate.getDate() + days);
     }
     return firstDate;
   }
@@ -65,7 +60,7 @@ export class EventosComponent {
     let lastDate = new Date(ld);
     const dateL = lastDate.getTime();
     if (dateL <= Date.now()) {
-      lastDate.setDate(lastDate.getDate() + days)
+      lastDate.setDate(lastDate.getDate() + days);
     }
     return lastDate;
   }

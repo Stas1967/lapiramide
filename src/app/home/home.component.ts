@@ -2,11 +2,14 @@ import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BehavService } from '../services/behav.service';
 import { BookinghomeComponent } from '../bookinghome/bookinghome.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatIconModule } from '@angular/material/icon';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, BookinghomeComponent],
+  imports: [CommonModule, BookinghomeComponent, DragDropModule, MatIconModule, RouterModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

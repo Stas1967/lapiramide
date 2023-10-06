@@ -24,9 +24,9 @@ export class AuthGuard {
   }
 
   getUIdTomasz(): boolean {
-    return sessionStorage.getItem('uid') === 'AYmtEeRlkYZrAcEodHQRguNSu5U2'
+    return sessionStorage.getItem('uid') === 'e4sebbsmWoRvpsiGtarEAIKpptA3'
   }
   getUIdRaul(): boolean {
-    return sessionStorage.getItem('uid') === 'CJeSDU1eLcS9PUMQZlArjEVIKVJ2'
+    return sessionStorage.getItem('uid') === 'BhnhoDJMP8PG6tawS8QhbPDGURA3'
   }
 }

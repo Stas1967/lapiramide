@@ -94,7 +94,7 @@ export class OfferComponent {
   ngOnInit(): void {
     this.getRoomsAsync();
     onAuthStateChanged(this.auth, (user) => {
-      if (user?.uid == 'CJeSDU1eLcS9PUMQZlArjEVIKVJ2' || user?.uid == 'AYmtEeRlkYZrAcEodHQRguNSu5U2') {
+      if (user?.uid == 'BhnhoDJMP8PG6tawS8QhbPDGURA3' || user?.uid == 'e4sebbsmWoRvpsiGtarEAIKpptA3') {
         this.isAdmin = true;
       } else {
         this.isAdmin = false;

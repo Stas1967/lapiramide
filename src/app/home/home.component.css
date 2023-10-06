@@ -18,7 +18,53 @@
     gap: 24px;
     justify-content: space-around;
     box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.6);
+}
 
+.event {
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/aparthotellapiramide.appspot.com/o/lapiramide%2Fmini%2Ff9fce674-f60d-4949-91af-ce80f8e98ec4.jpeg?alt=media&token=44aeb78d-f041-4ac4-9238-29fab8bc4f88");
+    width: 284px;
+    height: 284px;
+    background-color: bisque;
+    position: absolute;
+    right: 20px;
+    bottom: 30px;
+    color: rgb(26, 26, 26);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    border-radius: 50%;
+    box-shadow: 6px 6px 18px rgba(0, 0, 0, 0.4) inset;
+    cursor: grab;
+
+}
+
+.halfcir {
+    background-color: hsla(0, 0%, 0%, 0.6);
+    color: whitesmoke;
+    height: 142px;
+    width: 284px;
+    border-radius: 0 0 284px 284px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.halfcir span {
+    font-size: 24px;
+    width: 280px;
+    text-align: center;
+    line-height: 1.2;
+    font-weight: 200;
+    margin-bottom: 20px;
+
+}
+
+.drag {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: aliceblue;
 }
 
 
@@ -113,7 +159,6 @@ a:hover {
         font-size: 24px;
         line-height: 1.2;
     }
-
 }
 
 @media all and (min-width: 320px) and (max-width: 599.98px) {}
