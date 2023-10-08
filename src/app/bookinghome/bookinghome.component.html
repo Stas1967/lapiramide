@@ -1,11 +1,11 @@
 <div class="book">
     <!-- <span class="dayscount" *ngIf="getSelectedDays() > 0">Días seleccionados: {{getSelectedDays()}}</span> -->
+
     <mat-form-field style="color: rgb(48, 21, 0);" [appearance]="aperance">
-        <mat-label for="start">Intervalo de fechas</mat-label>
-        <mat-date-range-input [formGroup]="range" [rangePicker]="picker" [min]="today">
+        <mat-label aria-label="Intervalo de fechas" for="starto">Intervalo de fechas</mat-label>
+        <mat-date-range-input id="starto" [formGroup]="range" [rangePicker]="picker" [min]="today">
             <input id="start" name="start" matStartDate formControlName="start" placeholder="Start date">
-            <input id="end" name="end" matEndDate formControlName="end" placeholder="End date"
-                (dateChange)="getSelectedDays()">
+            <input id="end" name="end" matEndDate formControlName="end" placeholder="End date" (dateChange)="getSelectedDays()">
         </mat-date-range-input>
         <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>

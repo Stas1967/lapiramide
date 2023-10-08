@@ -108,10 +108,11 @@ export class ReservaComponent {
     const getmail = localStorage.getItem('email');
     if (this.reform.valid) {
       if (checkkey == null) {
+        this.bhvsrv.passSpin(true);
         signInAnonymously(this.auth).then((res) => {
           if (res) {
             localStorage.setItem('key', res.user.uid)
-            this.bhvsrv.passSpin(true);
+
             set(refdb(this.rdb, 'reservas/' + res.user.uid), this.FormData(true)).then((res) => {
               this.dialog.open(BoodocComponent, { disableClose: true, })
             }).then(() => {
@@ -134,7 +135,6 @@ export class ReservaComponent {
         onValue(refdb(this.rdb, 'reservas/' + checkkey), (snap) => {
           if (snap.exists()) {
             const dane = snap.val();
-            console.log(dane);
             this.reform.setValue({
               fullname: dane.fullname,
               email: dane.email,

@@ -6,6 +6,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 
+
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -22,6 +23,7 @@ export class HomeComponent {
     this.isSmall = bhvsrv.isMobilFu();
     this.datestart = this.bhvsrv.getDate().start;
     this.dateend = this.bhvsrv.getDate().end;
+
   }
 
   @HostListener('window:resize', ['$event'])

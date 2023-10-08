@@ -35,7 +35,6 @@ export class BookinglistComponent {
         this.dataSource = new MatTableDataSource(templist);
       } else {
         console.log('no hay datos');
-
       }
     })
   }

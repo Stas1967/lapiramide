@@ -31,6 +31,7 @@ import { BoodocComponent } from './boodoc/boodoc.component';
 import '@angular/common/locales/global/es';
 import '@angular/common/locales/es';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { getPerformance } from "firebase/performance";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAsuvgLiqYqpGnG0-msCc7c9kdOIDkpMXg",
@@ -43,27 +44,18 @@ const firebaseConfig = {
   measurementId: "G-JEMSNSLHY7"
 };
 
-// const firebaseConfig = {
-//   //apiKey: "",
-//   apiKey: "AIzaSyBVWxsXq5YLJlhUReBqdO8Q4t74b77cZl8",
-//   authDomain: "lapiramide-544e8.firebaseapp.com",
-//   databaseURL: "https://lapiramide-544e8-default-rtdb.europe-west1.firebasedatabase.app",
-//   projectId: "lapiramide-544e8",
-//   storageBucket: "lapiramide-544e8.appspot.com",
-//   messagingSenderId: "973582638272",
-//   appId: "1:973582638272:web:9ae7ce129147d4acaba125",
-//   measurementId: "G-90ZQQ1GC83"
-// };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 initializeFirestore(app, { localCache: persistentLocalCache({ tabManager: persistentSingleTabManager({}) }) })
 
+
 export const fireDb = getFirestore(app);
 export const fireRdb = getDatabase(app);
 export const fireAuth = getAuth(app);
 export const fireStorage = getStorage(app);
+const perf = getPerformance(app);
 export const refdb = ref;
 
 @NgModule({

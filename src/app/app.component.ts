@@ -8,6 +8,7 @@ import { fireAuth, fireRdb, refdb } from './app.module';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { onValue } from 'firebase/database';
 import { Employers } from './administrator/users/users.component';
+import { HttpClient, HttpClientModule, HttpStatusCode, HttpUserEvent } from '@angular/common/http';
 export interface myRoute {
   icon: string;
   name: string;
@@ -63,7 +64,7 @@ export class AppComponent {
     { icon: 'shop', name: 'Ofertas', url: '/offer' },
     { icon: 'celebration', name: 'Eventos', url: '/events' },
   ];
-  constructor(public bhvsrv: BehavService, public router: Router, private autsrv: AutentService) {
+  constructor(public bhvsrv: BehavService, public router: Router) {
     this.isSmall = bhvsrv.isMobilFu();
     this.isTabl = bhvsrv.isTabletFu();
     this.loggedin = false;
@@ -96,12 +97,6 @@ export class AppComponent {
     return signOut(this.auth);
   }
   ngOnInit() {
-    // let startDate = new Date();
-    // let endDate = new Date(2023, 9, 9);
-    // if (startDate > endDate) {
-    //   this.router.navigateByUrl('pagenotfound');
-    //   this.isBlocked = false;
-    // };
     onAuthStateChanged(this.auth, (user) => {
       onValue(refdb(this.rdb, 'users/' + user?.uid), (urx) => {
         const dane = urx.val() as Employers
