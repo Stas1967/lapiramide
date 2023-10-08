@@ -1,0 +1,16 @@
+<div mat-dialog-title>Ayuda con nuemro de telefono</div>
+<mat-dialog-content>
+    <p>Para escribir en forma correcta el numero de telefono sigue esta pauta:</p>
+    <p>Prefijo de 2 a 3 digitos siguiendo (+):<br> <b>+01</b> o <b>+12</b> o <b>+123</b></p>
+    <p>y a continuacion de 9 a 10 digitos de tu numero de telefono</p>
+    <p>Por ejemplo:</p>
+    <p><b>+01123456789</b> o <b>+123-1234567890</b></p>
+
+
+</mat-dialog-content>
+<mat-dialog-actions style="display: flex; justify-content: flex-end;">
+    <button mat-raised-button color="warn" [mat-dialog-close]="true">
+        <mat-icon class="iconbtn">done</mat-icon>
+        <span>Entendido</span>
+    </button>
+</mat-dialog-actions>

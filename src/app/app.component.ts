@@ -78,6 +78,15 @@ export class AppComponent {
       }
     })
   }
+  @HostListener('window:beforeunload', ['$event'])
+  beforeUnloadHandler(event: any) {
+    if (event) {
+      localStorage.removeItem('enddate');
+      localStorage.removeItem('startdate');
+      localStorage.removeItem('email');
+      localStorage.removeItem('phone');
+    }
+  }
   @HostListener('window:resize', ['$event'])
   ngOnResize() {
     this.isSmall = this.bhvsrv.isMobilFu();

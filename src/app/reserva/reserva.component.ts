@@ -51,8 +51,8 @@ export class ReservaComponent {
   isNewRecord = true;
   reform = new FormGroup({
     fullname: new FormControl('', Validators.required),
-    email: new FormControl('', [Validators.email, Validators.required, Validators.pattern('[a-z0-9]{3,}@[a-z]{2,}.[a-z]{2,}')]),
-    phone: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
+    phone: new FormControl('', [Validators.required, Validators.pattern('^((\\+([1-9][0-9]?|1[0-9][0-9]|2[0-4][0-9]|25[0-4])-?)|0)?[0-9]{9,10}$')]),
     country: new FormControl('', Validators.required),
     message: new FormControl(''),
     alojamiento: new FormControl(this.AloNum)
@@ -132,33 +132,44 @@ export class ReservaComponent {
     } else if (checkkey != null) {
       const msnak = this.snack.openFromComponent(SnackMsg, { verticalPosition: 'top', horizontalPosition: 'right' });
       msnak.onAction().subscribe(() => {
-        onValue(refdb(this.rdb, 'reservas/' + checkkey), (snap) => {
-          if (snap.exists()) {
-            const dane = snap.val();
-            this.reform.setValue({
-              fullname: dane.fullname,
-              email: dane.email,
-              phone: dane.phone,
-              message: dane.message,
-              country: dane.country,
-              alojamiento: dane.alonum
-            })
-            this.AloNum = dane.alonum;
-            this.Alojamiento = dane.alojam;
-          } else {
-            this.snack.open('Tu reserva fue procesada si lo desas puedes crear nueva', 'Ok', { duration: 5000 })
-            localStorage.removeItem('enddate');
-            localStorage.removeItem('startdate');
+        if (this.auth.currentUser?.isAnonymous == true) {
+          onValue(refdb(this.rdb, 'reservas/' + checkkey), (snap) => {
+            if (snap.exists()) {
+              const dane = snap.val();
+              this.reform.setValue({
+                fullname: dane.fullname,
+                email: dane.email,
+                phone: dane.phone,
+                message: dane.message,
+                country: dane.country,
+                alojamiento: dane.alonum
+              })
+              this.AloNum = dane.alonum;
+              this.Alojamiento = dane.alojam;
+            } else {
+              this.snack.open('Tu reserva fue procesada si lo desas puedes crear nueva', 'Ok', { duration: 5000 })
+              localStorage.removeItem('enddate');
+              localStorage.removeItem('startdate');
+              localStorage.removeItem('email');
+              localStorage.removeItem('phone');
+              localStorage.removeItem('key');
+              this.autsrv.LogOut();
+              this.router.navigateByUrl('offer');
+
+            }
+          })
+          this.Modificator = true;
+        } else {
+          this.dialog.open(LostData).beforeClosed().subscribe((uip) => {
+            localStorage.removeItem('key');
             localStorage.removeItem('email');
             localStorage.removeItem('phone');
-            localStorage.removeItem('key');
-            this.autsrv.LogOut();
-            this.router.navigateByUrl('offer');
+            this.router.navigateByUrl('/');
+          })
 
-          }
-        })
-        this.Modificator = true;
+        }
       });
+
     } else {
       this.snack.open('Los campos con (*) son obligatorios', 'Ok', { duration: 5000 })
     }
@@ -225,6 +236,10 @@ export class ReservaComponent {
   backToOffer(): void {
     this.router.navigateByUrl('/offer');
   }
+
+  HelpPhone() {
+    this.dialog.open(PhoneExp);
+  }
 }
 
 @Component({
@@ -240,4 +255,9 @@ export class SnackMsg {
 })
 export class LostData { }
 
+@Component({
+  selector: 'app-phoneexp',
+  templateUrl: './phoneexp.html',
+})
+export class PhoneExp { }
 

@@ -26,7 +26,7 @@ import { FootComponent } from './foot/foot.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LogDialog } from './login/login.component';
 import { WrongDialog } from './bookinghome/bookinghome.component';
-import { LostData, SnackMsg } from './reserva/reserva.component';
+import { LostData, PhoneExp, SnackMsg } from './reserva/reserva.component';
 import { BoodocComponent } from './boodoc/boodoc.component';
 import '@angular/common/locales/global/es';
 import '@angular/common/locales/es';
@@ -65,7 +65,8 @@ export const refdb = ref;
     WrongDialog,
     SnackMsg,
     BoodocComponent,
-    LostData
+    LostData,
+    PhoneExp
   ],
   imports: [
     BrowserModule,

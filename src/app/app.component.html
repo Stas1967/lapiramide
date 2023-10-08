@@ -2,8 +2,7 @@
   <mat-toolbar [ngClass]="{'tolbarhsm' : isSmall,   'tolbarhxl' : !isSmall}">
     <div class="menutoolbar">
       <div style=" display: flex; flex-direction: row; align-items: center;">
-        <img src="../assets/images/lapiramide.svg" alt="Apartamentos La Piramide"
-          [ngClass]="{'logobig' : !isSmall, 'logosmall' : isSmall}">
+        <img src="../assets/images/lapiramide.svg" alt="Apartamentos La Piramide" [ngClass]="{'logobig' : !isSmall, 'logosmall' : isSmall}">
         <div *ngIf="!isSmall" [@antitle]="state" [ngClass]="{'titlexl' : !isSmall, 'titlesm' : isSmall}">{{title}}
         </div>
         <div *ngIf="isSmall" [ngClass]="{'titlexl' : !isSmall, 'titlesm' : isSmall}">{{title}}
@@ -34,8 +33,7 @@
               <mat-icon class="iconbtn">login</mat-icon>
               <span *ngIf="!isTabl">SingOut</span>
             </button>
-            <button mat-button class="link" [matMenuTriggerFor]="menu" *ngIf="loggedin" [matBadge]="rezsize"
-              [matBadgeHidden]="badgehidden" matBadgeSize="medium" matBadgePosition="before">
+            <button mat-button class="link" [matMenuTriggerFor]="menu" *ngIf="loggedin" [matBadge]="rezsize" [matBadgeHidden]="badgehidden" matBadgeSize="medium" matBadgePosition="before">
               <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
                 <mat-icon class="iconbtn">admin_panel_settings</mat-icon>
                 <span *ngIf="!isTabl">Admin</span>
@@ -66,28 +64,24 @@
   </mat-toolbar>
 </div>
 <mat-sidenav-container [ngClass]="{'pagexl' : !isSmall, 'pagesm' : isSmall}" cdkScrollable>
-  <mat-sidenav class="sidenav" #sidenav [opened]="bhvsrv.isSideNavOpenFu()" (openedChange)="getPosition($event)"
-    [fixedInViewport]="isSmall">
+  <mat-sidenav class="sidenav" #sidenav [opened]="bhvsrv.isSideNavOpenFu()" (openedChange)="getPosition($event)" [fixedInViewport]="isSmall">
     <mat-toolbar class="sidenavtoolbar">
       <span>Menu</span>
     </mat-toolbar>
     <mat-nav-list *ngIf="isBlocked">
-      <mat-list-item *ngFor="let link of linkssm; let ia = index" (isActiveChange)="isActivChang()"
-        [routerLink]="link.url" routerLinkActive="active-item">
+      <mat-list-item *ngFor="let link of linkssm; let ia = index" (isActiveChange)="isActivChang()" [routerLink]="link.url" routerLinkActive="active-item">
         <div class="link">
           <mat-icon class="iconbtn" style="color: rgb(24, 24, 24);">{{link.icon}}</mat-icon>
           <span style="color: rgb(24, 24, 24);">{{link.name}}</span>
         </div>
       </mat-list-item>
-      <mat-list-item (isActiveChange)="isActivChang()" [routerLink]="'/login'" routerLinkActive="active-item"
-        *ngIf="!loggedin">
+      <mat-list-item (isActiveChange)="isActivChang()" [routerLink]="'/login'" routerLinkActive="active-item" *ngIf="!loggedin">
         <div class="link">
           <mat-icon class="iconbtn" style="color: rgb(24, 24, 24);">login</mat-icon>
           <span style="color: rgb(24, 24, 24);">Login</span>
         </div>
       </mat-list-item>
-      <mat-list-item (isActiveChange)="isActivChang()" [routerLink]="'/administrator'" routerLinkActive="active-item"
-        *ngIf="loggedin">
+      <mat-list-item (isActiveChange)="isActivChang()" [routerLink]="'/administrator'" routerLinkActive="active-item" *ngIf="loggedin">
         <div class="link">
           <div>
             <mat-icon class="iconbtn" style="color: rgb(24, 24, 24);">admin_panel_settings</mat-icon>
