@@ -8,7 +8,17 @@
     },
     "eventos": {
       ".read": true,
-      ".write": "root.child('users').child(auth.uid).child('isAdmin').val() == true"
+      ".write": "root.child('users').child(auth.uid).child('isAdmin').val() == true",
+      "$evento_id": {
+        ".write": true,
+        ".validate": "newData.hasChildren(['startevent', 'endevent'])",
+        "startevent": {
+          ".validate": "newData.isNumber() && newData.val() > now"
+        },
+        "endevent": {
+          ".validate": "newData.isNumber() && newData.val() > now"
+        }
+      }
     },
     "lapiramide": {
       ".read": "root.child('users').hasChild(auth.uid)",

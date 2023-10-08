@@ -19,18 +19,25 @@
             </div>
         </div>
         <div *ngIf="isEvent" class="cardcoitem">
-            <mat-card class="citem" *ngFor="let eve of eventList | async; let i = index">
+            <mat-card class="citem" *ngFor="let eve of eventList | async; let i = index" matTooltip="{{eve.eventtitle}}" matTooltipPosition="above" matTooltipPositionAtOrigin="true">
                 <div style="position: relative;">
                     <img src="{{eve.image}}" alt="" width="100%">
                     <div class="cardevent">
-                        <mat-card-title>{{eve.eventtitle}}</mat-card-title>
+                        <mat-card-title class="elip">{{eve.eventtitle}}</mat-card-title>
+
                     </div>
                 </div>
-                <mat-card-content>
+                <mat-card-content style="display: flex; flex-direction: column; justify-content: space-between; flex: 1;">
                     <p [innerHTML]="eve.eventdescrip"></p>
                     <div *ngIf="eve.repeate" class="carddescrip">
                         <p>El próximo evento tenemos<br>
-                            <b>{{returnDateF(eve.startevent, eve.cuantdays) | date: "d 'de' MMMM":"es"}}</b> y <b>{{returnDateL(eve.endevent, eve.cuantdays) | date:"d 'de' MMMM":"es"}}</b>
+                            <span>
+                                <b>{{eve.startevent > eve.endevent ? (eve.endevent | date:"d 'de' MMMM":"es") : (eve.startevent | date:"d 'de' MMMM":"es")}}</b>
+                                <span *ngIf="eve.startevent != eve.endevent">
+                                    <span>&nbsp;y&nbsp;</span>
+                                    <b>{{eve.startevent < eve.endevent ? (eve.endevent | date:"d 'de' MMMM":"es") : (eve.startevent | date:"d 'de' MMMM":"es")}}</b>
+                                </span>
+                            </span>
                         </p>
                     </div>
                 </mat-card-content>
