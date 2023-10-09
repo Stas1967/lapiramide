@@ -17,6 +17,7 @@ import { onValue, set, update } from 'firebase/database';
 import { signInAnonymously } from 'firebase/auth';
 import { AutentService } from '../services/autent.service';
 import { BoodocComponent } from '../boodoc/boodoc.component';
+import { NameSurnameValidator } from '../directives/forbiddenvalidator.directive';
 
 
 @Component({

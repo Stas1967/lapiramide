@@ -28,6 +28,10 @@
       ".read": "root.child('users').child(auth.uid).child('isAdmin').val() == true",
       ".write": "root.child('users').child(auth.uid).child('isAdmin').val() == true"
     },
+    "tempusers": {
+      ".read": "root.child('users').child(auth.uid).child('isAdmin').val() == true",
+      ".write": "root.child('users').child(auth.uid).child('isAdmin').val() == true"
+    },
     "reservas": {
       ".read": "root.child('users').child(auth.uid).child('isAdmin').val() == true",
       ".write": "root.child('users').child(auth.uid).child('isAdmin').val() == true",

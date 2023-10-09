@@ -91,7 +91,7 @@
 
         </div>
       </mat-list-item>
-      <mat-list-item (click)="LogOut()" style="background-color: red;">
+      <mat-list-item *ngIf="loggedin" (click)="LogOut()" style="background-color: red;">
         <div class="link" style="color: whitesmoke;">
           <mat-icon>logout</mat-icon>
           <span>Sign Out</span>

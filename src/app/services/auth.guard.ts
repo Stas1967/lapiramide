@@ -18,15 +18,15 @@ export class AuthGuard {
       return false;
     }
   }
-
+  //TODO: ADD REGISTER USER GUARD 
   getAuthKey(): boolean {
     return localStorage.getItem('authkey') === 'true'
   }
 
   getUIdTomasz(): boolean {
-    return sessionStorage.getItem('uid') === 'e4sebbsmWoRvpsiGtarEAIKpptA3'
+    return localStorage.getItem('uid') === 'e4sebbsmWoRvpsiGtarEAIKpptA3'
   }
   getUIdRaul(): boolean {
-    return sessionStorage.getItem('uid') === 'BhnhoDJMP8PG6tawS8QhbPDGURA3'
+    return localStorage.getItem('uid') === 'BhnhoDJMP8PG6tawS8QhbPDGURA3'
   }
 }

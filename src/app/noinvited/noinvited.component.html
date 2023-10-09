@@ -1,0 +1,14 @@
+<div [ngStyle]="isSmall ? {'height.px': 6} : {'height.px': 76}"></div>
+<div class="container">
+    <div class="noinvi">
+        <mat-icon>no_accounts</mat-icon>
+        <p>Depende del motivo por que estas aqui, más probable es que:</p>
+        <ul>
+            <li>No fuiste invitado</li>
+            <li>Intentas aceder a un lugar que no existe</li>
+            <li>O recibiste un email que no fue dirigido a Ti</li>
+        </ul>
+        <p>Lamentamos mucho esta situacion, si crees que es un error contacte con Apartamentos La Pirámid para solucionar esta incidencia</p>
+        <button mat-button color="warn" routerLink="/">Volver al inicio</button>
+    </div>
+</div>

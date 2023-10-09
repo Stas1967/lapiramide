@@ -31,6 +31,8 @@ export class AutentService {
       if (res.user) {
         this.route.navigate(['/']);
         localStorage.setItem('authkey', 'true');
+        localStorage.setItem('uid', res.user.uid);
+        sessionStorage.setItem('uid', res.user.uid);
       }
     }).catch((err) => {
       if (err.code === 'auth/invalid-login-credentials') {

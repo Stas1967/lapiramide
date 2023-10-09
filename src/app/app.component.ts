@@ -78,15 +78,13 @@ export class AppComponent {
       }
     })
   }
-  @HostListener('window:beforeunload', ['$event'])
-  beforeUnloadHandler(event: any) {
-    if (event) {
-      localStorage.removeItem('enddate');
-      localStorage.removeItem('startdate');
-      localStorage.removeItem('email');
-      localStorage.removeItem('phone');
-    }
-  }
+  // @HostListener('window:beforeunload', ['$event'])
+  // beforeUnloadHandler(event: any) {
+  //   if (event) {
+  //     localStorage.removeItem('email');
+  //     localStorage.removeItem('phone');
+  //   }
+  // }
   @HostListener('window:resize', ['$event'])
   ngOnResize() {
     this.isSmall = this.bhvsrv.isMobilFu();
@@ -107,20 +105,23 @@ export class AppComponent {
   }
   ngOnInit() {
     onAuthStateChanged(this.auth, (user) => {
-      onValue(refdb(this.rdb, 'users/' + user?.uid), (urx) => {
-        const dane = urx.val() as Employers
-        if (dane.isAdmin == true) {
-          onValue(refdb(this.rdb, 'reservas'), (rex) => {
-            if (rex.exists()) {
-              this.badgehidden = false;
-              this.rezsize = rex.size;
-            } else {
-              this.badgehidden = true;
-              this.rezsize = 0;
-            }
-          })
-        }
-      })
+      if (user) {
+        sessionStorage.setItem('uid', user.uid)
+        onValue(refdb(this.rdb, 'users/' + user?.uid), (urx) => {
+          const dane = urx.val() as Employers
+          if (dane.isAdmin == true) {
+            onValue(refdb(this.rdb, 'reservas'), (rex) => {
+              if (rex.exists()) {
+                this.badgehidden = false;
+                this.rezsize = rex.size;
+              } else {
+                this.badgehidden = true;
+                this.rezsize = 0;
+              }
+            })
+          }
+        })
+      }
       if (user?.isAnonymous == true) {
         this.loggedin = false;
         this.isAnonimo = true;

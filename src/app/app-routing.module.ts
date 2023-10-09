@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, provideRouter, withInMemoryScrolling } from '@angular/router';
 import { AuthGuard } from './services/auth.guard';
+import { NuserGuard } from './services/nuser.guard';
 
 const routes: Routes = [
 
@@ -11,7 +12,8 @@ const routes: Routes = [
   { path: 'reserva', title: 'Apartamentos La Pirámide - Reseravs', loadComponent: () => import('./reserva/reserva.component').then(c => c.ReservaComponent) },
   { path: 'login', title: 'Apartamentos La Pirámide - Login', loadComponent: () => import('./login/login.component').then(c => c.LoginComponent) },
   { path: 'register', title: 'Aparatamentos La Pirámide - Registro', loadComponent: () => import('./register/register.component').then(c => c.RegisterComponent) },
-  { path: 'administrator', title: 'Apartamentos La Pirámide- Admin', loadChildren: () => import('./administrator/administrator.module').then(m => m.AdministratorModule), canActivate: [AuthGuard] },
+  { path: 'administrator', title: 'Apartamentos La Pirámide - Admin', loadChildren: () => import('./administrator/administrator.module').then(m => m.AdministratorModule), canActivate: [AuthGuard] },
+  { path: 'mistake', title: 'Apartamentos La Pirámide - Mistake', loadComponent: () => import('./noinvited/noinvited.component').then(c => c.NoinvitedComponent) },
   { path: '**', loadComponent: () => import('./pagenotfound/pagenotfound.component').then(c => c.PagenotfoundComponent) },
 ];
 

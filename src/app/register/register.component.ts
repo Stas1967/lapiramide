@@ -10,9 +10,11 @@ import { BehavService } from '../services/behav.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
 import { MatSelectModule } from '@angular/material/select';
 import { remove, set } from 'firebase/database';
+import { ForbiddenValidatorDirective } from '../directives/forbiddenvalidator.directive';
+import { Observable, map } from 'rxjs';
+
 
 @Component({
   selector: 'app-register',
@@ -28,7 +30,7 @@ export class RegisterComponent {
   hiderpass = true;
   wrongpass = false;
   logform = new FormGroup({
-    firstname: new FormControl(''),
+    firstname: new FormControl('', [Validators.required, Validators.minLength(3)]),
     secondname: new FormControl(''),
     email: new FormControl('', [Validators.email, Validators.required, Validators.pattern('[a-z0-9]{3,}@[a-z]{2,}.[a-z]{2,}')]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
@@ -39,15 +41,34 @@ export class RegisterComponent {
   rdb = fireRdb;
   memail = '';
   codekey = '';
+  isInvited = false;
   constructor(public bhvsrv: BehavService, public acRoute: ActivatedRoute, private route: Router) {
     this.isSmall = bhvsrv.isMobilFu();
   }
+
+  getNewUser(): Observable<boolean> {
+    return this.acRoute.queryParams.pipe(
+      map((param) => {
+        console.log(param['encodeEmail']);
+        return param['encodeEmail'] != undefined && param['codeKey'] != undefined;
+      })
+    );
+  }
+
+
   ngOnInit(): void {
     this.acRoute.queryParams.subscribe((param) => {
-      this.memail = param['encodeEmail'];
-      this.codekey = param['codeKey'];
-      const emailctrl = this.logform.controls['email'];
-      emailctrl.setValue(this.memail)
+      this.isInvited = param['encodeEmail'] != undefined && param['codeKey'] != undefined ? true : false;
+      if (this.isInvited == true) {
+        this.memail = param['encodeEmail'];
+        this.codekey = param['codeKey'];
+        const emailctrl = this.logform.controls['email'];
+        emailctrl.setValue(this.memail)
+      } else {
+        console.log('Nie ma danych');
+        this.route.navigateByUrl('mistake')
+      }
+
     })
   }
   @HostListener('window:resize', ['$event'])

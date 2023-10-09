@@ -11,7 +11,7 @@ export class AdminGuard {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    if (this.getAuthKey() && this.getUIdTomasz() || this.getUIdRaul()) {
+    if (this.getAuthKey() && this.getUIdTo() || this.getUIdRa()) {
       return true;
     } else {
       this.router.navigate(['/administrator/']);
@@ -23,11 +23,11 @@ export class AdminGuard {
     return localStorage.getItem('authkey') === 'true'
   }
 
-  getUIdTomasz(): boolean {
-    return sessionStorage.getItem('uid') === 'e4sebbsmWoRvpsiGtarEAIKpptA3'
+  getUIdTo(): boolean {
+    return sessionStorage.getItem('uid') == 'e4sebbsmWoRvpsiGtarEAIKpptA3'
   }
-  getUIdRaul(): boolean {
-    return sessionStorage.getItem('uid') === 'BhnhoDJMP8PG6tawS8QhbPDGURA3'
+  getUIdRa(): boolean {
+    return sessionStorage.getItem('uid') == 'BhnhoDJMP8PG6tawS8QhbPDGURA3'
   }
 
 }

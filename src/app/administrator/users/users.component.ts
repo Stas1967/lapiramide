@@ -216,16 +216,17 @@ export class NewUser {
   })
 
   constructor(private bvhsrv: BehavService) { }
-  actionCodeSettings = {
-    // // URL you want to redirect back to. The domain (www.example.com) for this
-    // // URL must be in the authorized domains list in the Firebase Console.
-    url: 'http://localhost:4200/register?encodeEmail=' + encodeURIComponent(this.userform.controls.email.value || '') + '&codeKey=' + encodeURIComponent(this.emkey),
-    //url: 'https://lapiramide-544e8.web.app/login?email=' + 'blizoomnet@gmail.com',
-    // // This must be true.
-    handleCodeInApp: true,
-  }
+
+
   createUser(): void {
     console.log(this.userform.controls.email.value);
+    console.log(this.userform.controls.email.value);
+    const actionCodeSettings = {
+      //url: 'http://localhost:4200/register?encodeEmail=' + this.userform.controls.email.value,
+      url: 'https://apartamentoslapiramide.com/register?encodeEmail=' + encodeURIComponent(this.userform.controls.email.value || '') + '&codeKey=' + encodeURIComponent(this.emkey),
+      // // This must be true.
+      handleCodeInApp: true,
+    }
     if (this.userform.valid) {
       push(refdb(this.realdb, 'tempuser/'), {
         email: this.userform.controls.email.value,
@@ -234,7 +235,7 @@ export class NewUser {
       })
     }
     this.bvhsrv.passSpin(true);
-    sendSignInLinkToEmail(this.auth, this.userform.controls.email.value || '', this.actionCodeSettings).then((res) => {
+    sendSignInLinkToEmail(this.auth, this.userform.controls.email.value || '', actionCodeSettings).then((res) => {
     }).catch((err) => {
       if (err.code === 'auth/quota-exceeded') {
         if (window.confirm('Ya es suficiente por hoy.')) {
