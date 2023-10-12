@@ -24,9 +24,9 @@ export class AuthGuard {
   }
 
   getUIdTomasz(): boolean {
-    return localStorage.getItem('uid') === 'e4sebbsmWoRvpsiGtarEAIKpptA3'
+    return sessionStorage.getItem('uid') === 'e4sebbsmWoRvpsiGtarEAIKpptA3'
   }
   getUIdRaul(): boolean {
-    return localStorage.getItem('uid') === 'BhnhoDJMP8PG6tawS8QhbPDGURA3'
+    return sessionStorage.getItem('uid') === 'BhnhoDJMP8PG6tawS8QhbPDGURA3'
   }
 }

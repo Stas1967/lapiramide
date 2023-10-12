@@ -21,8 +21,9 @@
       }
     },
     "lapiramide": {
-      ".read": "root.child('users').hasChild(auth.uid)",
-      ".write": "root.child('users').child(auth.uid).child('isAdmin').val() == true"
+      ".read": true,
+      ".write": "root.child('users').child(auth.uid).child('isAdmin').val() == true",
+      ".indexOn": "togalery"
     },
     "users": {
       ".read": "root.child('users').child(auth.uid).child('isAdmin').val() == true",

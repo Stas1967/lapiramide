@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewEncapsulation } from '@angular/core';
 import { ImgPanel } from '../classes/imginfo';
 import { BehavService } from 'src/app/services/behav.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -8,13 +8,18 @@ import { MatTableDataSource } from '@angular/material/table';
 import { BehaviorSubject } from 'rxjs';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatCheckboxChange } from '@angular/material/checkbox';
+import { update } from 'firebase/database';
+import { fireRdb, refdb } from 'src/app/app.module';
 
 @Component({
   selector: 'app-imagelist',
   templateUrl: './imagelist.component.html',
   styleUrls: ['./imagelist.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ImagelistComponent {
+  rdb = fireRdb;
   addImagePanel: boolean = false;
   imageList: BehaviorSubject<ListaImg[]> | undefined;
   tempimglist: ListaImg[] = []
@@ -44,6 +49,13 @@ export class ImagelistComponent {
   }
   openLinkDial(im: ListaImg) {
     this.dialog.open(ImgLink, { width: '100%', disableClose: true, data: { small: im.mini, full: im.big } });
+  }
+
+  toGalery(imidi: string, event: MatCheckboxChange): void {
+    console.log(imidi, event.checked);
+    update(refdb(this.rdb, 'lapiramide/' + imidi), {
+      togalery: event.checked
+    })
   }
 
   minibtn(): void {

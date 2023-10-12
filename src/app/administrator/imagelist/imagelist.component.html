@@ -15,8 +15,13 @@
     </div>
     <div class="imagenes">
         <div class="imgitem" *ngFor="let im of imageList | async">
-            <img mat-card-image class="img" [src]="bigmini ? im.mini : im.big" [alt]="im.alt" loading="lazy"
-                (click)="openLinkDial(im)">
+            <mat-card>
+                <img mat-card-image [src]="bigmini ? im.mini : im.big" [alt]="im.alt" loading="lazy" (click)="openLinkDial(im)">
+                <mat-card-content>
+                    <mat-checkbox (change)="toGalery(im.id, $event)" [checked]="im.togalery">Para la galeria</mat-checkbox>
+                </mat-card-content>
+            </mat-card>
+
         </div>
     </div>
 </div>

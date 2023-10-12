@@ -1,0 +1,12 @@
+<div class="slideshow-container">
+    <div class="slideshow">
+        <button mat-icon-button class="closebtn" (click)="ClosePanel()">
+            <mat-icon>close</mat-icon>
+        </button>
+        <div *ngFor="let im of tempimglist; let i = index">
+            <img *ngIf="i == slideIndex" #mySlides class="fade" [src]="im.big" alt="" width="100%" (click)="ClosePanel()">
+        </div>
+        <a class="prev" (click)="plusSlides()">&#10094;</a>
+        <a class="next" (click)="plusSlides()">&#10095;</a>
+    </div>
+</div>

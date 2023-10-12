@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="pagetitle">
+        <h1>Galería de La Pirámide</h1>
+    </div>
+    <div class="imagenes">
+        <div class="imgitem" *ngFor="let im of tempimglist; let i = index">
+            <img mat-card-image [src]="im.mini " [alt]="im.alt" loading="lazy" (click)="showImg(i)">
+        </div>
+    </div>
+</div>
+<div *ngIf="ImgSlideShow" class="backstage">
+    <app-slideshow (closePanel)="ClosePanel($event)" [slideIndex]="slideIndex"></app-slideshow>
+</div>

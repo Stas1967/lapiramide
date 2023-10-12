@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -35,6 +35,7 @@ export interface Rooms {
 @Component({
   selector: 'app-apartments',
   templateUrl: './apartments.component.html',
+  encapsulation: ViewEncapsulation.None,
   standalone: true,
   styleUrls: ['./apartments.component.css'],
   imports: [CommonModule, FormsModule, MatFormFieldModule, MatInputModule,

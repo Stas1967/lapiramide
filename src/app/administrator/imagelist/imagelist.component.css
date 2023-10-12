@@ -4,15 +4,6 @@
     margin-right: 16px;
 }
 
-.imagenes {
-    margin-top: 16px;
-    margin-left: 16px;
-    margin-bottom: 16px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-}
-
 .pagetitle {
     display: flex;
     flex-direction: row;
@@ -23,8 +14,20 @@
     margin-bottom: 24px;
 }
 
+.imagenes {
+    margin-top: 16px;
+    margin-left: 16px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 8px;
+}
+
+
+
 .imgitem {
-    height: 20vh;
+    width: 25vh;
 }
 
 .img {

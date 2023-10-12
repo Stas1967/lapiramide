@@ -33,6 +33,7 @@ import '@angular/common/locales/es';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { getPerformance } from "firebase/performance";
 import { ForbiddenValidatorDirective } from './directives/forbiddenvalidator.directive';
+import { SlideshowComponent } from './galery/slideshow/slideshow.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAsuvgLiqYqpGnG0-msCc7c9kdOIDkpMXg",
@@ -68,7 +69,7 @@ export const refdb = ref;
     BoodocComponent,
     LostData,
     PhoneExp,
-    ForbiddenValidatorDirective
+    ForbiddenValidatorDirective,
   ],
   imports: [
     BrowserModule,
@@ -86,7 +87,9 @@ export const refdb = ref;
     MatBadgeModule,
     HttpClientModule,
     FootComponent,
+
   ],
+
   providers: [
     { provide: LOCALE_ID, useValue: 'es-ES' },
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' }

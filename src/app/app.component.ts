@@ -8,7 +8,7 @@ import { fireAuth, fireRdb, refdb } from './app.module';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { onValue } from 'firebase/database';
 import { Employers } from './administrator/users/users.component';
-import { HttpClient, HttpClientModule, HttpStatusCode, HttpUserEvent } from '@angular/common/http';
+
 export interface myRoute {
   icon: string;
   name: string;
@@ -57,11 +57,15 @@ export class AppComponent {
   @ViewChild('sidecont', { static: false }) public sidecont: MatSidenavContent | undefined;
   links: myRoute[] = [
     { icon: 'home', name: 'Inicio', url: '/' },
+    { icon: 'image', name: 'Galería', url: '/galery' },
     { icon: 'celebration', name: 'Eventos', url: '/events' },
+
+
   ];
   linkssm: myRoute[] = [
     { icon: 'home', name: 'Inicio', url: '/' },
     { icon: 'shop', name: 'Ofertas', url: '/offer' },
+    { icon: 'image', name: 'Galería', url: '/galery' },
     { icon: 'celebration', name: 'Eventos', url: '/events' },
   ];
   constructor(public bhvsrv: BehavService, public router: Router) {
