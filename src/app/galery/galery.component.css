@@ -15,10 +15,11 @@
 }
 
 .imgitem {
-    width: 16vh;
+    height: 20vh;
 }
 
-.img {
+
+img {
     object-fit: cover;
     vertical-align: bottom;
     max-width: 100%;
@@ -43,6 +44,21 @@
 }
 
 
+.fade:hover {
+    animation-name: fade;
+    animation-duration: 0.8s;
+}
+
+@keyframes fade {
+    from {
+        scale: 1
+    }
+
+    to {
+        scale: 1.09;
+        z-index: 99
+    }
+}
 
 .btnright {
     margin-right: 12px;
@@ -54,7 +70,15 @@
     margin-right: 12px;
 }
 
-
+svg#clouds {
+    color: antiquewhite;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    width: 95%;
+    z-index: -100;
+}
 
 @media all and (min-width: 1280px) and (max-width: 1920px) {}
 

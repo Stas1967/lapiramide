@@ -49,6 +49,24 @@ a:hover {
     color: chartreuse;
 }
 
+.copyright {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(212, 74, 50);
+    color: whitesmoke;
+    padding-top: 8px;
+}
+
+.copylink {
+    color: white;
+    text-decoration: none;
+}
+
+.copylink:hover {
+    color: rgb(207, 207, 207);
+    text-decoration: none;
+}
+
 @media all and (min-width: 1920px) {}
 
 @media all and (min-width: 960px) and (max-width: 1280px) {}

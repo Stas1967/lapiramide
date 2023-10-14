@@ -10,5 +10,5 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./foot.component.css']
 })
 export class FootComponent {
-
+  today = new Date();
 }

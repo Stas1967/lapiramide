@@ -1,8 +1,8 @@
 <div style="display: flex; flex: 1; justify-content: end;">
   <mat-toolbar [ngClass]="{'tolbarhsm' : isSmall,   'tolbarhxl' : !isSmall}">
     <div class="menutoolbar">
-      <div style=" display: flex; flex-direction: row; align-items: center;">
-        <img src="../assets/images/lapiramide.svg" alt="Apartamentos La Piramide" [ngClass]="{'logobig' : !isSmall, 'logosmall' : isSmall}">
+      <div style=" display: flex; flex-direction: row; align-items: center; cursor: pointer;" routerLink="/">
+        <img src="../assets/images/logo150.png" alt="Apartamentos La Piramide" [ngClass]="{'logobig' : !isSmall, 'logosmall' : isSmall}">
         <div *ngIf="!isSmall" [@antitle]="state" [ngClass]="{'titlexl' : !isSmall, 'titlesm' : isSmall}">{{title}}
         </div>
         <div *ngIf="isSmall" [ngClass]="{'titlexl' : !isSmall, 'titlesm' : isSmall}">{{title}}
