@@ -32,7 +32,10 @@
 
             </address>
             <address>
-                <span class="label">Email: </span>{{data['email']}}<br>
+                <a href="mailto:{{data['email']}}">{{data['email']}}</a><br>
+                <!-- <a href="whatsapp://send?text=apartamentoslapiramide.com">whatsapp</a>
+                <a href="mailto:vizaint@hotmail.com?subject=Hola&body=Este%20es%20un%20ejemplo">Enviar email</a> -->
+                <!-- <a href="https://api.whatsapp.com/send?text=www.google.com" data-action="share/whatsapp/share">Share via Whatsapp web</a> -->
                 <span class="label">Telefono: </span>{{data['phone']}}<br>
             </address>
         </div>
@@ -44,7 +47,7 @@
         <hr>
         <div class="pdoc">
             <span class="label">La cuenta</span>
-            <span>{{data['pricetopay'] | currency}}</span>
+            <span>{{data['pricetopay'] | currency: '€'}}</span>
         </div>
     </div>
 </mat-dialog-content>

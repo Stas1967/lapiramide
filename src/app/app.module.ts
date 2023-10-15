@@ -33,7 +33,9 @@ import '@angular/common/locales/es';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { getPerformance } from "firebase/performance";
 import { ForbiddenValidatorDirective } from './directives/forbiddenvalidator.directive';
-import { SlideshowComponent } from './galery/slideshow/slideshow.component';
+
+
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyAsuvgLiqYqpGnG0-msCc7c9kdOIDkpMXg",
